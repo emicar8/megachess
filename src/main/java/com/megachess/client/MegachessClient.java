@@ -5,6 +5,8 @@
  */
 package com.megachess.client;
 
+import com.megachess.chesspiece.ChessPiece;
+import com.megachess.chesspiece.Pawn;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
@@ -52,6 +54,7 @@ public class MegachessClient extends WebSocketClient{
         JSONObject data = new JSONObject(); //Objeto de data en la respuesta.
 
         char[][] boardMatrix = new char[this.expectedDimension][this.expectedDimension];
+        
 
         String event = receivedMessage.getString("event"); 
 
@@ -90,6 +93,7 @@ public class MegachessClient extends WebSocketClient{
                 System.out.println(receivedMessage.toString());
                 data = receivedMessage.getJSONObject("data");
                 String boardString = data.getString("board");
+                List<ChessPiece> MyPieces = new ArrayList<>();
                 int row = 0;
                 int column = 0;
                 for(int i = 0; i < boardString.length(); i++){
@@ -103,7 +107,65 @@ public class MegachessClient extends WebSocketClient{
                         column++;
                     }
                 }
-                System.out.println(Arrays.toString(boardMatrix));
+                for(int i = 0; i < this.expectedDimension; i++){
+                    for(int j = 0; j < this.expectedDimension; j++){
+                        switch(data.getString("actual_turn")){
+                            case "black":
+                                switch(boardMatrix[i][j]){
+                                    case 'p':
+                                        Pawn pawn = new Pawn(i,j,"black");
+                                        pawn.calculatePossibleMoves(boardMatrix);
+                                        MyPieces.add(pawn);
+                                        break;
+                                    case 'r':
+                                        break;
+                                    case 'h':
+                                        break;
+                                    case 'b':
+                                        break;
+                                    case 'q':
+                                        break;
+                                    case 'k':
+                                        break;
+                                    default:
+                                        break;
+                                }                                
+                                break;
+                            case "white":
+                                switch(boardMatrix[i][j]){
+                                    case 'P':
+                                        Pawn pawn = new Pawn(i,j,"white");
+                                        pawn.calculatePossibleMoves(boardMatrix);
+                                        MyPieces.add(pawn);
+                                        break;
+                                    case 'R':
+                                        break;
+                                    case 'H':
+                                        break;
+                                    case 'B':
+                                        break;
+                                    case 'Q':
+                                        break;
+                                    case 'K':
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            default:
+                                break;
+                                
+                        }
+
+                    }
+                }
+                int[] bestMove = {0,0,0};
+                for(ChessPiece piece : MyPieces){
+                    if(piece.getMaxValueMove()[2] > bestMove[2]){
+                        bestMove = piece.getMaxValueMove();
+                    }
+                    
+                }
 
                 messageToSend.put("action", "move");
                 data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));

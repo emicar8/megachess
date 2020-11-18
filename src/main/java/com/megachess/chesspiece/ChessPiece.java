@@ -15,10 +15,14 @@ import java.util.List;
 public abstract class ChessPiece {
     
     protected int currentCol,currentRow,pointsForMove,pointsForKill;
-    private List<int[]> possibleMoves, possibleAttacks;
-    private String color;
+    protected List<int[]> possibleMoves, possibleAttacks;
+    protected String color;
     
-    public ChessPiece(int col, int row, String color){
+    public ChessPiece(){
+        
+    }
+    
+    public ChessPiece(int row, int col, String color){
         this.currentCol = col;
         this.currentRow = row;
         this.color = color;
@@ -82,8 +86,30 @@ public abstract class ChessPiece {
         this.color = color;
     }
     
-    public abstract List<int[]> calculatePossibleMoves(char[][] Board);
+    public int[] getMaxValueMove(){
+        int[] currentMax = {0, 0, 0, 0, 0};
+        if(!this.possibleMoves.isEmpty()){ //List not empty
+            for(int[] move : this.possibleMoves){
+                if(move[4] > currentMax[4]){
+                    currentMax = move;
+                }
+            }
+        }
+        
+        if(!this.possibleAttacks.isEmpty()){ //List not empty
+            for(int[] attack : this.possibleAttacks){
+                if(attack[4] > currentMax[4]){
+                    currentMax = attack;
+                }
+            }
+        }
+        return currentMax;
+    }
     
-    public abstract List<int[]> calculatePossibleAttacks(char[][] Board);
+    public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board);
+    
+    public abstract void calculatePossibleAttacks(List<List<ChessPiece>> Board);
+    
+    public abstract boolean isNull();
     
 }
