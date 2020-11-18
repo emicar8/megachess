@@ -81,7 +81,7 @@ public class Queen extends ChessPiece{
                    default: //Last row
                        if(Board.get(this.currentRow).get(this.currentCol + 1).isNull()){ //Check if free space to the right
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow, this.currentCol + 1, this.pointsForMove});
-                       }if(Board.get(this.currentRow).get(this.currentCol - 1).isNull()){ //Check if free space to the left
+                       }else if(Board.get(this.currentRow).get(this.currentCol - 1).isNull()){ //Check if free space to the left
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow, this.currentCol - 1, this.pointsForMove});
                        }else if(Board.get(this.currentRow - 1).get(this.currentCol - 1).isNull()){ //Check if free space to the left and up
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 1, this.pointsForMove});
@@ -102,7 +102,7 @@ public class Queen extends ChessPiece{
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 1, this.pointsForMove});
                        }else if(Board.get(this.currentRow + 1).get(this.currentCol).isNull()){ //Check if free space down
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol, this.pointsForMove});
-                       }if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){ //Check if free space up
+                       }else if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){ //Check if free space up
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol, this.pointsForMove});
                        }else if(Board.get(this.currentRow - 1).get(this.currentCol + 1 ).isNull()){ //Check if free space to the right and up
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 1, this.pointsForMove});

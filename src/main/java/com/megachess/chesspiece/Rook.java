@@ -21,7 +21,8 @@ public class Rook extends ChessPiece{
 
     @Override
     public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
-switch(this.currentRow){
+        //Rook will only move one tile
+        switch(this.currentRow){
            case 0:
                switch(this.currentCol){
                    case 0: //First row and column
@@ -68,7 +69,7 @@ switch(this.currentRow){
                    default: //Last row
                        if(Board.get(this.currentRow).get(this.currentCol + 1).isNull()){ //Check if free space to the right
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow, this.currentCol + 1, this.pointsForMove});
-                       }if(Board.get(this.currentRow).get(this.currentCol - 1).isNull()){ //Check if free space to the left
+                       }else if(Board.get(this.currentRow).get(this.currentCol - 1).isNull()){ //Check if free space to the left
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow, this.currentCol - 1, this.pointsForMove});
                        }else if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){ //Check if free space up
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol, this.pointsForMove});
@@ -83,7 +84,7 @@ switch(this.currentRow){
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow, this.currentCol + 1, this.pointsForMove});
                        }else if(Board.get(this.currentRow + 1).get(this.currentCol).isNull()){ //Check if free space down
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol, this.pointsForMove});
-                       }if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){ //Check if free space up
+                       }else if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){ //Check if free space up
                            this.possibleMoves.add(new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol, this.pointsForMove});
                        }                                
                        break;
