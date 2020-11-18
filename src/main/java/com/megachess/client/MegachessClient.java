@@ -5,13 +5,21 @@
  */
 package com.megachess.client;
 
+import com.megachess.chesspiece.Bishop;
 import com.megachess.chesspiece.ChessPiece;
+import com.megachess.chesspiece.King;
+import com.megachess.chesspiece.Knight;
+import com.megachess.chesspiece.NullPiece;
 import com.megachess.chesspiece.Pawn;
+import com.megachess.chesspiece.Queen;
+import com.megachess.chesspiece.Rook;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -90,98 +98,94 @@ public class MegachessClient extends WebSocketClient{
 
             case "your_turn":
 
-                System.out.println(receivedMessage.toString());
+                //System.out.println(receivedMessage.toString());
                 data = receivedMessage.getJSONObject("data");
                 String boardString = data.getString("board");
-                List<ChessPiece> MyPieces = new ArrayList<>();
-                int row = 0;
-                int column = 0;
-                for(int i = 0; i < boardString.length(); i++){
-                    if(column < this.expectedDimension){
-                        boardMatrix[row][column] = boardString.charAt(i);
-                        column++;
-                    }else{
-                        row++;
-                        column = 0;
-                        boardMatrix[row][column] = boardString.charAt(i);
-                        column++;
-                    }
-                }
-                for(int i = 0; i < this.expectedDimension; i++){
-                    for(int j = 0; j < this.expectedDimension; j++){
-                        switch(data.getString("actual_turn")){
-                            case "black":
-                                switch(boardMatrix[i][j]){
-                                    case 'p':
-                                        Pawn pawn = new Pawn(i,j,"black");
-                                        pawn.calculatePossibleMoves(boardMatrix);
-                                        MyPieces.add(pawn);
-                                        break;
-                                    case 'r':
-                                        break;
-                                    case 'h':
-                                        break;
-                                    case 'b':
-                                        break;
-                                    case 'q':
-                                        break;
-                                    case 'k':
-                                        break;
-                                    default:
-                                        break;
-                                }                                
-                                break;
-                            case "white":
-                                switch(boardMatrix[i][j]){
-                                    case 'P':
-                                        Pawn pawn = new Pawn(i,j,"white");
-                                        pawn.calculatePossibleMoves(boardMatrix);
-                                        MyPieces.add(pawn);
-                                        break;
-                                    case 'R':
-                                        break;
-                                    case 'H':
-                                        break;
-                                    case 'B':
-                                        break;
-                                    case 'Q':
-                                        break;
-                                    case 'K':
-                                        break;
-                                    default:
-                                        break;
-                                }
+                List<int[]> AllMoves = new ArrayList<>();
+                List<List<ChessPiece>> Board = new ArrayList<>();
+                
+                
+                for(int row = 0; row < this.expectedDimension; row++){
+                    List<ChessPiece> BoardRow = new ArrayList<>();
+                    for(int column = 0; column < this.expectedDimension; column++){
+                        switch(boardString.charAt(row*this.expectedDimension + column)){
+                            case 'p':
+                               BoardRow.add(new Pawn(row,column,"black"));
+                               break;
+                            case 'P':
+                                BoardRow.add(new Pawn(row,column,"white"));
+                                break;                               
+                           case 'r':
+                               BoardRow.add(new Rook(row,column,"black")); //TODO
+                               break;
+                            case 'R':
+                                BoardRow.add(new Rook(row,column,"white")); //TODO
+                                break;                               
+                           case 'h':
+                               BoardRow.add(new Knight(row,column,"black")); //TODO
+                               break;
+                            case 'H':
+                                BoardRow.add(new Knight(row,column,"white")); //TODO
+                                break;                               
+                           case 'b':
+                               BoardRow.add(new Bishop(row,column,"black")); //TODO
+                               break;
+                            case 'B':
+                                BoardRow.add(new Bishop(row,column,"white")); //TODO
+                                break;                               
+                           case 'q':
+                               BoardRow.add(new Queen(row,column,"black")); //TODO
+                               break;
+                            case 'Q':
+                                BoardRow.add(new Queen(row,column,"white")); //TODO
+                                break;                               
+                           case 'k':
+                               BoardRow.add(new King(row,column,"black")); //TODO
+                               break;                          
+                            case 'K':
+                                BoardRow.add(new King(row,column,"white")); //TODO
                                 break;
                             default:
-                                break;
-                                
+                                BoardRow.add(new NullPiece(row,column));
+                                break;                        
+                        }                        
+                    }
+                    Board.add(BoardRow);
+                }
+                
+               
+
+                for(List<ChessPiece> Row : Board){
+                    for(ChessPiece Piece : Row){
+                        if(data.getString("actual_turn").equals(Piece.getColor())){
+                            Piece.calculatePossibleMoves(Board);
+                            Piece.calculatePossibleAttacks(Board);
+                            AllMoves.addAll(Piece.getPossibleMoves());
+                            AllMoves.addAll(Piece.getPossibleAttacks()); 
                         }
-
+                                             
                     }
-                }
-                int[] bestMove = {0,0,0};
-                for(ChessPiece piece : MyPieces){
-                    if(piece.getMaxValueMove()[2] > bestMove[2]){
-                        bestMove = piece.getMaxValueMove();
-                    }
-                    
-                }
 
+                }
+               
+                Collections.sort(AllMoves, new MoveComparator().reversed());
+                
                 messageToSend.put("action", "move");
                 data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
                 data.put("turn_token", receivedMessage.getJSONObject("data").get("turn_token"));
-                data.put("from_row", Math.floor(Math.random()*16));
-                data.put("from_col", Math.floor(Math.random()*16));
-                data.put("to_row", Math.floor(Math.random()*16));
-                data.put("to_col", Math.floor(Math.random()*16));
+                data.put("from_row", AllMoves.get(0)[0]);
+                data.put("from_col",  AllMoves.get(0)[1]);
+                data.put("to_row",  AllMoves.get(0)[2]);
+                data.put("to_col",  AllMoves.get(0)[3]);
                 messageToSend.put("data", data);
-                System.out.println(messageToSend.toString());
+                //System.out.println(messageToSend.toString());
                 try{
                     send(messageToSend.toString());
                 }catch(Exception e){
                     System.out.println(e.toString());
                 }
                 break;
+
 
             case "gameover":
 
