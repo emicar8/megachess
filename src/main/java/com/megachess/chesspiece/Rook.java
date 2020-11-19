@@ -5,6 +5,7 @@
  */
 package com.megachess.chesspiece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,26 @@ public class Rook extends ChessPiece{
     @Override
     public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
         //Rook will only move one tile
-        switch(this.currentRow){
+        
+        List<int[]> BaseMoves = new ArrayList<>();
+        
+        //Rook basic moves
+        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol}); //upwards
+        BaseMoves.add(new int[] {this.currentRow, this.currentCol + 1}); //right
+        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol}); //downwards
+        BaseMoves.add(new int[] {this.currentRow, this.currentCol - 1}); //left
+        
+        for(int[] baseMove : BaseMoves){
+            if(baseMove[0] >= 0 && baseMove[0] < 16 && baseMove[1] >= 0 && baseMove[1] < 16){
+                if(Board.get(baseMove[0]).get(baseMove[1]).isNull()){
+                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, baseMove[0], baseMove[1], this.pointsForMove});
+                }
+            }
+        }
+        
+        
+        //Rook will only move one tile
+        /*switch(this.currentRow){
            case 0:
                switch(this.currentCol){
                    case 0: //First row and column
@@ -110,7 +130,7 @@ public class Rook extends ChessPiece{
                        break;
                }                        
                break;
-       }
+       }*/
     }
 
     @Override

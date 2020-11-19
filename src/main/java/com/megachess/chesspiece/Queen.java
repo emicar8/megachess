@@ -17,7 +17,7 @@ public class Queen extends ChessPiece{
     public Queen(int col, int row, String color){
         super(col, row, color);
         this.pointsForMove = 70;
-        this.pointsForKill = 10*this.pointsForMove;
+        this.pointsForKill = 700;
     }    
     
     @Override
