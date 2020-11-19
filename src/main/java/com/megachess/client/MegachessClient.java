@@ -102,7 +102,9 @@ public class MegachessClient extends WebSocketClient{
                 data = receivedMessage.getJSONObject("data");
                 String boardString = data.getString("board");
                 List<int[]> AllMoves = new ArrayList<>();
+                List<int[]> BestMoves = new ArrayList<>();
                 List<List<ChessPiece>> Board = new ArrayList<>();
+                int[] selectedMove = new int[5];
                 
                 
                 for(int row = 0; row < this.expectedDimension; row++){
@@ -170,13 +172,20 @@ public class MegachessClient extends WebSocketClient{
                
                 Collections.sort(AllMoves, new MoveComparator().reversed());
                 
+                for(int[] move : AllMoves){
+                    if(AllMoves.get(0)[4] == move[4]){
+                        BestMoves.add(move);
+                    }
+                }
+                selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
+                
                 messageToSend.put("action", "move");
                 data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
                 data.put("turn_token", receivedMessage.getJSONObject("data").get("turn_token"));
-                data.put("from_row", AllMoves.get(0)[0]);
-                data.put("from_col",  AllMoves.get(0)[1]);
-                data.put("to_row",  AllMoves.get(0)[2]);
-                data.put("to_col",  AllMoves.get(0)[3]);
+                data.put("from_row", selectedMove[0]);
+                data.put("from_col", selectedMove[1]);
+                data.put("to_row",  selectedMove[2]);
+                data.put("to_col",  selectedMove[3]);
                 messageToSend.put("data", data);
                 //System.out.println(messageToSend.toString());
                 try{
