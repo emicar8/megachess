@@ -17,7 +17,7 @@ public class Rook extends ChessPiece{
     public Rook(int col, int row, String color){
         super(col, row, color);
         this.pointsForMove = 60;
-        this.pointsForKill = 10*this.pointsForMove;
+        this.pointsForKill = 600;
     }    
 
     @Override

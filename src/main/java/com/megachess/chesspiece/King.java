@@ -5,6 +5,7 @@
  */
 package com.megachess.chesspiece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,13 +16,33 @@ public class King extends ChessPiece{
 
     public King(int col, int row, String color){
         super(col, row, color);
-        this.pointsForMove = 100;
-        this.pointsForKill = 10*this.pointsForMove;
         this.pointsForMove = 65; //Lower performance of king movement to incentivize pawn movement to promote.
+        this.pointsForKill = 1000; 
     }    
     
     @Override
     public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
+        
+        List<int[]> BaseMoves = new ArrayList<>();
+        
+        //King basic moves
+        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol - 1}); //left and upwards
+        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol}); //upwards
+        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol + 1}); //right and upwards
+        BaseMoves.add(new int[] {this.currentRow, this.currentCol + 1}); //right
+        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol + 1}); //right and downwards
+        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol}); //downwards
+        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol - 1}); //left and downwards
+        BaseMoves.add(new int[] {this.currentRow, this.currentCol - 1}); //left
+        
+        for(int[] baseMove : BaseMoves){
+            if(baseMove[0] >= 0 && baseMove[0] < 16 && baseMove[1] >= 0 && baseMove[1] < 16){
+                if(Board.get(baseMove[0]).get(baseMove[1]).isNull()){
+                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, baseMove[0], baseMove[1], this.pointsForMove});
+                }
+            }
+        }        
+        /*
         switch(this.currentRow){
            case 0:
                switch(this.currentCol){
@@ -142,7 +163,7 @@ public class King extends ChessPiece{
                        break;
                }                        
                break;
-       }
+       }*/
     }
 
     @Override
