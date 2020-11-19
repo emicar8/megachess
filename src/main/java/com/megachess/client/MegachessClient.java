@@ -60,17 +60,14 @@ public class MegachessClient extends WebSocketClient{
         JSONObject receivedMessage = new JSONObject(message); //Mensaje Recibido.
         JSONObject messageToSend = new JSONObject();    //Respuesta.
         JSONObject data = new JSONObject(); //Objeto de data en la respuesta.
-
-        char[][] boardMatrix = new char[this.expectedDimension][this.expectedDimension];
         
-
         String event = receivedMessage.getString("event"); 
 
         switch (event){
             case "update_user_list":
 
                 System.out.println(receivedMessage.toString());
-                messageToSend.put("action", "challenge"); //Solucion temporal
+                /*messageToSend.put("action", "challenge"); //Solucion temporal
                 data.put("username", "Emile");
                 data.put("message", "Te reto a un duelo.");
                 messageToSend.put("data", data);
@@ -79,11 +76,10 @@ public class MegachessClient extends WebSocketClient{
                     send(messageToSend.toString());
                 }catch (Exception e){
                     System.out.println(e.getMessage());
-                }
+                }*/
                 break;
 
             case "ask_challenge":
-
                 System.out.println(receivedMessage.toString());
                 messageToSend.put("action", "accept_challenge");
                 data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
@@ -97,7 +93,6 @@ public class MegachessClient extends WebSocketClient{
                 break;
 
             case "your_turn":
-
                 //System.out.println(receivedMessage.toString());
                 data = receivedMessage.getJSONObject("data");
                 String boardString = data.getString("board");
@@ -177,6 +172,7 @@ public class MegachessClient extends WebSocketClient{
                         BestMoves.add(move);
                     }
                 }
+                
                 selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
                 
                 messageToSend.put("action", "move");
@@ -214,7 +210,7 @@ public class MegachessClient extends WebSocketClient{
     }
 
     public static void main(String[] args) throws URISyntaxException {		
-            WebSocketClient client = new MegachessClient(new URI("ws://megachess.herokuapp.com/service?authtoken=41144025-261a-4fc6-abd5-04a32350df97"));
+            WebSocketClient client = new MegachessClient(new URI("ws://megachess.herokuapp.com/service?authtoken=b5b7dec8-5668-4909-83db-5b4db4bf81e9"));
             client.connect();
     }
 }
