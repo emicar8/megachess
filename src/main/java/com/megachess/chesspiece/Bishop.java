@@ -5,6 +5,7 @@
  */
 package com.megachess.chesspiece;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,12 +17,30 @@ public class Bishop extends ChessPiece{
     public Bishop(int col, int row, String color){
         super(col, row, color);
         this.pointsForMove = 40;
-        this.pointsForKill = 10*this.pointsForMove;
+        this.pointsForKill = 400;
     }    
     
     @Override
     public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
         //Bishop will only move one tile
+        
+        List<int[]> BaseMoves = new ArrayList<>();
+        
+        //Bishop basic moves
+        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol - 1}); //left and upwards
+        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol + 1}); //right and upwards
+        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol + 1}); //right and downwards
+        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol - 1}); //left and downwards
+        
+        for(int[] baseMove : BaseMoves){
+            if(baseMove[0] >= 0 && baseMove[0] < 16 && baseMove[1] >= 0 && baseMove[1] < 16){
+                if(Board.get(baseMove[0]).get(baseMove[1]).isNull()){
+                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, baseMove[0], baseMove[1], this.pointsForMove});
+                }
+            }
+        }        
+        
+        /*
         switch(this.currentRow){
            case 0:
                switch(this.currentCol){
@@ -96,7 +115,7 @@ public class Bishop extends ChessPiece{
                        break;
                }                        
                break;
-       }
+       }*/
     }
 
     @Override
