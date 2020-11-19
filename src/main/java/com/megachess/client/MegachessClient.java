@@ -99,7 +99,7 @@ public class MegachessClient extends WebSocketClient{
                 List<int[]> AllMoves = new ArrayList<>();
                 List<int[]> BestMoves = new ArrayList<>();
                 List<List<ChessPiece>> Board = new ArrayList<>();
-                int[] selectedMove = new int[5];
+                int[] selectedMove;
                 
                 
                 for(int row = 0; row < this.expectedDimension; row++){
