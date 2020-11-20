@@ -19,7 +19,8 @@ public class King extends ChessPiece{
     public King(int col, int row, String color){
         super(col, row, color);
         this.pointsForMove = 65; //Lower performance of king movement to incentivize pawn movement to promote.
-        this.pointsForKill = 1000; 
+        this.pointsForKill = 650; //Lowered to target enemy queens more aggressively
+        //this.pointsForKill = 1000;
     }    
     
     @Override

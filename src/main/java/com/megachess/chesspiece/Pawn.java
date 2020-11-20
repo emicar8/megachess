@@ -17,7 +17,7 @@ public class Pawn extends ChessPiece{
     
     public Pawn(int col, int row, String color){
         super(col, row, color);
-        this.pointsForMove = 80; //Setting points for kill to incentivize promotion of pawns over other movements but not over other kills.
+        this.pointsForMove = 80; //Incentivize promotion of pawns over other movements but not over other kills.
         this.pointsForKill = 100;
         
     }

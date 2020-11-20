@@ -55,7 +55,7 @@ public abstract class ChessPiece {
     }
 
     public int getPointsForKill() {
-        return pointsForKill;
+        return pointsForKill + this.prioritizeCenterKill(this.currentCol);
     }
 
     public void setPointsForKill(int pointsForKill) {
@@ -104,6 +104,10 @@ public abstract class ChessPiece {
             }
         }
         return currentMax;
+    }
+    
+    private int prioritizeCenterKill(int col){
+        return (int)Math.round(-Math.pow(col-7.5, 2));
     }
     
     public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board);

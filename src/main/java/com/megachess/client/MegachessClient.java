@@ -94,7 +94,7 @@ public class MegachessClient extends WebSocketClient{
                 break;
 
             case "your_turn":
-                System.out.println(receivedMessage.toString());
+                //System.out.println(receivedMessage.toString());
                 data = receivedMessage.getJSONObject("data");
                 String boardString = data.getString("board");
                 List<int[]> AllMoves = new ArrayList<>();
@@ -102,6 +102,10 @@ public class MegachessClient extends WebSocketClient{
                 List<List<ChessPiece>> Board = new ArrayList<>();
                 int[] selectedMove;
                 
+                
+                for(int row = 0; row < this.expectedDimension; row++){
+                    System.out.println(boardString.substring(row*16, row*16 + 16));
+                }
                 
                 for(int row = 0; row < this.expectedDimension; row++){
                     List<ChessPiece> BoardRow = new ArrayList<>();
@@ -175,6 +179,7 @@ public class MegachessClient extends WebSocketClient{
                 }
                 
                 selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
+                
                 try{
                     messageToSend.put("action", "move");
                     data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
