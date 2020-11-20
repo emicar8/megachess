@@ -27,6 +27,7 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
 
 /**
  *
@@ -67,7 +68,7 @@ public class MegachessClient extends WebSocketClient{
             case "update_user_list":
 
                 System.out.println(receivedMessage.toString());
-                /*messageToSend.put("action", "challenge"); //Solucion temporal
+               /* messageToSend.put("action", "challenge"); //Solucion temporal
                 data.put("username", "Emile");
                 data.put("message", "Te reto a un duelo.");
                 messageToSend.put("data", data);
@@ -174,7 +175,18 @@ public class MegachessClient extends WebSocketClient{
                 }
                 
                 selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
-                
+                try{
+                    messageToSend.put("action", "move");
+                    data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
+                    data.put("turn_token", receivedMessage.getJSONObject("data").get("turn_token"));
+                    data.put("from_row", selectedMove[0]);
+                    data.put("from_col", selectedMove[1]);
+                    data.put("to_row",  selectedMove[2]);
+                    data.put("to_col",  selectedMove[3]);
+                    messageToSend.put("data", data);                    
+                }catch(Exception e){
+                    System.out.println(e.toString());
+                }
                 messageToSend.put("action", "move");
                 data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
                 data.put("turn_token", receivedMessage.getJSONObject("data").get("turn_token"));
@@ -190,6 +202,7 @@ public class MegachessClient extends WebSocketClient{
                     System.out.println(e.toString());
                 }
                 break;
+
 
 
             case "gameover":
