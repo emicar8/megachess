@@ -94,7 +94,7 @@ public class MegachessClient extends WebSocketClient{
                 break;
 
             case "your_turn":
-                //System.out.println(receivedMessage.toString());
+                System.out.println(receivedMessage.toString());
                 data = receivedMessage.getJSONObject("data");
                 String boardString = data.getString("board");
                 List<int[]> AllMoves = new ArrayList<>();
