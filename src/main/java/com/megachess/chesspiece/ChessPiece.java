@@ -55,8 +55,8 @@ public abstract class ChessPiece {
     }
 
     public int getPointsForKill() {
-        //return pointsForKill + this.prioritizeCenterKill(this.currentCol);
-        return pointsForKill;
+        return pointsForKill + this.prioritizeCenterKill(this.currentCol);
+        //return pointsForKill;
     }
 
     public void setPointsForKill(int pointsForKill) {

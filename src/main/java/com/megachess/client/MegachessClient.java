@@ -58,9 +58,10 @@ public class MegachessClient extends WebSocketClient{
     @Override
     public void onMessage(String message) {
 
-        JSONObject receivedMessage = new JSONObject(message); //Mensaje Recibido.
-        JSONObject messageToSend = new JSONObject();    //Respuesta.
-        JSONObject data = new JSONObject(); //Objeto de data en la respuesta.
+        JSONObject receivedMessage = new JSONObject(message); //Received message
+        JSONObject messageToSend = new JSONObject();    //Sent message.
+        JSONObject dataIn = new JSONObject(); //In data object
+        JSONObject dataOut = new JSONObject(); //Out data object
         
         String event = receivedMessage.getString("event"); 
 
@@ -83,8 +84,8 @@ public class MegachessClient extends WebSocketClient{
             case "ask_challenge":
                 System.out.println(receivedMessage.toString());
                 messageToSend.put("action", "accept_challenge");
-                data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
-                messageToSend.put("data", data);
+                dataOut.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
+                messageToSend.put("data", dataOut);
                 System.out.println(messageToSend.toString());
                 try{
                     send(messageToSend.toString());
@@ -95,17 +96,17 @@ public class MegachessClient extends WebSocketClient{
 
             case "your_turn":
                 //System.out.println(receivedMessage.toString());
-                data = receivedMessage.getJSONObject("data");
-                String boardString = data.getString("board");
+                dataIn = receivedMessage.getJSONObject("data");
+                String boardString = dataIn.getString("board");
                 List<int[]> AllMoves = new ArrayList<>();
                 List<int[]> BestMoves = new ArrayList<>();
                 List<List<ChessPiece>> Board = new ArrayList<>();
                 int[] selectedMove;
                 
                 
-                for(int row = 0; row < this.expectedDimension; row++){
+                /*for(int row = 0; row < this.expectedDimension; row++){
                     System.out.println(boardString.substring(row*16, row*16 + 16));
-                }
+                }*/
                 
                 for(int row = 0; row < this.expectedDimension; row++){
                     List<ChessPiece> BoardRow = new ArrayList<>();
@@ -159,7 +160,7 @@ public class MegachessClient extends WebSocketClient{
 
                 for(List<ChessPiece> Row : Board){
                     for(ChessPiece Piece : Row){
-                        if(data.getString("actual_turn").equals(Piece.getColor())){
+                        if(dataIn.getString("actual_turn").equals(Piece.getColor())){
                             Piece.calculatePossibleMoves(Board);
                             Piece.calculatePossibleAttacks(Board);
                             AllMoves.addAll(Piece.getPossibleMoves());
@@ -182,25 +183,18 @@ public class MegachessClient extends WebSocketClient{
                 
                 try{
                     messageToSend.put("action", "move");
-                    data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
-                    data.put("turn_token", receivedMessage.getJSONObject("data").get("turn_token"));
-                    data.put("from_row", selectedMove[0]);
-                    data.put("from_col", selectedMove[1]);
-                    data.put("to_row",  selectedMove[2]);
-                    data.put("to_col",  selectedMove[3]);
-                    messageToSend.put("data", data);                    
+                    dataOut.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
+                    dataOut.put("turn_token", receivedMessage.getJSONObject("data").get("turn_token"));
+                    dataOut.put("from_row", selectedMove[0]);
+                    dataOut.put("from_col", selectedMove[1]);
+                    dataOut.put("to_row",  selectedMove[2]);
+                    dataOut.put("to_col",  selectedMove[3]);
+                    messageToSend.put("data", dataOut);                    
                 }catch(Exception e){
                     System.out.println(e.toString());
                 }
-                messageToSend.put("action", "move");
-                data.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
-                data.put("turn_token", receivedMessage.getJSONObject("data").get("turn_token"));
-                data.put("from_row", selectedMove[0]);
-                data.put("from_col", selectedMove[1]);
-                data.put("to_row",  selectedMove[2]);
-                data.put("to_col",  selectedMove[3]);
-                messageToSend.put("data", data);
-                //System.out.println(messageToSend.toString());
+                
+                System.out.println(messageToSend.toString());
                 try{
                     send(messageToSend.toString());
                 }catch(Exception e){
