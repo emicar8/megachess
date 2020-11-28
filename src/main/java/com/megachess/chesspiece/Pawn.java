@@ -24,11 +24,9 @@ public class Pawn extends ChessPiece{
             this.pointsForMove = 500; //In range, promote is worth 500 points.
         }
         this.pointsForKill = 100;
-        
     }
     
-    private int[] moveUpOnce(List<List<ChessPiece>> Board){
-        
+    private int[] moveUpOnce(List<List<ChessPiece>> Board){ 
         if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){
             return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol, this.pointsForMove + 8 - (this.currentRow - 1)};
         }
@@ -41,12 +39,10 @@ public class Pawn extends ChessPiece{
                 return new int[] {this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol, this.pointsForMove + 8 - (this.currentRow - 2)};
             }            
         }
-
         return null;      
     }
     
     private int[] moveDownOnce(List<List<ChessPiece>> Board){
-        
         if(Board.get(this.currentRow + 1).get(this.currentCol).isNull()){
             return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol, this.pointsForMove - 7 + this.currentRow + 1};
         }
@@ -63,7 +59,6 @@ public class Pawn extends ChessPiece{
     }  
     
     private int[] moveUpAndRight(List<List<ChessPiece>> Board){
-        
         if(this.currentCol < 15){
             if(Board.get(this.currentRow - 1).get(this.currentCol + 1).getColor().equals("black")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 1, Board.get(this.currentRow - 1).get(this.currentCol + 1).getPointsForKill()};
@@ -73,7 +68,6 @@ public class Pawn extends ChessPiece{
     }
     
     private int[] moveUpAndLeft(List<List<ChessPiece>> Board){
-        
         if(this.currentCol > 0){
             if(Board.get(this.currentRow - 1).get(this.currentCol - 1).getColor().equals("black")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 1, Board.get(this.currentRow - 1).get(this.currentCol - 1).getPointsForKill()};
@@ -83,7 +77,6 @@ public class Pawn extends ChessPiece{
     }
 
     private int[] moveDownAndRight(List<List<ChessPiece>> Board){
-        
         if(this.currentCol < 15){
             if(Board.get(this.currentRow + 1).get(this.currentCol + 1).getColor().equals("white")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 1, Board.get(this.currentRow + 1).get(this.currentCol + 1).getPointsForKill()};
@@ -93,7 +86,6 @@ public class Pawn extends ChessPiece{
     }
     
     private int[] moveDownAndLeft(List<List<ChessPiece>> Board){
-        
         if(this.currentCol > 0){
             if(Board.get(this.currentRow + 1).get(this.currentCol - 1).getColor().equals("white")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 1, Board.get(this.currentRow + 1).get(this.currentCol - 1).getPointsForKill()};
