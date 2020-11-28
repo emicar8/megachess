@@ -19,26 +19,81 @@ public class Rook extends ChessPiece{
         this.pointsForMove = 60;
         this.pointsForKill = 600;
     }    
-
-    @Override
-    public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
-        //Rook will only move one tile
-        
-        List<int[]> BaseMoves = new ArrayList<>();
-        
-        //Rook basic moves
-        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol}); //upwards
-        BaseMoves.add(new int[] {this.currentRow, this.currentCol + 1}); //right
-        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol}); //downwards
-        BaseMoves.add(new int[] {this.currentRow, this.currentCol - 1}); //left
-        
-        for(int[] baseMove : BaseMoves){
-            if(baseMove[0] >= 0 && baseMove[0] < 16 && baseMove[1] >= 0 && baseMove[1] < 16){
-                if(Board.get(baseMove[0]).get(baseMove[1]).isNull()){
-                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, baseMove[0], baseMove[1], this.pointsForMove});
+    
+    private List<int[]> moveRight(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = this.currentCol + 1; i < 16; i++){ //Check moves towards the right
+            if(!Board.get(this.currentRow).get(i).isNull()){ //Position is not empty
+                if(Board.get(this.currentRow).get(i).getColor().equals(this.color)){ //Check if piece is same color
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow, i - 1, this.getPointsForMove()}); //Piece is same color
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow, i, Board.get(this.currentRow).get(i).getPointsForKill()}); //Piece is not same color
                 }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow, i, this.getPointsForMove()});
             }
         }
+        return moves;
+    }   
+    
+    private List<int[]> moveDown(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = this.currentRow + 1; i < 16; i++){ //Check moves downwards
+            if(!Board.get(i).get(this.currentCol).isNull()){ //Position is not empty
+                if(Board.get(i).get(this.currentCol).getColor().equals(this.color)){ //Check if piece is same color
+                    moves.add(new int[]{this.currentRow, this.currentCol, i - 1, this.currentCol, this.getPointsForMove()}); //Piece is same color
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, i, this.currentCol, Board.get(i).get(this.currentCol).getPointsForKill()}); //Piece is not same color
+                }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, i, this.currentCol, this.getPointsForMove()});
+            }
+        }        
+        return moves;
+    }
+    
+    private List<int[]> moveLeft(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = this.currentCol - 1; i > -1; i--){ //Check moves towards the left
+            if(!Board.get(this.currentRow).get(i).isNull()){ //Position is not empty
+                if(Board.get(this.currentRow).get(i).getColor().equals(this.color)){ //Check if piece is same color
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow, i + 1, this.getPointsForMove()}); //Piece is same color
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow, i, Board.get(this.currentRow).get(i).getPointsForKill()}); //Piece is not same color
+                }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow, i, this.getPointsForMove()});
+            }
+        }        
+        return moves;
+    }    
+    
+    private List<int[]> moveUp(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = this.currentRow - 1; i > -1; i--){ //Check moves upwards
+            if(!Board.get(i).get(this.currentCol).isNull()){ //Position is not empty
+                if(Board.get(i).get(this.currentCol).getColor().equals(this.color)){ //Check if piece is same color
+                    moves.add(new int[]{this.currentRow, this.currentCol, i + 1, this.currentCol, this.getPointsForMove()}); //Piece is same color
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, i, this.currentCol, Board.get(i).get(this.currentCol).getPointsForKill()}); //Piece is not same color
+                }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, i, this.currentCol, this.getPointsForMove()});
+            }
+        }        
+        return moves;
+    }   
+    
+    @Override
+    public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
+        this.possibleMoves.addAll(this.moveDown(Board));
+        this.possibleMoves.addAll(this.moveRight(Board));
+        this.possibleMoves.addAll(this.moveUp(Board));
+        this.possibleMoves.addAll(this.moveLeft(Board));
     }
 
     @Override
