@@ -19,26 +19,89 @@ public class Bishop extends ChessPiece{
         this.pointsForMove = 40;
         this.pointsForKill = 400;
     }    
+
+    private List<int[]> moveRightAndDown(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = 1; i < Math.min(16 - this.currentRow, 16 - this.currentCol); i++){
+            if(!Board.get(this.currentRow + i).get(this.currentCol + i).isNull()){ //Position is not empty
+                if(Board.get(this.currentRow + i).get(this.currentCol + i).getColor().equals(this.color)){ //Check if piece is same color
+                    if(i != 1){ //Check if piece of same color is adjacent 
+                        moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow + i - 1, this.currentCol + i - 1, this.getPointsForMove()}); //Piece is same color
+                    }                  
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow + i, this.currentCol + i, Board.get(this.currentRow + i).get(this.currentCol + i).getPointsForKill()}); //Piece is not same color
+                }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow + i, this.currentCol + i, this.getPointsForMove()});
+            }            
+        }
+        return moves;
+    }
+    
+    private List<int[]> moveRightAndUp(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = 1; i < Math.min(this.currentRow + 1, 16 - this.currentCol); i++){
+            if(!Board.get(this.currentRow - i).get(this.currentCol + i).isNull()){ //Position is not empty
+                if(Board.get(this.currentRow - i).get(this.currentCol + i).getColor().equals(this.color)){ //Check if piece is same color
+                    if(i != 1){ //Check if piece of same color is adjacent 
+                        moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow - i + 1, this.currentCol + i - 1, this.getPointsForMove()}); //Piece is same color
+                    }                  
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow - i, this.currentCol + i, Board.get(this.currentRow - i).get(this.currentCol + i).getPointsForKill()}); //Piece is not same color
+                }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow - i, this.currentCol + i, this.getPointsForMove()});
+            }            
+        }
+        return moves;
+    }
+
+    private List<int[]> moveLeftAndUp(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = 1; i < Math.min(this.currentRow + 1, this.currentCol + 1); i++){
+            if(!Board.get(this.currentRow - i).get(this.currentCol - i).isNull()){ //Position is not empty
+                if(Board.get(this.currentRow - i).get(this.currentCol - i).getColor().equals(this.color)){ //Check if piece is same color
+                    if(i != 1){ //Check if piece of same color is adjacent 
+                        moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow - i + 1, this.currentCol - i + 1, this.getPointsForMove()}); //Piece is same color
+                    }                  
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow - i, this.currentCol - i, Board.get(this.currentRow - i).get(this.currentCol - i).getPointsForKill()}); //Piece is not same color
+                }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow - i, this.currentCol - i, this.getPointsForMove()});
+            }            
+        }
+        return moves;
+    }
+    
+    private List<int[]> moveLeftAndDown(List<List<ChessPiece>> Board){
+        List<int[]> moves = new ArrayList<>();
+        for(int i = 1; i < Math.min(16 - this.currentRow, this.currentCol + 1); i++){
+            if(!Board.get(this.currentRow + i).get(this.currentCol - i).isNull()){ //Position is not empty
+                if(Board.get(this.currentRow + i).get(this.currentCol - i).getColor().equals(this.color)){ //Check if piece is same color
+                    if(i != 1){ //Check if piece of same color is adjacent 
+                        moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow + i - 1, this.currentCol - i + 1, this.getPointsForMove()}); //Piece is same color
+                    }                  
+                }else{
+                    moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow + i, this.currentCol - i, Board.get(this.currentRow + i).get(this.currentCol - i).getPointsForKill()}); //Piece is not same color
+                }
+                break;
+            }else{
+                moves.add(new int[]{this.currentRow, this.currentCol, this.currentRow + i, this.currentCol - i, this.getPointsForMove()});
+            }            
+        }
+        return moves;
+    }
     
     @Override
     public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
-        //Bishop will only move one tile
-        
-        List<int[]> BaseMoves = new ArrayList<>();
-        
-        //Bishop basic moves
-        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol - 1}); //left and upwards
-        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol + 1}); //right and upwards
-        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol + 1}); //right and downwards
-        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol - 1}); //left and downwards
-        
-        for(int[] baseMove : BaseMoves){
-            if(baseMove[0] >= 0 && baseMove[0] < 16 && baseMove[1] >= 0 && baseMove[1] < 16){
-                if(Board.get(baseMove[0]).get(baseMove[1]).isNull()){
-                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, baseMove[0], baseMove[1], this.pointsForMove});
-                }
-            }
-        }        
+        this.possibleMoves.addAll(this.moveLeftAndDown(Board));
+        this.possibleMoves.addAll(this.moveRightAndDown(Board));
+        this.possibleMoves.addAll(this.moveRightAndUp(Board));
+        this.possibleMoves.addAll(this.moveLeftAndUp(Board));       
     }
 
     @Override
