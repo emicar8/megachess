@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Bishop extends ChessPiece{
 
-    public Bishop(int col, int row, String color){
-        super(col, row, color);
+    public Bishop(int row, int col, String color){
+        super(row, col, color);
         this.pointsForMove = 40;
         this.pointsForKill = 400;
     }    

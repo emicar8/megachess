@@ -16,8 +16,8 @@ import java.util.logging.Logger;
  */
 public class Knight extends ChessPiece{
 
-    public Knight(int col, int row, String color){
-        super(col, row, color);
+    public Knight(int row, int col, String color){
+        super(row, col, color);
         this.pointsForMove = 30;
         this.pointsForKill = 300;
     }    

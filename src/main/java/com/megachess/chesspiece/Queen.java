@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class Queen extends ChessPiece{
 
-    public Queen(int col, int row, String color){
-        super(col, row, color);
+    public Queen(int row, int col, String color){
+        super(row, col, color);
         this.pointsForMove = 70;
-        this.pointsForKill = 700;
+        this.pointsForKill = 50;
     }    
     
     @Override

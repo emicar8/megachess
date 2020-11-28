@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.megachess.chesspiece.PawnTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
+com.megachess.chesspiece.PawnTest.testCalculatePossibleAttacks()  Time elapsed: 0.001 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at com.megachess.chesspiece.PawnTest.testCalculatePossibleAttacks(PawnTest.java:78)
+
+com.megachess.chesspiece.PawnTest.testCalculatePossibleMoves()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at com.megachess.chesspiece.PawnTest.testCalculatePossibleMoves(PawnTest.java:65)
+

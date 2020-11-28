@@ -15,9 +15,15 @@ import java.util.logging.Logger;
  */
 public class Pawn extends ChessPiece{
     
-    public Pawn(int col, int row, String color){
-        super(col, row, color);
-        this.pointsForMove = 80; //Incentivize promotion of pawns over other movements but not over other kills.
+    public Pawn(int row, int col, String color){
+        super(row, col, color);
+        //this.pointsForMove = 80; //Incentivize promotion of pawns over other movements but not over other kills.
+        if(Math.abs(8.5 - (double)row) > 1.5){ //Check if in range of promotion on next move.
+            this.pointsForMove = 80; //Not in range, but still incentivized over other movements
+        }else{
+            this.pointsForMove = 500; //In range, promote is worth 500 points.
+        }
+        
         this.pointsForKill = 100;
         
     }

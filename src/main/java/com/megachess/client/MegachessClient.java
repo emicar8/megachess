@@ -66,32 +66,14 @@ public class MegachessClient extends WebSocketClient{
         String event = receivedMessage.getString("event"); 
 
         switch (event){
-            case "update_user_list":
-
-                System.out.println(receivedMessage.toString());
-               /* messageToSend.put("action", "challenge"); //Solucion temporal
-                data.put("username", "Emile");
-                data.put("message", "Te reto a un duelo.");
-                messageToSend.put("data", data);
-                System.out.println(messageToSend.toString());
-                try{
-                    send(messageToSend.toString());
-                }catch (Exception e){
-                    System.out.println(e.getMessage());
-                }*/
-                break;
-
             case "ask_challenge":
+                
                 System.out.println(receivedMessage.toString());
                 messageToSend.put("action", "accept_challenge");
                 dataOut.put("board_id", receivedMessage.getJSONObject("data").get("board_id"));
                 messageToSend.put("data", dataOut);
                 System.out.println(messageToSend.toString());
-                try{
-                    send(messageToSend.toString());
-                }catch (Exception e){
-                    System.out.println(e.getMessage());
-                }
+                send(messageToSend.toString());
                 break;
 
             case "your_turn":
@@ -119,34 +101,34 @@ public class MegachessClient extends WebSocketClient{
                                 BoardRow.add(new Pawn(row,column,"white"));
                                 break;                               
                            case 'r':
-                               BoardRow.add(new Rook(row,column,"black")); //TODO
+                               BoardRow.add(new Rook(row,column,"black")); 
                                break;
                             case 'R':
-                                BoardRow.add(new Rook(row,column,"white")); //TODO
+                                BoardRow.add(new Rook(row,column,"white")); 
                                 break;                               
                            case 'h':
-                               BoardRow.add(new Knight(row,column,"black")); //TODO
+                               BoardRow.add(new Knight(row,column,"black"));
                                break;
                             case 'H':
-                                BoardRow.add(new Knight(row,column,"white")); //TODO
+                                BoardRow.add(new Knight(row,column,"white")); 
                                 break;                               
                            case 'b':
-                               BoardRow.add(new Bishop(row,column,"black")); //TODO
+                               BoardRow.add(new Bishop(row,column,"black")); 
                                break;
                             case 'B':
-                                BoardRow.add(new Bishop(row,column,"white")); //TODO
+                                BoardRow.add(new Bishop(row,column,"white"));
                                 break;                               
                            case 'q':
-                               BoardRow.add(new Queen(row,column,"black")); //TODO
+                               BoardRow.add(new Queen(row,column,"black"));
                                break;
                             case 'Q':
-                                BoardRow.add(new Queen(row,column,"white")); //TODO
+                                BoardRow.add(new Queen(row,column,"white"));
                                 break;                               
                            case 'k':
-                               BoardRow.add(new King(row,column,"black")); //TODO
+                               BoardRow.add(new King(row,column,"black"));
                                break;                          
                             case 'K':
-                                BoardRow.add(new King(row,column,"white")); //TODO
+                                BoardRow.add(new King(row,column,"white")); 
                                 break;
                             default:
                                 BoardRow.add(new NullPiece(row,column));
@@ -156,8 +138,6 @@ public class MegachessClient extends WebSocketClient{
                     Board.add(BoardRow);
                 }
                 
-               
-
                 for(List<ChessPiece> Row : Board){
                     for(ChessPiece Piece : Row){
                         if(dataIn.getString("actual_turn").equals(Piece.getColor())){
@@ -168,12 +148,12 @@ public class MegachessClient extends WebSocketClient{
                         }
                                              
                     }
-
                 }
                
                 Collections.sort(AllMoves, new MoveComparator().reversed());
                 
                 for(int[] move : AllMoves){
+                    //System.out.println(move[0] + "," + move[1] + "," + move[2] + "," + move[3] + "," + move[4]);
                     if(AllMoves.get(0)[4] == move[4]){
                         BestMoves.add(move);
                     }
@@ -190,24 +170,21 @@ public class MegachessClient extends WebSocketClient{
                     dataOut.put("to_row",  selectedMove[2]);
                     dataOut.put("to_col",  selectedMove[3]);
                     messageToSend.put("data", dataOut);                    
-                }catch(Exception e){
+                }catch(JSONException e){
                     System.out.println(e.toString());
                 }
                 
-                System.out.println(messageToSend.toString());
-                try{
-                    send(messageToSend.toString());
-                }catch(Exception e){
-                    System.out.println(e.toString());
-                }
+                //System.out.println(messageToSend.toString());
+                send(messageToSend.toString());
                 break;
 
-
-
+            case "update_user_list":
             case "gameover":
-
+            default:
+                
                 System.out.println(receivedMessage.toString());
                 break;
+                
         }
     }
 

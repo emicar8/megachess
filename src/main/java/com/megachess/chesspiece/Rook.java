@@ -14,8 +14,8 @@ import java.util.List;
  */
 public class Rook extends ChessPiece{
     
-    public Rook(int col, int row, String color){
-        super(col, row, color);
+    public Rook(int row, int col, String color){
+        super(row, col, color);
         this.pointsForMove = 60;
         this.pointsForKill = 600;
     }    

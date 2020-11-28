@@ -16,11 +16,11 @@ import java.util.logging.Logger;
  */
 public class King extends ChessPiece{
 
-    public King(int col, int row, String color){
-        super(col, row, color);
+    public King(int row, int col, String color){
+        super(row, col, color);
         this.pointsForMove = 65; //Lower performance of king movement to incentivize pawn movement to promote.
-        this.pointsForKill = 650; //Lowered to target enemy queens more aggressively
-        //this.pointsForKill = 1000;
+        //this.pointsForKill = 650; //Lowered to target enemy queens more aggressively
+        this.pointsForKill = 1000;
     }    
     
     @Override
