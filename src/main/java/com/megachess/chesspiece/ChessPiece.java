@@ -87,6 +87,13 @@ public abstract class ChessPiece {
         this.color = color;
     }
     
+    public void AddIfNotNull(int [] move){
+        if(move != null){
+            this.possibleMoves.add(move);
+        }
+    }
+    
+    
     public int[] getMaxValueMove(){
         int[] currentMax = {0, 0, 0, 0, 0};
         if(!this.possibleMoves.isEmpty()){ //List not empty
@@ -116,5 +123,4 @@ public abstract class ChessPiece {
     public abstract void calculatePossibleAttacks(List<List<ChessPiece>> Board);
     
     public abstract boolean isNull();
-    
 }

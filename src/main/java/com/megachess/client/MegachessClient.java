@@ -142,9 +142,9 @@ public class MegachessClient extends WebSocketClient{
                     for(ChessPiece Piece : Row){
                         if(dataIn.getString("actual_turn").equals(Piece.getColor())){
                             Piece.calculatePossibleMoves(Board);
-                            Piece.calculatePossibleAttacks(Board);
+                            //Piece.calculatePossibleAttacks(Board);
                             AllMoves.addAll(Piece.getPossibleMoves());
-                            AllMoves.addAll(Piece.getPossibleAttacks()); 
+                            //AllMoves.addAll(Piece.getPossibleAttacks()); 
                         }
                                              
                     }
@@ -156,7 +156,8 @@ public class MegachessClient extends WebSocketClient{
                     //System.out.println(move[0] + "," + move[1] + "," + move[2] + "," + move[3] + "," + move[4]);
                     if(AllMoves.get(0)[4] == move[4]){
                         BestMoves.add(move);
-                    }
+                    }  
+
                 }
                 
                 selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
