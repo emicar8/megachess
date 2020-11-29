@@ -20,30 +20,108 @@ public class Knight extends ChessPiece{
         super(row, col, color);
         this.pointsForMove = 30;
         this.pointsForKill = 300;
+    }
+
+    private int[] moveUpAndRight(List<List<ChessPiece>> Board){
+        if(this.currentRow > 1 && this.currentCol < 15){
+            if(Board.get(this.currentRow - 2).get(this.currentCol + 1).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol + 1, this.pointsForMove};
+            }else if(!Board.get(this.currentRow - 2).get(this.currentCol + 1).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol + 1, Board.get(this.currentRow - 2).get(this.currentCol + 1).getPointsForKill()};
+            }
+        }
+        return null;
+    }
+    
+    private int[] moveRightAndUp(List<List<ChessPiece>> Board){
+        if(this.currentRow > 0 && this.currentCol < 14){
+            if(Board.get(this.currentRow - 1).get(this.currentCol + 2).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 2, this.pointsForMove};
+            }else if(!Board.get(this.currentRow - 1).get(this.currentCol + 2).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 2, Board.get(this.currentRow - 1).get(this.currentCol + 2).getPointsForKill()};
+            }
+        }
+        return null;
+    }
+
+    private int[] moveRightAndDown(List<List<ChessPiece>> Board){
+        if(this.currentRow < 15 && this.currentCol < 14){
+            if(Board.get(this.currentRow + 1).get(this.currentCol + 2).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 2, this.pointsForMove};
+            }else if(!Board.get(this.currentRow + 1).get(this.currentCol + 2).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 2, Board.get(this.currentRow + 1).get(this.currentCol + 2).getPointsForKill()};
+            }
+        }
+        return null;
+    }
+    
+    private int[] moveDownAndRight(List<List<ChessPiece>> Board){
+        if(this.currentRow < 14 && this.currentCol < 15){
+            if(Board.get(this.currentRow + 2).get(this.currentCol + 1).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol + 1, this.pointsForMove};
+            }else if(!Board.get(this.currentRow + 2).get(this.currentCol + 1).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol + 1, Board.get(this.currentRow + 2).get(this.currentCol + 1).getPointsForKill()};
+            }
+        }
+        return null;
+    }
+
+    private int[] moveDownAndLeft(List<List<ChessPiece>> Board){
+        if(this.currentRow < 14 && this.currentCol > 0){
+            if(Board.get(this.currentRow + 2).get(this.currentCol - 1).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol - 1, this.pointsForMove};
+            }else if(!Board.get(this.currentRow + 2).get(this.currentCol - 1).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol - 1, Board.get(this.currentRow + 2).get(this.currentCol - 1).getPointsForKill()};
+            }
+        }
+        return null;
+    }
+    
+    private int[] moveLeftAndDown(List<List<ChessPiece>> Board){
+        if(this.currentRow < 15 && this.currentCol > 1){
+            if(Board.get(this.currentRow + 1).get(this.currentCol - 2).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 2, this.pointsForMove};
+            }else if(!Board.get(this.currentRow + 1).get(this.currentCol - 2).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 2, Board.get(this.currentRow + 1).get(this.currentCol - 2).getPointsForKill()};
+            }
+        }
+        return null;
+    }
+    
+    private int[] moveLeftAndUp(List<List<ChessPiece>> Board){
+        if(this.currentRow > 0 && this.currentCol > 1){
+            if(Board.get(this.currentRow - 1).get(this.currentCol - 2).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 2, this.pointsForMove};
+            }else if(!Board.get(this.currentRow - 1).get(this.currentCol - 2).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 2, Board.get(this.currentRow - 1).get(this.currentCol - 2).getPointsForKill()};
+            }
+        }
+        return null;
+    }    
+    
+    private int[] moveUpAndLeft(List<List<ChessPiece>> Board){
+        if(this.currentRow > 1 && this.currentCol > 0){
+            if(Board.get(this.currentRow - 2).get(this.currentCol - 1).isNull()){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol - 1, this.pointsForMove};
+            }else if(!Board.get(this.currentRow - 2).get(this.currentCol - 1).getColor().equals(this.color)){
+                return new int[]{this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol - 1, Board.get(this.currentRow - 2).get(this.currentCol - 1).getPointsForKill()};
+            }
+        }
+        return null;
     }    
     
     @Override
     public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
-                    
-        List<int[]> BaseMoves = new ArrayList<>();
         
-        //Knight basic moves
-        BaseMoves.add(new int[] {this.currentRow - 2, this.currentCol - 1}); //upwards and then left
-        BaseMoves.add(new int[] {this.currentRow - 2, this.currentCol + 1}); //upwards and then right
-        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol + 2}); //right and then upwards
-        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol + 2}); //right and then downwards
-        BaseMoves.add(new int[] {this.currentRow + 2, this.currentCol + 1}); //downwards and then right
-        BaseMoves.add(new int[] {this.currentRow + 2, this.currentCol - 1}); //downwards and then left
-        BaseMoves.add(new int[] {this.currentRow + 1, this.currentCol - 2}); //left and then downwards
-        BaseMoves.add(new int[] {this.currentRow - 1, this.currentCol - 2}); //left and then upwards
+        this.AddIfNotNull(moveDownAndLeft(Board));
+        this.AddIfNotNull(moveDownAndRight(Board));
+        this.AddIfNotNull(moveRightAndDown(Board));
+        this.AddIfNotNull(moveRightAndUp(Board));
+        this.AddIfNotNull(moveUpAndRight(Board));
+        this.AddIfNotNull(moveUpAndLeft(Board));
+        this.AddIfNotNull(moveLeftAndUp(Board));
+        this.AddIfNotNull(moveLeftAndDown(Board));
         
-        for(int[] baseMove : BaseMoves){
-            if(baseMove[0] >= 0 && baseMove[0] < 16 && baseMove[1] >= 0 && baseMove[1] < 16){
-                if(Board.get(baseMove[0]).get(baseMove[1]).isNull()){
-                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, baseMove[0], baseMove[1], this.pointsForMove});
-                }
-            }
-        }        
     }
 
     @Override
