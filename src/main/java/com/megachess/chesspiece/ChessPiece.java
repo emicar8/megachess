@@ -120,7 +120,5 @@ public abstract class ChessPiece {
     
     public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board);
     
-    public abstract void calculatePossibleAttacks(List<List<ChessPiece>> Board);
-    
     public abstract boolean isNull();
 }

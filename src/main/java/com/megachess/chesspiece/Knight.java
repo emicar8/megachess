@@ -5,10 +5,7 @@
  */
 package com.megachess.chesspiece;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -122,47 +119,6 @@ public class Knight extends ChessPiece{
         this.AddIfNotNull(moveLeftAndUp(Board));
         this.AddIfNotNull(moveLeftAndDown(Board));
         
-    }
-
-    @Override
-    public void calculatePossibleAttacks(List<List<ChessPiece>> Board) {
-        List<int[]> BaseAttacks = new ArrayList<>();
-        
-        //Knight basic moves
-        BaseAttacks.add(new int[] {this.currentRow - 2, this.currentCol - 1}); //upwards and then left
-        BaseAttacks.add(new int[] {this.currentRow - 2, this.currentCol + 1}); //upwards and then right
-        BaseAttacks.add(new int[] {this.currentRow - 1, this.currentCol + 2}); //right and then upwards
-        BaseAttacks.add(new int[] {this.currentRow + 1, this.currentCol + 2}); //right and then downwards
-        BaseAttacks.add(new int[] {this.currentRow + 2, this.currentCol + 1}); //downwards and then right
-        BaseAttacks.add(new int[] {this.currentRow + 2, this.currentCol - 1}); //downwards and then left
-        BaseAttacks.add(new int[] {this.currentRow + 1, this.currentCol - 2}); //left and then downwards
-        BaseAttacks.add(new int[] {this.currentRow - 1, this.currentCol - 2}); //left and then upwards
-        
-        for(int[] baseAttack : BaseAttacks){
-            if(baseAttack[0] >= 0 && baseAttack[0] < 16 && baseAttack[1] >= 0 && baseAttack[1] < 16){
-                if(!Board.get(baseAttack[0]).get(baseAttack[1]).isNull()){ //Not empty space
-                    switch(this.color){
-                        case "black":
-                            if(Board.get(baseAttack[0]).get(baseAttack[1]).getColor().equals("white")){ //Check if enemy
-                                this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, baseAttack[0], baseAttack[1], Board.get(baseAttack[0]).get(baseAttack[1]).getPointsForKill()});
-                            }
-                            break;
-                        case "white":
-                            if(Board.get(baseAttack[0]).get(baseAttack[1]).getColor().equals("black")){ //Check if enemy
-                                this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, baseAttack[0], baseAttack[1], Board.get(baseAttack[0]).get(baseAttack[1]).getPointsForKill()});
-                            }                            
-                            break;
-                        default:
-                            try {
-                                throw new Exception("Color must be black or white");
-                            } catch (Exception ex) {
-                                Logger.getLogger(King.class.getName()).log(Level.SEVERE, null, ex);
-                            }   
-                            break;
-                    }
-                }
-            }
-        }
     }
 
     @Override

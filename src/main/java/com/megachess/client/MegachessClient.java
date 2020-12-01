@@ -142,11 +142,8 @@ public class MegachessClient extends WebSocketClient{
                     for(ChessPiece Piece : Row){
                         if(dataIn.getString("actual_turn").equals(Piece.getColor())){
                             Piece.calculatePossibleMoves(Board);
-                            //Piece.calculatePossibleAttacks(Board);
                             AllMoves.addAll(Piece.getPossibleMoves());
-                            //AllMoves.addAll(Piece.getPossibleAttacks()); 
-                        }
-                                             
+                        }                   
                     }
                 }
                

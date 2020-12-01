@@ -23,11 +23,6 @@ public class NullPiece extends ChessPiece{
     }
 
     @Override
-    public void calculatePossibleAttacks(List<List<ChessPiece>> Board) {
-        //Do nothing
-    }
-
-    @Override
     public boolean isNull() {
         return true;
     }

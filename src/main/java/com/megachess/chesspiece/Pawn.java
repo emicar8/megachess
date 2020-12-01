@@ -120,63 +120,6 @@ public class Pawn extends ChessPiece{
     }
 
     @Override
-    public void calculatePossibleAttacks(List<List<ChessPiece>> Board) {
-        switch (this.color) {
-            case "black":
-                switch(this.currentCol){
-                    case 0: //Border position
-                        if(!Board.get(this.currentRow + 1).get(this.currentCol + 1).isNull() && Board.get(this.currentRow + 1).get(this.currentCol + 1).getColor().equals("white")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 1, Board.get(this.currentRow + 1).get(this.currentCol + 1).getPointsForKill()});
-                        }                        
-                        break;
-                    case 15: //Border position
-                        if(!Board.get(this.currentRow + 1).get(this.currentCol - 1).isNull() && Board.get(this.currentRow + 1).get(this.currentCol - 1).getColor().equals("white")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 1, Board.get(this.currentRow + 1).get(this.currentCol - 1).getPointsForKill()});
-                        } 
-                        break;
-                    default:
-                        if(!Board.get(this.currentRow + 1).get(this.currentCol - 1).isNull() && Board.get(this.currentRow + 1).get(this.currentCol - 1).getColor().equals("white")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 1, Board.get(this.currentRow + 1).get(this.currentCol - 1).getPointsForKill()});
-                        } 
-                        if(!Board.get(this.currentRow + 1).get(this.currentCol + 1).isNull() && Board.get(this.currentRow + 1).get(this.currentCol + 1).getColor().equals("white")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 1, Board.get(this.currentRow + 1).get(this.currentCol + 1).getPointsForKill()});
-                        }
-                        break;
-                }
-                break;
-            case "white":
-                switch(this.currentCol){
-                    case 0: //Border piece
-                        if(!Board.get(this.currentRow - 1).get(this.currentCol + 1).isNull() && Board.get(this.currentRow - 1).get(this.currentCol + 1).getColor().equals("black")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 1, Board.get(this.currentRow - 1).get(this.currentCol + 1).getPointsForKill()});
-                        }                        
-                        break;
-                    case 15: //Border piece
-                        if(!Board.get(this.currentRow - 1).get(this.currentCol - 1).isNull() && Board.get(this.currentRow - 1).get(this.currentCol - 1).getColor().equals("black")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 1, Board.get(this.currentRow - 1).get(this.currentCol - 1).getPointsForKill()});
-                        } 
-                        break;
-                    default:
-                        if(!Board.get(this.currentRow - 1).get(this.currentCol - 1).isNull() && Board.get(this.currentRow - 1).get(this.currentCol - 1).getColor().equals("black")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 1, Board.get(this.currentRow - 1).get(this.currentCol - 1).getPointsForKill()});
-                        } 
-                        if(!Board.get(this.currentRow - 1).get(this.currentCol + 1).isNull() && Board.get(this.currentRow - 1).get(this.currentCol + 1).getColor().equals("black")){ //Attacking space is not empty and piece is from rival.
-                            this.possibleAttacks.add(new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 1, Board.get(this.currentRow - 1).get(this.currentCol + 1).getPointsForKill()});
-                        }   
-                        break;
-                }
-                break;         
-            default:
-                try {
-                    throw new Exception("Color must be black or white");
-                } catch (Exception ex) {
-                    Logger.getLogger(Pawn.class.getName()).log(Level.SEVERE, null, ex);
-                }   
-                break;
-        }
-    }
-
-    @Override
     public boolean isNull() {
         return false;
     }
