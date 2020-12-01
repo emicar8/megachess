@@ -157,7 +157,6 @@ public class MegachessClient extends WebSocketClient{
                     if(AllMoves.get(0)[4] == move[4]){
                         BestMoves.add(move);
                     }  
-
                 }
                 
                 selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
