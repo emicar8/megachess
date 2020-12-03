@@ -10,6 +10,9 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+    
+ 
+    
     <dependencies>
         <dependency>
             <groupId>org.java-websocket</groupId>
@@ -38,6 +41,20 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.6.0</version>
             <scope>test</scope>
-        </dependency>
-    </dependencies>    
+        </dependency>       
+    </dependencies> 
+    
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+        </plugins>
+    </build>       
+             
 </project>
