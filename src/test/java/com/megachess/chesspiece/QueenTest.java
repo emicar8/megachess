@@ -101,38 +101,37 @@ public class QueenTest {
     static Stream<Arguments> testMoveRight_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {8,12,8,14,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {8,12,8,14,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {8,12,8,15,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {8,12,8,14,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {8,12,8,14,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {8,12,8,15,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
-        return Stream.of(
-                Arguments.of("                                                                                                                                            qp                                                                                                                  ", 8, 12, Test1),
-                Arguments.of("                                                                                                                                            q P                                                                                                                 ", 8, 12, Test2),
-                Arguments.of("                                                                                                                                            q p                                                                                                                 ", 8, 12, Test3),
-                Arguments.of("                                                                                                                                            q                                                                                                                   ", 8, 12, Test4),
-                Arguments.of("                                                                                                                                               q                                                                                                                ", 8, 15, Test5)              
+        return Stream.of(Arguments.of("                                                                                                                                            qp                                                                                                                  ", 8, 12, TestResult1),
+                Arguments.of("                                                                                                                                            q P                                                                                                                 ", 8, 12, TestResult2),
+                Arguments.of("                                                                                                                                            q p                                                                                                                 ", 8, 12, TestResult3),
+                Arguments.of("                                                                                                                                            q                                                                                                                   ", 8, 12, TestResult4),
+                Arguments.of("                                                                                                                                               q                                                                                                                ", 8, 15, TestResult5)              
         );
     }    
     
     
-    @ParameterizedTest(name="Queen move right test run {index}")
+    @ParameterizedTest(name="Rook move right test run {index}")
     @MethodSource("testMoveRight_Parameters")
     public void testMoveRight(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveRight(currentRow, currentCol + 1, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveRight(currentRow, currentCol + 1, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }
     
@@ -141,24 +140,23 @@ public class QueenTest {
     static Stream<Arguments> testMoveDown_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {12,12,14,12,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,12,14,12,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,12,15,12,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,12,14,12,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,14,12,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,15,12,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
-        return Stream.of(
-                Arguments.of("                                                                                                                                                                                                            q               p                                   ", 12, 12, Test1),
-                Arguments.of("                                                                                                                                                                                                            q                               P                   ", 12, 12, Test2),
-                Arguments.of("                                                                                                                                                                                                            q                               p                   ", 12, 12, Test3),
-                Arguments.of("                                                                                                                                                                                                            q                                                   ", 12, 12, Test4),
-                Arguments.of("                                                                                                                                                                                                                                                            q   ", 15, 12, Test5)              
+        return Stream.of(Arguments.of("                                                                                                                                                                                                            q               p                                   ", 12, 12, TestResult1),
+                Arguments.of("                                                                                                                                                                                                            q                               P                   ", 12, 12, TestResult2),
+                Arguments.of("                                                                                                                                                                                                            q                               p                   ", 12, 12, TestResult3),
+                Arguments.of("                                                                                                                                                                                                            q                                                   ", 12, 12, TestResult4),
+                Arguments.of("                                                                                                                                                                                                                                                            q   ", 15, 12, TestResult5)              
         );
     }    
     
@@ -181,24 +179,24 @@ public class QueenTest {
     static Stream<Arguments> testMoveLeft_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {12,3,12,1,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,3,12,1,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,3,12,0,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,3,12,1,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,12,1,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,12,0,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
-                Arguments.of("                                                                                                                                                                                                  pq                                                            ", 12, 3, Test1),
-                Arguments.of("                                                                                                                                                                                                 P q                                                            ", 12, 3, Test2),
-                Arguments.of("                                                                                                                                                                                                 p q                                                            ", 12, 3, Test3),
-                Arguments.of("                                                                                                                                                                                                   q                                                            ", 12, 3, Test4),
-                Arguments.of("                                                                                                                                                                                                q                                                               ", 12, 0, Test5)              
+                Arguments.of("                                                                                                                                                                                                  pq                                                            ", 12, 3, TestResult1),
+                Arguments.of("                                                                                                                                                                                                 P q                                                            ", 12, 3, TestResult2),
+                Arguments.of("                                                                                                                                                                                                 p q                                                            ", 12, 3, TestResult3),
+                Arguments.of("                                                                                                                                                                                                   q                                                            ", 12, 3, TestResult4),
+                Arguments.of("                                                                                                                                                                                                q                                                               ", 12, 0, TestResult5)              
         );
     }    
     
@@ -221,24 +219,24 @@ public class QueenTest {
     static Stream<Arguments> testMoveUp_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {3,2,1,2,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {3,2,1,2,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {3,2,0,2,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {3,2,1,2,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,2,1,2,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,2,0,2,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
-                Arguments.of("                                  p               q                                                                                                                                                                                                             ", 3, 2, Test1),
-                Arguments.of("                  P                               q                                                                                                                                                                                                             ", 3, 2, Test2),
-                Arguments.of("                  p                               q                                                                                                                                                                                                             ", 3, 2, Test3),
-                Arguments.of("                                                  q                                                                                                                                                                                                             ", 3, 2, Test4),
-                Arguments.of("  q                                                                                                                                                                                                                                                             ", 0, 2, Test5)              
+                Arguments.of("                                  p               q                                                                                                                                                                                                             ", 3, 2, TestResult1),
+                Arguments.of("                  P                               q                                                                                                                                                                                                             ", 3, 2, TestResult2),
+                Arguments.of("                  p                               q                                                                                                                                                                                                             ", 3, 2, TestResult3),
+                Arguments.of("                                                  q                                                                                                                                                                                                             ", 3, 2, TestResult4),
+                Arguments.of("  q                                                                                                                                                                                                                                                             ", 0, 2, TestResult5)              
         );
     }    
     
@@ -261,24 +259,24 @@ public class QueenTest {
     static Stream<Arguments> testMoveRightAndUp_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {3,12,1,14,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {3,12,1,14,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {3,12,0,15,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {3,12,1,14,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,12,1,14,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,12,0,15,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
-                Arguments.of("                                             p              q                                                                                                                                                                                                   ", 3, 12, Test1),
-                Arguments.of("                              P                             q                                                                                                                                                                                                   ", 3, 12, Test2),
-                Arguments.of("                              p                             q                                                                                                                                                                                                   ", 3, 12, Test3),
-                Arguments.of("                                                            q                                                                                                                                                                                                   ", 3, 12, Test4),
-                Arguments.of("               q                                                                                                                                                                                                                                                ", 0, 15, Test5)              
+                Arguments.of("                                             p              q                                                                                                                                                                                                   ", 3, 12, TestResult1),
+                Arguments.of("                              P                             q                                                                                                                                                                                                   ", 3, 12, TestResult2),
+                Arguments.of("                              p                             q                                                                                                                                                                                                   ", 3, 12, TestResult3),
+                Arguments.of("                                                            q                                                                                                                                                                                                   ", 3, 12, TestResult4),
+                Arguments.of("               q                                                                                                                                                                                                                                                ", 0, 15, TestResult5)              
         );
     }    
     
@@ -301,24 +299,24 @@ public class QueenTest {
     static Stream<Arguments> testMoveRightAndDown_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {12,12,14,14,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,12,14,14,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,12,15,15,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,12,14,14,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,14,14,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,15,15,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
-                Arguments.of("                                                                                                                                                                                                            q                p                                  ", 12, 12, Test1),
-                Arguments.of("                                                                                                                                                                                                            q                                 P                 ", 12, 12, Test2),
-                Arguments.of("                                                                                                                                                                                                            q                                 p                 ", 12, 12, Test3),
-                Arguments.of("                                                                                                                                                                                                            q                                                   ", 12, 12, Test4),
-                Arguments.of("                                                                                                                                                                                                                                                               q", 15, 15, Test5)              
+                Arguments.of("                                                                                                                                                                                                            q                p                                  ", 12, 12, TestResult1),
+                Arguments.of("                                                                                                                                                                                                            q                                 P                 ", 12, 12, TestResult2),
+                Arguments.of("                                                                                                                                                                                                            q                                 p                 ", 12, 12, TestResult3),
+                Arguments.of("                                                                                                                                                                                                            q                                                   ", 12, 12, TestResult4),
+                Arguments.of("                                                                                                                                                                                                                                                               q", 15, 15, TestResult5)              
         );
     }    
     
@@ -341,24 +339,24 @@ public class QueenTest {
     static Stream<Arguments> testMoveLeftAndUp_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {3,3,1,1,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {3,3,1,1,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {3,3,0,0,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {3,3,1,1,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,3,1,1,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,3,0,0,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
-                Arguments.of("                                  p                q                                                                                                                                                                                                            ", 3, 3, Test1),
-                Arguments.of("                 P                                 q                                                                                                                                                                                                            ", 3, 3, Test2),
-                Arguments.of("                 p                                 q                                                                                                                                                                                                            ", 3, 3, Test3),
-                Arguments.of("                                                   q                                                                                                                                                                                                            ", 3, 3, Test4),
-                Arguments.of("q                                                                                                                                                                                                                                                               ", 0, 0, Test5)              
+                Arguments.of("                                  p                q                                                                                                                                                                                                            ", 3, 3, TestResult1),
+                Arguments.of("                 P                                 q                                                                                                                                                                                                            ", 3, 3, TestResult2),
+                Arguments.of("                 p                                 q                                                                                                                                                                                                            ", 3, 3, TestResult3),
+                Arguments.of("                                                   q                                                                                                                                                                                                            ", 3, 3, TestResult4),
+                Arguments.of("q                                                                                                                                                                                                                                                               ", 0, 0, TestResult5)              
         );
     }    
     
@@ -381,24 +379,24 @@ public class QueenTest {
     static Stream<Arguments> testMoveLeftAndDown_Parameters(){
         Pawn auxPawn = new Pawn(0,0,"");
         Queen auxQueen = new Queen(0,0,"");
-        List<int[]> Test1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
-        List<int[]> Test2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        Test2.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
-        Test2.add(new int[] {12,3,14,1,auxPawn.getPointsForKill()});
-        List<int[]> Test3 = new ArrayList<>(); //Piece of same color but with possible movement
-        Test3.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
-        List<int[]> Test4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        Test4.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,3,14,1,auxQueen.getPointsForMove()});
-        Test4.add(new int[] {12,3,15,0,auxQueen.getPointsForMove()});
-        List<int[]> Test5 = new ArrayList<>(); //Piece on the border, no move possible
+        List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
+        TestResult2.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,3,14,1,auxPawn.getPointsForKill()});
+        List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
+        TestResult3.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
+        List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
+        TestResult4.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,14,1,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,15,0,auxQueen.getPointsForMove()});
+        List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
-                Arguments.of("                                                                                                                                                                                                   q              p                                             ", 12, 3, Test1),
-                Arguments.of("                                                                                                                                                                                                   q                             P                              ", 12, 3, Test2),
-                Arguments.of("                                                                                                                                                                                                   q                             p                              ", 12, 3, Test3),
-                Arguments.of("                                                                                                                                                                                                   q                                                            ", 12, 3, Test4),
-                Arguments.of("                                                                                                                                                                                                                                                q               ", 15, 0, Test5)              
+                Arguments.of("                                                                                                                                                                                                   q              p                                             ", 12, 3, TestResult1),
+                Arguments.of("                                                                                                                                                                                                   q                             P                              ", 12, 3, TestResult2),
+                Arguments.of("                                                                                                                                                                                                   q                             p                              ", 12, 3, TestResult3),
+                Arguments.of("                                                                                                                                                                                                   q                                                            ", 12, 3, TestResult4),
+                Arguments.of("                                                                                                                                                                                                                                                q               ", 15, 0, TestResult5)              
         );
     }    
     
@@ -416,25 +414,8 @@ public class QueenTest {
         
     }    
     
-    /**
-     * Test of calculatePossibleMoves method, of class Queen.
-     */
-    /*@Test
-    public void testCalculatePossibleMoves() {
-        System.out.println("calculatePossibleMoves");
-        List<List<ChessPiece>> Board = null;
-        Queen instance = null;
-        instance.calculatePossibleMoves(Board);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of isNull method, of class Queen.
-     */
     @Test
     public void testIsNull() {
-        System.out.println("isNull");
         Queen instance = new Queen(0,0,"");
         boolean expResult = false;
         boolean result = instance.isNull();

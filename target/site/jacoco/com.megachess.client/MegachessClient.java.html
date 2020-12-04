@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MegachessClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">megachess</a> &gt; <a href="index.source.html" class="el_package">com.megachess.client</a> &gt; <span class="el_source">MegachessClient.java</span></div><h1>MegachessClient.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (c) 2010-2020 Nathan Rajlich
+ *
+ *  Permission is hereby granted, free of charge, to any person
+ *  obtaining a copy of this software and associated documentation
+ *  files (the &quot;Software&quot;), to deal in the Software without
+ *  restriction, including without limitation the rights to use,
+ *  copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the
+ *  Software is furnished to do so, subject to the following
+ *  conditions:
+ *
+ *  The above copyright notice and this permission notice shall be
+ *  included in all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+ *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ *  OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ *  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ *  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ *  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ *  OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+package com.megachess.client;
+
+import com.megachess.chesspiece.Bishop;
+import com.megachess.chesspiece.ChessPiece;
+import com.megachess.chesspiece.King;
+import com.megachess.chesspiece.Knight;
+import com.megachess.chesspiece.NullPiece;
+import com.megachess.chesspiece.Pawn;
+import com.megachess.chesspiece.Queen;
+import com.megachess.chesspiece.Rook;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.json.JSONObject;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft;
+
+import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
+
+/**
+ *
+ * @author Emile
+ */
+public class MegachessClient extends WebSocketClient{
+    
+<span class="nc" id="L57">    private int expectedDimension = 16;</span>
+
+    public MegachessClient(URI serverUri, Draft draft) {
+<span class="nc" id="L60">            super(serverUri, draft);</span>
+<span class="nc" id="L61">    }</span>
+
+    public MegachessClient(URI serverURI) {
+<span class="nc" id="L64">            super(serverURI);</span>
+<span class="nc" id="L65">    }</span>
+
+    @Override
+    public void onOpen(ServerHandshake handshakedata) {
+<span class="nc" id="L69">            System.out.println(&quot;new connection opened&quot;);</span>
+<span class="nc" id="L70">    }</span>
+
+    @Override
+    public void onClose(int code, String reason, boolean remote) {
+<span class="nc" id="L74">            System.out.println(&quot;closed with exit code &quot; + code + &quot; additional info: &quot; + reason);</span>
+<span class="nc" id="L75">    }</span>
+
+    @Override
+    public void onMessage(String message) {
+
+<span class="nc" id="L80">        JSONObject receivedMessage = new JSONObject(message); //Received message</span>
+<span class="nc" id="L81">        JSONObject messageToSend = new JSONObject();    //Sent message.</span>
+<span class="nc" id="L82">        JSONObject dataIn = new JSONObject(); //In data object</span>
+<span class="nc" id="L83">        JSONObject dataOut = new JSONObject(); //Out data object</span>
+        
+<span class="nc" id="L85">        String event = receivedMessage.getString(&quot;event&quot;); </span>
+
+<span class="nc bnc" id="L87" title="All 3 branches missed.">        switch (event){</span>
+            case &quot;ask_challenge&quot;:
+                
+<span class="nc" id="L90">                System.out.println(receivedMessage.toString());</span>
+<span class="nc" id="L91">                messageToSend.put(&quot;action&quot;, &quot;accept_challenge&quot;);</span>
+<span class="nc" id="L92">                dataOut.put(&quot;board_id&quot;, receivedMessage.getJSONObject(&quot;data&quot;).get(&quot;board_id&quot;));</span>
+<span class="nc" id="L93">                messageToSend.put(&quot;data&quot;, dataOut);</span>
+<span class="nc" id="L94">                System.out.println(messageToSend.toString());</span>
+<span class="nc" id="L95">                send(messageToSend.toString());</span>
+<span class="nc" id="L96">                break;</span>
+
+            case &quot;your_turn&quot;:
+                //System.out.println(receivedMessage.toString());
+<span class="nc" id="L100">                dataIn = receivedMessage.getJSONObject(&quot;data&quot;);</span>
+<span class="nc" id="L101">                String boardString = dataIn.getString(&quot;board&quot;);</span>
+<span class="nc" id="L102">                List&lt;int[]&gt; AllMoves = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L103">                List&lt;int[]&gt; BestMoves = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L104">                List&lt;List&lt;ChessPiece&gt;&gt; Board = new ArrayList&lt;&gt;();</span>
+                int[] selectedMove;
+                
+                
+                /*for(int row = 0; row &lt; this.expectedDimension; row++){
+                    System.out.println(boardString.substring(row*16, row*16 + 16));
+                }*/
+                
+<span class="nc bnc" id="L112" title="All 2 branches missed.">                for(int row = 0; row &lt; this.expectedDimension; row++){</span>
+<span class="nc" id="L113">                    List&lt;ChessPiece&gt; BoardRow = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                    for(int column = 0; column &lt; this.expectedDimension; column++){</span>
+<span class="nc bnc" id="L115" title="All 13 branches missed.">                        switch(boardString.charAt(row*this.expectedDimension + column)){</span>
+                            case 'p':
+<span class="nc" id="L117">                               BoardRow.add(new Pawn(row,column,&quot;black&quot;));</span>
+<span class="nc" id="L118">                               break;</span>
+                            case 'P':
+<span class="nc" id="L120">                                BoardRow.add(new Pawn(row,column,&quot;white&quot;));</span>
+<span class="nc" id="L121">                                break;                               </span>
+                           case 'r':
+<span class="nc" id="L123">                               BoardRow.add(new Rook(row,column,&quot;black&quot;)); </span>
+<span class="nc" id="L124">                               break;</span>
+                            case 'R':
+<span class="nc" id="L126">                                BoardRow.add(new Rook(row,column,&quot;white&quot;)); </span>
+<span class="nc" id="L127">                                break;                               </span>
+                           case 'h':
+<span class="nc" id="L129">                               BoardRow.add(new Knight(row,column,&quot;black&quot;));</span>
+<span class="nc" id="L130">                               break;</span>
+                            case 'H':
+<span class="nc" id="L132">                                BoardRow.add(new Knight(row,column,&quot;white&quot;)); </span>
+<span class="nc" id="L133">                                break;                               </span>
+                           case 'b':
+<span class="nc" id="L135">                               BoardRow.add(new Bishop(row,column,&quot;black&quot;)); </span>
+<span class="nc" id="L136">                               break;</span>
+                            case 'B':
+<span class="nc" id="L138">                                BoardRow.add(new Bishop(row,column,&quot;white&quot;));</span>
+<span class="nc" id="L139">                                break;                               </span>
+                           case 'q':
+<span class="nc" id="L141">                               BoardRow.add(new Queen(row,column,&quot;black&quot;));</span>
+<span class="nc" id="L142">                               break;</span>
+                            case 'Q':
+<span class="nc" id="L144">                                BoardRow.add(new Queen(row,column,&quot;white&quot;));</span>
+<span class="nc" id="L145">                                break;                               </span>
+                           case 'k':
+<span class="nc" id="L147">                               BoardRow.add(new King(row,column,&quot;black&quot;));</span>
+<span class="nc" id="L148">                               break;                          </span>
+                            case 'K':
+<span class="nc" id="L150">                                BoardRow.add(new King(row,column,&quot;white&quot;)); </span>
+<span class="nc" id="L151">                                break;</span>
+                            default:
+<span class="nc" id="L153">                                BoardRow.add(new NullPiece(row,column));</span>
+                                break;                        
+                        }                        
+                    }
+<span class="nc" id="L157">                    Board.add(BoardRow);</span>
+                }
+                
+<span class="nc bnc" id="L160" title="All 2 branches missed.">                for(List&lt;ChessPiece&gt; Row : Board){</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">                    for(ChessPiece Piece : Row){</span>
+<span class="nc bnc" id="L162" title="All 2 branches missed.">                        if(dataIn.getString(&quot;actual_turn&quot;).equals(Piece.getColor())){</span>
+<span class="nc" id="L163">                            Piece.calculatePossibleMoves(Board);</span>
+<span class="nc" id="L164">                            AllMoves.addAll(Piece.getPossibleMoves());</span>
+                        }                   
+<span class="nc" id="L166">                    }</span>
+<span class="nc" id="L167">                }</span>
+               
+<span class="nc" id="L169">                Collections.sort(AllMoves, new MoveComparator().reversed());</span>
+                
+<span class="nc bnc" id="L171" title="All 2 branches missed.">                for(int[] move : AllMoves){</span>
+                    //System.out.println(move[0] + &quot;,&quot; + move[1] + &quot;,&quot; + move[2] + &quot;,&quot; + move[3] + &quot;,&quot; + move[4]);
+<span class="nc bnc" id="L173" title="All 2 branches missed.">                    if(AllMoves.get(0)[4] == move[4]){</span>
+<span class="nc" id="L174">                        BestMoves.add(move);</span>
+                    }  
+<span class="nc" id="L176">                }</span>
+                
+<span class="nc" id="L178">                selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));</span>
+                
+                try{
+<span class="nc" id="L181">                    messageToSend.put(&quot;action&quot;, &quot;move&quot;);</span>
+<span class="nc" id="L182">                    dataOut.put(&quot;board_id&quot;, receivedMessage.getJSONObject(&quot;data&quot;).get(&quot;board_id&quot;));</span>
+<span class="nc" id="L183">                    dataOut.put(&quot;turn_token&quot;, receivedMessage.getJSONObject(&quot;data&quot;).get(&quot;turn_token&quot;));</span>
+<span class="nc" id="L184">                    dataOut.put(&quot;from_row&quot;, selectedMove[0]);</span>
+<span class="nc" id="L185">                    dataOut.put(&quot;from_col&quot;, selectedMove[1]);</span>
+<span class="nc" id="L186">                    dataOut.put(&quot;to_row&quot;,  selectedMove[2]);</span>
+<span class="nc" id="L187">                    dataOut.put(&quot;to_col&quot;,  selectedMove[3]);</span>
+<span class="nc" id="L188">                    messageToSend.put(&quot;data&quot;, dataOut);                    </span>
+<span class="nc" id="L189">                }catch(JSONException e){</span>
+<span class="nc" id="L190">                    System.out.println(e.toString());</span>
+<span class="nc" id="L191">                }</span>
+                
+                //System.out.println(messageToSend.toString());
+<span class="nc" id="L194">                send(messageToSend.toString());</span>
+<span class="nc" id="L195">                break;</span>
+
+            case &quot;update_user_list&quot;:
+            case &quot;gameover&quot;:
+            default:
+                
+<span class="nc" id="L201">                System.out.println(receivedMessage.toString());</span>
+                break;
+                
+        }
+<span class="nc" id="L205">    }</span>
+
+    @Override
+    public void onMessage(ByteBuffer message) {
+<span class="nc" id="L209">        System.out.println(&quot;received ByteBuffer&quot;);</span>
+<span class="nc" id="L210">    }</span>
+
+    @Override
+    public void onError(Exception ex) {
+<span class="nc" id="L214">            System.err.println(&quot;an error occurred:&quot; + ex);</span>
+<span class="nc" id="L215">    }</span>
+
+    public static void main(String[] args) throws URISyntaxException {		
+<span class="nc" id="L218">            WebSocketClient client = new MegachessClient(new URI(&quot;ws://megachess.herokuapp.com/service?authtoken=b5b7dec8-5668-4909-83db-5b4db4bf81e9&quot;));</span>
+<span class="nc" id="L219">            client.connect();</span>
+<span class="nc" id="L220">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

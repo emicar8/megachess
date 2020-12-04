@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rook.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">megachess</a> &gt; <a href="index.source.html" class="el_package">com.megachess.chesspiece</a> &gt; <span class="el_source">Rook.java</span></div><h1>Rook.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.megachess.chesspiece;
+
+
+import java.util.List;
+
+/**
+ *
+ * @author Emile
+ */
+public class Rook extends ChessPiece{
+    
+    public Rook(int row, int col, String color){
+<span class="fc" id="L18">        super(row, col, color);</span>
+<span class="fc" id="L19">        this.pointsForMove = 60;</span>
+<span class="fc" id="L20">        this.pointsForKill = 600;</span>
+<span class="fc" id="L21">    }    </span>
+    
+    
+    public void moveRight(int newRow, int newCol, List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(newCol &lt; 16){</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">            if(!Board.get(newRow).get(newCol).isNull()){ //Position is not empty</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">                if(!Board.get(newRow).get(newCol).getColor().equals(this.color)){ //Check if piece is different color</span>
+<span class="fc" id="L28">                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, Board.get(newRow).get(newCol).getPointsForKill()}); //Piece is not same color                  </span>
+                }                
+            }else{ //Can keep moving.
+<span class="fc" id="L31">                this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, this.getPointsForMove()});</span>
+<span class="fc" id="L32">                this.moveRight(newRow, newCol + 1, Board);</span>
+            }
+        }
+<span class="fc" id="L35">    }</span>
+    
+    public void moveDown(int newRow, int newCol, List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if(newRow &lt; 16){</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            if(!Board.get(newRow).get(newCol).isNull()){ //Position is not empty</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">                if(!Board.get(newRow).get(newCol).getColor().equals(this.color)){ //Check if piece is different color</span>
+<span class="fc" id="L41">                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, Board.get(newRow).get(newCol).getPointsForKill()}); //Piece is not same color                  </span>
+                }               
+            }else{ //Can keep moving.
+<span class="fc" id="L44">                this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, this.getPointsForMove()});</span>
+<span class="fc" id="L45">                this.moveDown(newRow + 1, newCol, Board);</span>
+            }
+        }
+<span class="fc" id="L48">    }     </span>
+
+    public void moveLeft(int newRow, int newCol, List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if(newCol &gt; -1){</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            if(!Board.get(newRow).get(newCol).isNull()){ //Position is not empty</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">                if(!Board.get(newRow).get(newCol).getColor().equals(this.color)){ //Check if piece is different color</span>
+<span class="fc" id="L54">                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, Board.get(newRow).get(newCol).getPointsForKill()}); //Piece is not same color                  </span>
+                }                 
+            }else{ //Can keep moving.
+<span class="fc" id="L57">                this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, this.getPointsForMove()});</span>
+<span class="fc" id="L58">                this.moveLeft(newRow, newCol - 1, Board);</span>
+            }
+        }
+<span class="fc" id="L61">    }</span>
+       
+    public void moveUp(int newRow, int newCol, List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if(newRow &gt; -1){</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            if(!Board.get(newRow).get(newCol).isNull()){ //Position is not empty</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">                if(!Board.get(newRow).get(newCol).getColor().equals(this.color)){ //Check if piece is different color</span>
+<span class="fc" id="L67">                    this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, Board.get(newRow).get(newCol).getPointsForKill()}); //Piece is not same color                  </span>
+                }               
+            }else{ //Can keep moving.
+<span class="fc" id="L70">                this.possibleMoves.add(new int[]{this.currentRow, this.currentCol, newRow, newCol, this.getPointsForMove()});</span>
+<span class="fc" id="L71">                this.moveUp(newRow - 1, newCol, Board);</span>
+            }
+        }
+<span class="fc" id="L74">    } </span>
+    
+    @Override
+    public void calculatePossibleMoves(List&lt;List&lt;ChessPiece&gt;&gt; Board) {
+<span class="nc" id="L78">        this.moveDown(this.currentRow + 1, this.currentCol, Board);</span>
+<span class="nc" id="L79">        this.moveRight(this.currentRow, this.currentCol + 1, Board);</span>
+<span class="nc" id="L80">        this.moveLeft(this.currentRow, this.currentCol - 1, Board);</span>
+<span class="nc" id="L81">        this.moveUp(this.currentRow - 1, this.currentCol, Board);</span>
+<span class="nc" id="L82">    }</span>
+
+    @Override
+    public boolean isNull() {
+<span class="fc" id="L86">        return false;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

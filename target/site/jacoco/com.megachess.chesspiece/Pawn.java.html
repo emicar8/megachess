@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Pawn.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">megachess</a> &gt; <a href="index.source.html" class="el_package">com.megachess.chesspiece</a> &gt; <span class="el_source">Pawn.java</span></div><h1>Pawn.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.megachess.chesspiece;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Emile
+ */
+public class Pawn extends ChessPiece{
+    
+    public Pawn(int row, int col, String color){
+<span class="fc" id="L19">        super(row, col, color);</span>
+        //this.pointsForMove = 80; //Incentivize promotion of pawns over other movements but not over other kills.
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if(Math.abs(7.5 - (double)row) &gt; 1.5){ //Check if in range of promotion on next move.</span>
+<span class="fc" id="L22">            this.pointsForMove = 80; //Not in range, but still incentivized over other movements</span>
+        }else{
+<span class="fc" id="L24">            this.pointsForMove = 500; //In range, promote is worth 500 points.</span>
+        }
+<span class="fc" id="L26">        this.pointsForKill = 100;</span>
+<span class="fc" id="L27">    }</span>
+    
+    private int[] moveUpOnce(List&lt;List&lt;ChessPiece&gt;&gt; Board){ 
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){</span>
+<span class="nc" id="L31">            return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol, this.pointsForMove + 8 - (this.currentRow - 1)};</span>
+        }
+<span class="nc" id="L33">        return null;</span>
+    }
+    
+    private int[] moveUpTwice(List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="nc bnc" id="L37" title="All 4 branches missed.">        if(this.currentRow == 12 || this.currentRow == 13){</span>
+<span class="nc bnc" id="L38" title="All 4 branches missed.">            if(Board.get(this.currentRow - 1).get(this.currentCol).isNull() &amp;&amp; Board.get(this.currentRow - 2).get(this.currentCol).isNull()){</span>
+<span class="nc" id="L39">                return new int[] {this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol, this.pointsForMove + 8 - (this.currentRow - 2)};</span>
+            }            
+        }
+<span class="nc" id="L42">        return null;      </span>
+    }
+    
+    private int[] moveDownOnce(List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if(Board.get(this.currentRow + 1).get(this.currentCol).isNull()){</span>
+<span class="nc" id="L47">            return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol, this.pointsForMove - 7 + this.currentRow + 1};</span>
+        }
+<span class="nc" id="L49">        return null;  </span>
+    }
+    
+    private int[] moveDownTwice(List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="nc bnc" id="L53" title="All 4 branches missed.">        if(this.currentRow == 2 || this.currentRow == 3){</span>
+<span class="nc bnc" id="L54" title="All 4 branches missed.">            if(Board.get(this.currentRow + 1).get(this.currentCol).isNull() &amp;&amp; Board.get(this.currentRow + 2).get(this.currentCol).isNull()){</span>
+<span class="nc" id="L55">                return new int[] {this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol, this.pointsForMove - 7 + this.currentRow + 2};</span>
+            }   
+        }
+<span class="nc" id="L58">        return null;            </span>
+    }  
+    
+    private int[] moveUpAndRight(List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if(this.currentCol &lt; 15){</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">            if(Board.get(this.currentRow - 1).get(this.currentCol + 1).getColor().equals(&quot;black&quot;)){</span>
+<span class="nc" id="L64">                return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 1, Board.get(this.currentRow - 1).get(this.currentCol + 1).getPointsForKill()};</span>
+            }
+        }
+<span class="nc" id="L67">        return null;</span>
+    }
+    
+    private int[] moveUpAndLeft(List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(this.currentCol &gt; 0){</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">            if(Board.get(this.currentRow - 1).get(this.currentCol - 1).getColor().equals(&quot;black&quot;)){</span>
+<span class="nc" id="L73">                return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 1, Board.get(this.currentRow - 1).get(this.currentCol - 1).getPointsForKill()};</span>
+            }
+        }
+<span class="nc" id="L76">        return null;       </span>
+    }
+
+    private int[] moveDownAndRight(List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if(this.currentCol &lt; 15){</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            if(Board.get(this.currentRow + 1).get(this.currentCol + 1).getColor().equals(&quot;white&quot;)){</span>
+<span class="nc" id="L82">                return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 1, Board.get(this.currentRow + 1).get(this.currentCol + 1).getPointsForKill()};</span>
+            }
+        }
+<span class="nc" id="L85">        return null;   </span>
+    }
+    
+    private int[] moveDownAndLeft(List&lt;List&lt;ChessPiece&gt;&gt; Board){
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if(this.currentCol &gt; 0){</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">            if(Board.get(this.currentRow + 1).get(this.currentCol - 1).getColor().equals(&quot;white&quot;)){</span>
+<span class="nc" id="L91">                return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 1, Board.get(this.currentRow + 1).get(this.currentCol - 1).getPointsForKill()};</span>
+            }
+        }
+<span class="nc" id="L94">        return null;  </span>
+    }       
+
+    @Override
+    public void calculatePossibleMoves(List&lt;List&lt;ChessPiece&gt;&gt; Board) {
+<span class="nc bnc" id="L99" title="All 3 branches missed.">        switch (this.color) {</span>
+            case &quot;black&quot;:
+<span class="nc" id="L101">                this.AddIfNotNull(moveDownOnce(Board));</span>
+<span class="nc" id="L102">                this.AddIfNotNull(moveDownTwice(Board));</span>
+<span class="nc" id="L103">                this.AddIfNotNull(moveDownAndRight(Board));</span>
+<span class="nc" id="L104">                this.AddIfNotNull(moveDownAndLeft(Board));</span>
+<span class="nc" id="L105">                break;</span>
+            case &quot;white&quot;:
+<span class="nc" id="L107">                this.AddIfNotNull(moveUpOnce(Board));</span>
+<span class="nc" id="L108">                this.AddIfNotNull(moveUpTwice(Board));</span>
+<span class="nc" id="L109">                this.AddIfNotNull(moveUpAndRight(Board));</span>
+<span class="nc" id="L110">                this.AddIfNotNull(moveUpAndLeft(Board));</span>
+<span class="nc" id="L111">                break;         </span>
+            default:
+                try {
+<span class="nc" id="L114">                    throw new Exception(&quot;Color must be black or white&quot;);</span>
+<span class="nc" id="L115">                } catch (Exception ex) {</span>
+<span class="nc" id="L116">                    Logger.getLogger(Pawn.class.getName()).log(Level.SEVERE, null, ex);</span>
+                }   
+                break;
+        }
+<span class="nc" id="L120">    }</span>
+
+    @Override
+    public boolean isNull() {
+<span class="fc" id="L124">        return false;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
