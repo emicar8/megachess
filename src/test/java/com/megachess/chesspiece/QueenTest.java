@@ -99,18 +99,18 @@ public class QueenTest {
     //////////////////////////////MOVE RIGHT TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveRight_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {8,12,8,14,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {8,12,8,13,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {8,12,8,14,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {8,12,8,13,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {8,12,8,13,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {8,12,8,14,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {8,12,8,15,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {8,12,8,13,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {8,12,8,14,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {8,12,8,15,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(Arguments.of("                                                                                                                                            qp                                                                                                                  ", 8, 12, TestResult1),
@@ -122,7 +122,7 @@ public class QueenTest {
     }    
     
     
-    @ParameterizedTest(name="Rook move right test run {index}")
+    @ParameterizedTest(name="Queen move right test run {index}")
     @MethodSource("testMoveRight_Parameters")
     public void testMoveRight(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
@@ -138,18 +138,18 @@ public class QueenTest {
     //////////////////////////////MOVE DOWN TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveDown_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {12,12,14,12,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {12,12,13,12,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,12,14,12,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {12,12,13,12,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {12,12,13,12,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,12,14,12,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,12,15,12,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,13,12,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,14,12,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,15,12,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(Arguments.of("                                                                                                                                                                                                            q               p                                   ", 12, 12, TestResult1),
@@ -168,27 +168,27 @@ public class QueenTest {
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveDown(currentRow + 1, currentCol, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveDown(currentRow + 1, currentCol, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }
 
     //////////////////////////////MOVE LEFT TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveLeft_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {12,3,12,1,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {12,3,12,2,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,3,12,1,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {12,3,12,2,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {12,3,12,2,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,3,12,1,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,3,12,0,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,12,2,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,12,1,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,12,0,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
@@ -208,27 +208,27 @@ public class QueenTest {
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveLeft(currentRow, currentCol - 1, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveLeft(currentRow, currentCol - 1, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
 
     //////////////////////////////MOVE UP TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveUp_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {3,2,1,2,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {3,2,2,2,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {3,2,1,2,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {3,2,2,2,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {3,2,2,2,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {3,2,1,2,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {3,2,0,2,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,2,2,2,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,2,1,2,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,2,0,2,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
@@ -248,27 +248,27 @@ public class QueenTest {
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveUp(currentRow - 1, currentCol, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveUp(currentRow - 1, currentCol, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
     
     //////////////////////////////MOVE RIGHT AND UP TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveRightAndUp_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {3,12,1,14,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {3,12,2,13,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {3,12,1,14,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {3,12,2,13,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {3,12,2,13,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {3,12,1,14,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {3,12,0,15,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,12,2,13,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,12,1,14,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,12,0,15,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
@@ -288,27 +288,27 @@ public class QueenTest {
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveRightAndUp(currentRow - 1, currentCol + 1, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveRightAndUp(currentRow - 1, currentCol + 1, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }
     
     //////////////////////////////MOVE RIGHT AND DOWN TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveRightAndDown_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {12,12,14,14,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {12,12,13,13,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,12,14,14,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {12,12,13,13,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {12,12,13,13,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,12,14,14,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,12,15,15,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,13,13,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,14,14,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,12,15,15,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
@@ -328,27 +328,27 @@ public class QueenTest {
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveRightAndDown(currentRow + 1, currentCol + 1, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveRightAndDown(currentRow + 1, currentCol + 1, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
     
     //////////////////////////////MOVE LEFT AND UP TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveLeftAndUp_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {3,3,1,1,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {3,3,2,2,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {3,3,1,1,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {3,3,2,2,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {3,3,2,2,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {3,3,1,1,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {3,3,0,0,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,3,2,2,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,3,1,1,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {3,3,0,0,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
@@ -368,27 +368,27 @@ public class QueenTest {
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveLeftAndUp(currentRow - 1, currentCol - 1, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveLeftAndUp(currentRow - 1, currentCol - 1, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }  
 
     //////////////////////////////MOVE LEFT AND DOWN TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveLeftAndDown_Parameters(){
-        Pawn auxPawn = new Pawn(0,0,"");
-        Queen auxQueen = new Queen(0,0,"");
+        Pawn AuxPawn = new Pawn(0,0,"");
+        Queen AuxQueen = new Queen(0,0,"");
         List<int[]> TestResult1 = new ArrayList<>(); //Adjacent piece of same color, no moves should be generated
         List<int[]> TestResult2 = new ArrayList<>(); //Piece of different color, with possible movement and attack.
-        TestResult2.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
-        TestResult2.add(new int[] {12,3,14,1,auxPawn.getPointsForKill()});
+        TestResult2.add(new int[] {12,3,13,2,AuxQueen.getPointsForMove()});
+        TestResult2.add(new int[] {12,3,14,1,AuxPawn.getPointsForKill()});
         List<int[]> TestResult3 = new ArrayList<>(); //Piece of same color but with possible movement
-        TestResult3.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
+        TestResult3.add(new int[] {12,3,13,2,AuxQueen.getPointsForMove()});
         List<int[]> TestResult4 = new ArrayList<>(); //No Pieces in the way, moves till the border
-        TestResult4.add(new int[] {12,3,13,2,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,3,14,1,auxQueen.getPointsForMove()});
-        TestResult4.add(new int[] {12,3,15,0,auxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,13,2,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,14,1,AuxQueen.getPointsForMove()});
+        TestResult4.add(new int[] {12,3,15,0,AuxQueen.getPointsForMove()});
         List<int[]> TestResult5 = new ArrayList<>(); //Piece on the border, no move possible
         
         return Stream.of(
@@ -408,9 +408,9 @@ public class QueenTest {
         List<List<ChessPiece>> Board = this.generateBoard(boardString);
         //Finished creating board
         
-        Queen testQueen = new Queen(currentRow,currentCol,"black");
-        testQueen.moveLeftAndDown(currentRow + 1, currentCol - 1, Board);
-        assertArrayEquals(expectedMoves.toArray(), testQueen.getPossibleMoves().toArray());
+        Queen TestQueen = new Queen(currentRow,currentCol,"black");
+        TestQueen.moveLeftAndDown(currentRow + 1, currentCol - 1, Board);
+        assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
     

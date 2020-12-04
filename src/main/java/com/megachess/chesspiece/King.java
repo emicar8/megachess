@@ -23,7 +23,7 @@ public class King extends ChessPiece{
 
     //Straight moves
     
-    private int[] moveDown(List<List<ChessPiece>> Board){
+    public int[] moveDown(List<List<ChessPiece>> Board){
         if(this.currentRow < 15){
             if(Board.get(this.currentRow + 1).get(this.currentCol).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol, this.getPointsForMove()};
@@ -34,7 +34,7 @@ public class King extends ChessPiece{
         return null;
     }   
   
-    private int[] moveLeft(List<List<ChessPiece>> Board){
+    public int[] moveLeft(List<List<ChessPiece>> Board){
         if(this.currentCol > 0){
             if(Board.get(this.currentRow).get(this.currentCol - 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow, this.currentCol - 1, this.getPointsForMove()};
@@ -45,7 +45,7 @@ public class King extends ChessPiece{
         return null;
     }   
 
-    private int[] moveUp(List<List<ChessPiece>> Board){
+    public int[] moveUp(List<List<ChessPiece>> Board){
         if(this.currentRow > 0){
             if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol, this.getPointsForMove()};
@@ -56,7 +56,7 @@ public class King extends ChessPiece{
         return null;
     }       
     
-    private int[] moveRight(List<List<ChessPiece>> Board){
+    public int[] moveRight(List<List<ChessPiece>> Board){
         if(this.currentCol < 15){
             if(Board.get(this.currentRow).get(this.currentCol + 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow, this.currentCol + 1, this.getPointsForMove()};
@@ -69,7 +69,7 @@ public class King extends ChessPiece{
     
     //Diagonal moves
     
-    private int[] moveRightAndDown(List<List<ChessPiece>> Board){
+    public int[] moveRightAndDown(List<List<ChessPiece>> Board){
         if(this.currentRow < 15 && this.currentCol < 15){
             if(Board.get(this.currentRow + 1).get(this.currentCol + 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 1, this.getPointsForMove()};
@@ -80,7 +80,7 @@ public class King extends ChessPiece{
         return null;
     }   
   
-    private int[] moveLeftAndDown(List<List<ChessPiece>> Board){
+    public int[] moveLeftAndDown(List<List<ChessPiece>> Board){
         if(this.currentRow < 15 && this.currentCol > 0){
             if(Board.get(this.currentRow + 1).get(this.currentCol - 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 1, this.getPointsForMove()};
@@ -91,7 +91,7 @@ public class King extends ChessPiece{
         return null;
     }   
 
-    private int[] moveLeftAndUp(List<List<ChessPiece>> Board){
+    public int[] moveLeftAndUp(List<List<ChessPiece>> Board){
         if(this.currentRow > 0 && this.currentCol > 0){
             if(Board.get(this.currentRow - 1).get(this.currentCol - 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 1, this.getPointsForMove()};
@@ -102,7 +102,7 @@ public class King extends ChessPiece{
         return null;
     }       
     
-    private int[] moveRightAndUp(List<List<ChessPiece>> Board){
+    public int[] moveRightAndUp(List<List<ChessPiece>> Board){
         if(this.currentRow > 0 && this.currentCol < 15){
             if(Board.get(this.currentRow - 1).get(this.currentCol + 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 1, this.getPointsForMove()};
