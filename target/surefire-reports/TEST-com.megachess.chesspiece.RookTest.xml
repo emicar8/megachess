@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.chesspiece.RookTest" time="0.012" tests="21" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.chesspiece.RookTest" time="0.008" tests="21" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.specification.version" value="11"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\test-classes;C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\classes;C:\Users\Emile\.m2\repository\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar;C:\Users\Emile\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\Emile\.m2\repository\org\json\json\20200518\json-20200518.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Emile\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Emile\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;C:\Users\Emile\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\Emile\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;"/>
+    <property name="java.class.path" value="C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\test-classes;C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\classes;C:\Users\Emile\.m2\repository\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar;C:\Users\Emile\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\Emile\.m2\repository\org\json\json\20200518\json-20200518.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Emile\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Emile\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -18,9 +18,9 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
-    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire11857652144460789685\surefirebooter15863461171747767734.jar C:\Users\Emile\AppData\Local\Temp\surefire11857652144460789685 2020-12-04T12-17-17_177-jvmRun1 surefire6808978808495705592tmp surefire_08122582277937872057tmp"/>
+    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire6573107482179678227\surefirebooter3691497213166432879.jar C:\Users\Emile\AppData\Local\Temp\surefire6573107482179678227 2020-12-04T13-21-45_480-jvmRun1 surefire9023502592247529666tmp surefire_08759646582707096171tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\test-classes;C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\classes;C:\Users\Emile\.m2\repository\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar;C:\Users\Emile\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\Emile\.m2\repository\org\json\json\20200518\json-20200518.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Emile\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Emile\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;C:\Users\Emile\.m2\repository\javax\xml\bind\jaxb-api\2.3.1\jaxb-api-2.3.1.jar;C:\Users\Emile\.m2\repository\javax\activation\javax.activation-api\1.2.0\javax.activation-api-1.2.0.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\test-classes;C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\classes;C:\Users\Emile\.m2\repository\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar;C:\Users\Emile\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\Emile\.m2\repository\org\json\json\20200518\json-20200518.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Emile\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Emile\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Emile"/>
     <property name="user.language" value="en"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire11857652144460789685\surefirebooter15863461171747767734.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire6573107482179678227\surefirebooter3691497213166432879.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11+28"/>
@@ -65,7 +65,7 @@
   </properties>
   <testcase name="testMoveDown{String, int, int, List}[1]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, List}[2]" classname="com.megachess.chesspiece.RookTest" time="0"/>
-  <testcase name="testMoveDown{String, int, int, List}[3]" classname="com.megachess.chesspiece.RookTest" time="0.001"/>
+  <testcase name="testMoveDown{String, int, int, List}[3]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, List}[4]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, List}[5]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveLeft{String, int, int, List}[1]" classname="com.megachess.chesspiece.RookTest" time="0"/>
@@ -79,8 +79,8 @@
   <testcase name="testMoveUp{String, int, int, List}[3]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveUp{String, int, int, List}[4]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveUp{String, int, int, List}[5]" classname="com.megachess.chesspiece.RookTest" time="0.001"/>
-  <testcase name="testMoveRight{String, int, int, List}[1]" classname="com.megachess.chesspiece.RookTest" time="0.001"/>
-  <testcase name="testMoveRight{String, int, int, List}[2]" classname="com.megachess.chesspiece.RookTest" time="0"/>
+  <testcase name="testMoveRight{String, int, int, List}[1]" classname="com.megachess.chesspiece.RookTest" time="0"/>
+  <testcase name="testMoveRight{String, int, int, List}[2]" classname="com.megachess.chesspiece.RookTest" time="0.001"/>
   <testcase name="testMoveRight{String, int, int, List}[3]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveRight{String, int, int, List}[4]" classname="com.megachess.chesspiece.RookTest" time="0"/>
   <testcase name="testMoveRight{String, int, int, List}[5]" classname="com.megachess.chesspiece.RookTest" time="0.001"/>
