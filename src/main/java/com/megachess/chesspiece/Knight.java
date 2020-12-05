@@ -19,7 +19,7 @@ public class Knight extends ChessPiece{
         this.pointsForKill = 300;
     }
 
-    private int[] moveUpAndRight(List<List<ChessPiece>> Board){
+    public int[] moveUpAndRight(List<List<ChessPiece>> Board){
         if(this.currentRow > 1 && this.currentCol < 15){
             if(Board.get(this.currentRow - 2).get(this.currentCol + 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol + 1, this.pointsForMove};
@@ -30,7 +30,7 @@ public class Knight extends ChessPiece{
         return null;
     }
     
-    private int[] moveRightAndUp(List<List<ChessPiece>> Board){
+    public int[] moveRightAndUp(List<List<ChessPiece>> Board){
         if(this.currentRow > 0 && this.currentCol < 14){
             if(Board.get(this.currentRow - 1).get(this.currentCol + 2).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 2, this.pointsForMove};
@@ -41,7 +41,7 @@ public class Knight extends ChessPiece{
         return null;
     }
 
-    private int[] moveRightAndDown(List<List<ChessPiece>> Board){
+    public int[] moveRightAndDown(List<List<ChessPiece>> Board){
         if(this.currentRow < 15 && this.currentCol < 14){
             if(Board.get(this.currentRow + 1).get(this.currentCol + 2).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 2, this.pointsForMove};
@@ -52,7 +52,7 @@ public class Knight extends ChessPiece{
         return null;
     }
     
-    private int[] moveDownAndRight(List<List<ChessPiece>> Board){
+    public int[] moveDownAndRight(List<List<ChessPiece>> Board){
         if(this.currentRow < 14 && this.currentCol < 15){
             if(Board.get(this.currentRow + 2).get(this.currentCol + 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol + 1, this.pointsForMove};
@@ -63,7 +63,7 @@ public class Knight extends ChessPiece{
         return null;
     }
 
-    private int[] moveDownAndLeft(List<List<ChessPiece>> Board){
+    public int[] moveDownAndLeft(List<List<ChessPiece>> Board){
         if(this.currentRow < 14 && this.currentCol > 0){
             if(Board.get(this.currentRow + 2).get(this.currentCol - 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol - 1, this.pointsForMove};
@@ -74,7 +74,7 @@ public class Knight extends ChessPiece{
         return null;
     }
     
-    private int[] moveLeftAndDown(List<List<ChessPiece>> Board){
+    public int[] moveLeftAndDown(List<List<ChessPiece>> Board){
         if(this.currentRow < 15 && this.currentCol > 1){
             if(Board.get(this.currentRow + 1).get(this.currentCol - 2).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 2, this.pointsForMove};
@@ -85,7 +85,7 @@ public class Knight extends ChessPiece{
         return null;
     }
     
-    private int[] moveLeftAndUp(List<List<ChessPiece>> Board){
+    public int[] moveLeftAndUp(List<List<ChessPiece>> Board){
         if(this.currentRow > 0 && this.currentCol > 1){
             if(Board.get(this.currentRow - 1).get(this.currentCol - 2).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 2, this.pointsForMove};
@@ -96,7 +96,7 @@ public class Knight extends ChessPiece{
         return null;
     }    
     
-    private int[] moveUpAndLeft(List<List<ChessPiece>> Board){
+    public int[] moveUpAndLeft(List<List<ChessPiece>> Board){
         if(this.currentRow > 1 && this.currentCol > 0){
             if(Board.get(this.currentRow - 2).get(this.currentCol - 1).isNull()){
                 return new int[]{this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol - 1, this.pointsForMove};
