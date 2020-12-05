@@ -94,26 +94,6 @@ public abstract class ChessPiece {
     }
     
     
-    public int[] getMaxValueMove(){
-        int[] currentMax = {0, 0, 0, 0, 0};
-        if(!this.possibleMoves.isEmpty()){ //List not empty
-            for(int[] move : this.possibleMoves){
-                if(move[4] > currentMax[4]){
-                    currentMax = move;
-                }
-            }
-        }
-        
-        if(!this.possibleAttacks.isEmpty()){ //List not empty
-            for(int[] attack : this.possibleAttacks){
-                if(attack[4] > currentMax[4]){
-                    currentMax = attack;
-                }
-            }
-        }
-        return currentMax;
-    }
-    
     private int prioritizeCenterKill(int col){
         return (int)Math.round(-Math.pow(col-7.5, 2));
     }
