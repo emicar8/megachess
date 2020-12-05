@@ -1,0 +1,350 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.megachess.chesspiece;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+/**
+ *
+ * @author Emile
+ */
+public class PawnTest {
+    
+    public PawnTest() {
+    }
+    
+    @BeforeAll
+    public static void setUpClass() {
+    }
+    
+    @AfterAll
+    public static void tearDownClass() {
+    }
+    
+    @BeforeEach
+    public void setUp() {
+    }
+    
+    @AfterEach
+    public void tearDown() {
+    }
+    
+    private List<List<ChessPiece>> generateBoard(String boardString){
+        List<List<ChessPiece>> Board = new ArrayList<>();
+        for(int row = 0; row < 16; row++){
+            List<ChessPiece> BoardRow = new ArrayList<>();
+            for(int column = 0; column < 16; column++){
+                switch(boardString.charAt(row*16 + column)){
+                    case 'p':
+                       BoardRow.add(new Pawn(row,column,"black"));
+                       break;
+                    case 'P':
+                        BoardRow.add(new Pawn(row,column,"white"));
+                        break;                               
+                   case 'r':
+                       BoardRow.add(new Rook(row,column,"black")); 
+                       break;
+                    case 'R':
+                        BoardRow.add(new Rook(row,column,"white")); 
+                        break;                               
+                   case 'h':
+                       BoardRow.add(new Knight(row,column,"black"));
+                       break;
+                    case 'H':
+                        BoardRow.add(new Knight(row,column,"white")); 
+                        break;                               
+                   case 'b':
+                       BoardRow.add(new Bishop(row,column,"black")); 
+                       break;
+                    case 'B':
+                        BoardRow.add(new Bishop(row,column,"white"));
+                        break;                               
+                   case 'q':
+                       BoardRow.add(new Queen(row,column,"black"));
+                       break;
+                    case 'Q':
+                        BoardRow.add(new Queen(row,column,"white"));
+                        break;                               
+                   case 'k':
+                       BoardRow.add(new King(row,column,"black"));
+                       break;                          
+                    case 'K':
+                        BoardRow.add(new King(row,column,"white")); 
+                        break;
+                    default:
+                        BoardRow.add(new NullPiece(row,column));
+                        break;                        
+                }                        
+            }
+            Board.add(BoardRow);
+        } 
+        return Board;
+    }    
+
+    //////////////////////////////MOVE UP TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveUpOnce_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult2 = null; //Adjacent piece of different color, no moves should be generated
+        int[] TestResult3 = new int[] {12,7,11,7,AuxPawn.getPointsForMove() + 8 - (12 - 1)}; //No piece in the way, movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                                                                                                                                                       p               p                                                        ", 12, 7, TestResult1),
+                Arguments.of("                                                                                                                                                                                       P               p                                                        ", 12, 7, TestResult2),
+                Arguments.of("                                                                                                                                                                                                       p                                                        ", 12, 7, TestResult3)              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move up once test run {index}")
+    @MethodSource("testMoveUpOnce_Parameters")
+    public void testMoveUpOnce(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
+        assertArrayEquals(expectedMove, TestPawn.moveUpOnce(Board));
+    }  
+
+    //////////////////////////////MOVE UP TWICE TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveUpTwice_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult2 = null; //Adjacent piece of different color, no moves should be generated
+        int[] TestResult3 = new int[] {12,7,10,7,AuxPawn.getPointsForMove() + 8 - (12 - 2)}; //No piece in the way, movement possible
+        int[] TestResult4 = null; //Piece in the second position, can't move up two places
+        int[] TestResult5 = null; //Piece in the first position, can't move up two places
+        int[] TestResult6 = null; //Piece in the second position, can't move up two places
+        int[] TestResult7 = new int[] {13,7,11,7,AuxPawn.getPointsForMove() + 8 - (13 - 2)}; //No piece in the way, movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                                                                                                                                                       p               p                                                        ", 12, 7, TestResult1),
+                Arguments.of("                                                                                                                                                                                       P               p                                                        ", 12, 7, TestResult2),
+                Arguments.of("                                                                                                                                                                                                       p                                                        ", 12, 7, TestResult3),
+                Arguments.of("                                                                                                                                                                       p                               p                                                        ", 12, 7, TestResult4),
+                Arguments.of("                                                                                                                                                                                                       p               p                                        ", 13, 7, TestResult5),
+                Arguments.of("                                                                                                                                                                                       p                               p                                        ", 13, 7, TestResult6),
+                Arguments.of("                                                                                                                                                                                                                       p                                        ", 13, 7, TestResult7)
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move up twice test run {index}")
+    @MethodSource("testMoveUpTwice_Parameters")
+    public void testMoveUpTwice(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
+        assertArrayEquals(expectedMove, TestPawn.moveUpTwice(Board));
+    }
+
+    //////////////////////////////MOVE DOWN TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveDownOnce_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult2 = null; //Adjacent piece of different color, no moves should be generated
+        int[] TestResult3 = new int[] {3,7,4,7,AuxPawn.getPointsForMove() - 7 + 3 + 1}; //No piece in the way, movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                       p               p                                                                                                                                                                                        ", 3, 7, TestResult1),
+                Arguments.of("                                                       p               P                                                                                                                                                                                        ", 3, 7, TestResult2),
+                Arguments.of("                                                       p                                                                                                                                                                                                        ", 3, 7, TestResult3)              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move down once test run {index}")
+    @MethodSource("testMoveDownOnce_Parameters")
+    public void testMoveUpDown(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
+        assertArrayEquals(expectedMove, TestPawn.moveDownOnce(Board));
+    }  
+
+    //////////////////////////////MOVE DOWN TWICE TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveDownTwice_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult2 = null; //Adjacent piece of different color, no moves should be generated
+        int[] TestResult3 = new int[] {3,7,5,7,AuxPawn.getPointsForMove() - 7 + 3 + 2}; //No piece in the way, movement possible
+        int[] TestResult4 = null; //Piece in the second position, can't move up two places
+        int[] TestResult5 = null; //Piece in the first position, can't move up two places
+        int[] TestResult6 = null; //Piece in the second position, can't move up two places
+        int[] TestResult7 = new int[] {2,7,4,7,AuxPawn.getPointsForMove() - 7 + 2 + 2}; //No piece in the way, movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                       p               p                                                                                                                                                                                        ", 3, 7, TestResult1),
+                Arguments.of("                                                       p               P                                                                                                                                                                                        ", 3, 7, TestResult2),
+                Arguments.of("                                                       p                                                                                                                                                                                                        ", 3, 7, TestResult3),
+                Arguments.of("                                                       p                               p                                                                                                                                                                        ", 3, 7, TestResult4),
+                Arguments.of("                                       p               p                                                                                                                                                                                                        ", 2, 7, TestResult5),
+                Arguments.of("                                       p                               p                                                                                                                                                                                        ", 2, 7, TestResult6),
+                Arguments.of("                                       p                                                                                                                                                                                                                        ", 2, 7, TestResult7)
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move down twice test run {index}")
+    @MethodSource("testMoveDownTwice_Parameters")
+    public void testMoveDownTwice(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
+        assertArrayEquals(expectedMove, TestPawn.moveDownTwice(Board));
+    }
+
+    //////////////////////////////MOVE RIGHT AND UP TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveUpAndRight_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = new int[] {9,14,8,15,AuxPawn.getPointsForKill()}; //Piece of different color, with possible attack.
+        int[] TestResult2 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult3 = null; //No piece in the way, no movement possible
+        int[] TestResult4 = null; //On border, no movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                                                                                                               p              P                                                                                                 ", 9, 14, TestResult1),
+                Arguments.of("                                                                                                                                               P              P                                                                                                 ", 9, 14, TestResult2),
+                Arguments.of("                                                                                                                                                              p                                                                                                 ", 9, 14, TestResult3),
+                Arguments.of("                                                                                                                                               p                                                                                                                ", 8, 15, TestResult4)              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move right and up test run {index}")
+    @MethodSource("testMoveUpAndRight_Parameters")
+    public void testMoveUpAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"white");
+        assertArrayEquals(expectedMove, TestPawn.moveUpAndRight(Board));
+    }
+    
+    //////////////////////////////MOVE LEFT AND UP TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveUpAndLeft_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = new int[] {9,1,8,0,AuxPawn.getPointsForKill()}; //Piece of different color, with possible attack.
+        int[] TestResult2 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult3 = null; //No piece in the way, no movement possible
+        int[] TestResult4 = null; //On border, no movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                                                                                                p                P                                                                                                              ", 9, 1, TestResult1),
+                Arguments.of("                                                                                                                                P                P                                                                                                              ", 9, 1, TestResult2),
+                Arguments.of("                                                                                                                                                 P                                                                                                              ", 9, 1, TestResult3),
+                Arguments.of("                                                                                                                                P                                                                                                                               ", 8, 0, TestResult4)              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move left and up test run {index}")
+    @MethodSource("testMoveUpAndLeft_Parameters")
+    public void testMoveUpAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"white");
+        assertArrayEquals(expectedMove, TestPawn.moveUpAndLeft(Board));
+    } 
+    
+    //////////////////////////////MOVE RIGHT AND DOWN TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveDownAndRight_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = new int[] {5,14,6,15,AuxPawn.getPointsForKill()}; //Piece of different color, with possible attack.
+        int[] TestResult2 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult3 = null; //No piece in the way, no movement possible
+        int[] TestResult4 = null; //On border, no movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                                                              p                P                                                                                                                                                ", 5, 14, TestResult1),
+                Arguments.of("                                                                                              p                p                                                                                                                                                ", 5, 14, TestResult2),
+                Arguments.of("                                                                                              p                                                                                                                                                                 ", 5, 14, TestResult3),
+                Arguments.of("                                                                                                               p                                                                                                                                                ", 6, 15, TestResult4)              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move right and down test run {index}")
+    @MethodSource("testMoveDownAndRight_Parameters")
+    public void testMoveDownAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
+        assertArrayEquals(expectedMove, TestPawn.moveDownAndRight(Board));
+    }
+    
+    //////////////////////////////MOVE LEFT AND DOWN TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testMoveDownAndLeft_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        int[] TestResult1 = new int[] {5,1,6,0,AuxPawn.getPointsForKill()}; //Piece of different color, with possible attack.
+        int[] TestResult2 = null; //Adjacent piece of same color, no moves should be generated
+        int[] TestResult3 = null; //No piece in the way, no movement possible
+        int[] TestResult4 = null; //On border, no movement possible
+        
+        return Stream.of(
+                Arguments.of("                                                                                 p              P                                                                                                                                                               ", 5, 1, TestResult1),
+                Arguments.of("                                                                                 p              p                                                                                                                                                               ", 5, 1, TestResult2),
+                Arguments.of("                                                                                 p                                                                                                                                                                              ", 5, 1, TestResult3),
+                Arguments.of("                                                                                                p                                                                                                                                                               ", 6, 0, TestResult4)              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn move left and down test run {index}")
+    @MethodSource("testMoveDownAndLeft_Parameters")
+    public void testMoveDownAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+
+        Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
+        assertArrayEquals(expectedMove, TestPawn.moveDownAndLeft(Board));
+    }        
+
+    /**
+     * Test of isNull method, of class Pawn.
+     */
+    @Test
+    public void testIsNull() {
+        Pawn instance = new Pawn(0,0,"");
+        boolean expResult = false;
+        boolean result = instance.isNull();
+        assertEquals(expResult, result);
+    }
+    
+}

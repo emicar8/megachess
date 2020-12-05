@@ -26,14 +26,14 @@ public class Pawn extends ChessPiece{
         this.pointsForKill = 100;
     }
     
-    private int[] moveUpOnce(List<List<ChessPiece>> Board){ 
+    public int[] moveUpOnce(List<List<ChessPiece>> Board){ 
         if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){
             return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol, this.pointsForMove + 8 - (this.currentRow - 1)};
         }
         return null;
     }
     
-    private int[] moveUpTwice(List<List<ChessPiece>> Board){
+    public int[] moveUpTwice(List<List<ChessPiece>> Board){
         if(this.currentRow == 12 || this.currentRow == 13){
             if(Board.get(this.currentRow - 1).get(this.currentCol).isNull() && Board.get(this.currentRow - 2).get(this.currentCol).isNull()){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow - 2, this.currentCol, this.pointsForMove + 8 - (this.currentRow - 2)};
@@ -42,14 +42,14 @@ public class Pawn extends ChessPiece{
         return null;      
     }
     
-    private int[] moveDownOnce(List<List<ChessPiece>> Board){
+    public int[] moveDownOnce(List<List<ChessPiece>> Board){
         if(Board.get(this.currentRow + 1).get(this.currentCol).isNull()){
             return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol, this.pointsForMove - 7 + this.currentRow + 1};
         }
         return null;  
     }
     
-    private int[] moveDownTwice(List<List<ChessPiece>> Board){
+    public int[] moveDownTwice(List<List<ChessPiece>> Board){
         if(this.currentRow == 2 || this.currentRow == 3){
             if(Board.get(this.currentRow + 1).get(this.currentCol).isNull() && Board.get(this.currentRow + 2).get(this.currentCol).isNull()){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow + 2, this.currentCol, this.pointsForMove - 7 + this.currentRow + 2};
@@ -58,7 +58,7 @@ public class Pawn extends ChessPiece{
         return null;            
     }  
     
-    private int[] moveUpAndRight(List<List<ChessPiece>> Board){
+    public int[] moveUpAndRight(List<List<ChessPiece>> Board){
         if(this.currentCol < 15){
             if(Board.get(this.currentRow - 1).get(this.currentCol + 1).getColor().equals("black")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol + 1, Board.get(this.currentRow - 1).get(this.currentCol + 1).getPointsForKill()};
@@ -67,7 +67,7 @@ public class Pawn extends ChessPiece{
         return null;
     }
     
-    private int[] moveUpAndLeft(List<List<ChessPiece>> Board){
+    public int[] moveUpAndLeft(List<List<ChessPiece>> Board){
         if(this.currentCol > 0){
             if(Board.get(this.currentRow - 1).get(this.currentCol - 1).getColor().equals("black")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow - 1, this.currentCol - 1, Board.get(this.currentRow - 1).get(this.currentCol - 1).getPointsForKill()};
@@ -76,7 +76,7 @@ public class Pawn extends ChessPiece{
         return null;       
     }
 
-    private int[] moveDownAndRight(List<List<ChessPiece>> Board){
+    public int[] moveDownAndRight(List<List<ChessPiece>> Board){
         if(this.currentCol < 15){
             if(Board.get(this.currentRow + 1).get(this.currentCol + 1).getColor().equals("white")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol + 1, Board.get(this.currentRow + 1).get(this.currentCol + 1).getPointsForKill()};
@@ -85,7 +85,7 @@ public class Pawn extends ChessPiece{
         return null;   
     }
     
-    private int[] moveDownAndLeft(List<List<ChessPiece>> Board){
+    public int[] moveDownAndLeft(List<List<ChessPiece>> Board){
         if(this.currentCol > 0){
             if(Board.get(this.currentRow + 1).get(this.currentCol - 1).getColor().equals("white")){
                 return new int[] {this.currentRow, this.currentCol, this.currentRow + 1, this.currentCol - 1, Board.get(this.currentRow + 1).get(this.currentCol - 1).getPointsForKill()};
