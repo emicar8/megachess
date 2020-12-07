@@ -276,6 +276,37 @@ public class BishopTest {
         TestBishop.moveLeftAndDown(currentRow + 1, currentCol - 1, Board);
         assertArrayEquals(expectedMoves.toArray(), TestBishop.getPossibleMoves().toArray());
         
+    } 
+    
+    //////////////////////////////CALCULATE POSSIBLE MOVES TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testCalculatePossibleMoves_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        List<int[]> TestResult1 = new ArrayList<>(); //Surrounded by pieces of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Surrounded by pieces of different color, all possible attacks.
+        TestResult2.add(new int[] {7,7,8,6,AuxPawn.getPointsForKill()}); //Down and left
+        TestResult2.add(new int[] {7,7,6,6,AuxPawn.getPointsForKill()}); //Up and left
+        TestResult2.add(new int[] {7,7,6,8,AuxPawn.getPointsForKill()}); //Up and right
+        TestResult2.add(new int[] {7,7,8,8,AuxPawn.getPointsForKill()}); //Down and right
+        
+        return Stream.of(
+                Arguments.of("                                                                                                      ppp             pbp             ppp                                                                                                                       ", 7, 7, TestResult1),
+                Arguments.of("                                                                                                      PPP             PbP             PPP                                                                                                                       ", 7, 7, TestResult2)             
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Bishop calculatePossibleMoves test run {index}")
+    @MethodSource("testCalculatePossibleMoves_Parameters")
+    public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        Bishop TestBishop = new Bishop(currentRow,currentCol,"black");
+        TestBishop.calculatePossibleMoves(Board);
+        assertArrayEquals(expectedMoves.toArray(), TestBishop.getPossibleMoves().toArray());
+        
     }    
     
     /**

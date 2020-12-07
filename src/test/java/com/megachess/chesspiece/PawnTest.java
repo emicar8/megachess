@@ -365,6 +365,47 @@ public class PawnTest {
         assertArrayEquals(expectedMove, TestPawn.moveDownAndLeft(Board));
     }        
 
+    //////////////////////////////CALCULATE POSSIBLE MOVES TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testCalculatePossibleMoves_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        //Black Pawn
+        List<int[]> TestResult1 = new ArrayList<>(); //All moves blocked, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //All moves possible.
+        TestResult2.add(new int[] {2,7,3,7,AuxPawn.getPointsForMove() - 7 + 2 + 1}); //Down once
+        TestResult2.add(new int[] {2,7,4,7,AuxPawn.getPointsForMove() - 7 + 2 + 2}); //Down twice
+        TestResult2.add(new int[] {2,7,3,8,AuxPawn.getPointsForKill()}); //Down and right
+        TestResult2.add(new int[] {2,7,3,6,AuxPawn.getPointsForKill()}); //Down and left
+        //White Pawn
+        List<int[]> TestResult3 = new ArrayList<>(); //All moves blocked, no moves should be generated
+        List<int[]> TestResult4 = new ArrayList<>(); //All moves possible.
+        TestResult4.add(new int[] {13,7,12,7,AuxPawn.getPointsForMove() + 8 - (13 - 1)}); //Up once
+        TestResult4.add(new int[] {13,7,11,7,AuxPawn.getPointsForMove() + 8 - (13 - 2)}); //Up twice
+        TestResult4.add(new int[] {13,7,12,8,AuxPawn.getPointsForKill()}); //Up and right
+        TestResult4.add(new int[] {13,7,12,6,AuxPawn.getPointsForKill()}); //Up and left        
+        
+        return Stream.of(
+                Arguments.of("                                       p              ppp                                                                                                                                                                                                       ", 2, 7, "black", TestResult1),
+                Arguments.of("                                       p              P P                                                                                                                                                                                                       ", 2, 7, "black", TestResult2),
+                Arguments.of("                                                                                                                                                                                                      PPP              P                                        ", 13,7, "white", TestResult3),
+                Arguments.of("                                                                                                                                                                                                      p p              P                                        ", 13,7, "white", TestResult4)                
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Queen calculatePossibleMoves test run {index}")
+    @MethodSource("testCalculatePossibleMoves_Parameters")
+    public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, String color, List<int[]> expectedMoves){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        Pawn TestPawn = new Pawn(currentRow,currentCol,color);
+        TestPawn.calculatePossibleMoves(Board);
+        assertArrayEquals(expectedMoves.toArray(), TestPawn.getPossibleMoves().toArray());
+        
+    }    
+    
     /**
      * Test of isNull method, of class Pawn.
      */

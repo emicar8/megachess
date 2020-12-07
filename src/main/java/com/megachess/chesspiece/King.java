@@ -116,13 +116,13 @@ public class King extends ChessPiece{
     @Override
     public void calculatePossibleMoves(List<List<ChessPiece>> Board) {       
         this.AddIfNotNull(moveDown(Board));
+        this.AddIfNotNull(moveRight(Board));
         this.AddIfNotNull(moveLeft(Board));
         this.AddIfNotNull(moveUp(Board));
-        this.AddIfNotNull(moveRight(Board));
-        this.AddIfNotNull(moveRightAndDown(Board));
         this.AddIfNotNull(moveLeftAndDown(Board));
-        this.AddIfNotNull(moveLeftAndUp(Board));
-        this.AddIfNotNull(moveRightAndUp(Board));      
+        this.AddIfNotNull(moveLeftAndUp(Board));      
+        this.AddIfNotNull(moveRightAndUp(Board));  
+        this.AddIfNotNull(moveRightAndDown(Board));
     }
 
     @Override

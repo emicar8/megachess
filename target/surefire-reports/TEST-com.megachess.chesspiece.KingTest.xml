@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.chesspiece.KingTest" time="0.028" tests="35" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.chesspiece.KingTest" time="0.032" tests="37" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
-    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire1276667360392625588\surefirebooter1375838883261660335.jar C:\Users\Emile\AppData\Local\Temp\surefire1276667360392625588 2020-12-06T21-54-44_179-jvmRun1 surefire12174701811073080554tmp surefire_013673916085464235038tmp"/>
+    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire3799655920571333739\surefirebooter958747719177864080.jar C:\Users\Emile\AppData\Local\Temp\surefire3799655920571333739 2020-12-06T23-00-44_999-jvmRun1 surefire8278560033178490755tmp surefire_07359269018809919076tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\test-classes;C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\classes;C:\Users\Emile\.m2\repository\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar;C:\Users\Emile\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\Emile\.m2\repository\org\json\json\20200518\json-20200518.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Emile\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Emile\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire1276667360392625588\surefirebooter1375838883261660335.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire3799655920571333739\surefirebooter958747719177864080.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11+28"/>
@@ -66,36 +66,38 @@
   <testcase name="testMoveRightAndUp{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveRightAndUp{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveRightAndUp{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveRightAndUp{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testMoveRightAndUp{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testKing{int, int, String}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testKing{int, int, String}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeftAndDown{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeftAndDown{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeftAndDown{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveLeftAndDown{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
-  <testcase name="testMoveDown{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testMoveLeftAndDown{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testCalculatePossbileMoves{String, int, int, List}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testCalculatePossbileMoves{String, int, int, List}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testMoveDown{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeft{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveLeft{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testMoveLeft{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeft{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveLeft{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testMoveLeft{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeftAndUp{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveLeftAndUp{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testMoveLeftAndUp{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeftAndUp{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeftAndUp{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveRightAndDown{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveRightAndDown{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveRightAndDown{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testMoveRightAndDown{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveRightAndDown{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testIsNull" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testIsNull" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveUp{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveUp{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveUp{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
-  <testcase name="testMoveUp{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
-  <testcase name="testMoveRight{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
-  <testcase name="testMoveRight{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
-  <testcase name="testMoveRight{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
-  <testcase name="testMoveRight{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0.001"/>
+  <testcase name="testMoveUp{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testMoveUp{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testMoveRight{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testMoveRight{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testMoveRight{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testMoveRight{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0.016"/>
 </testsuite>

@@ -358,6 +358,41 @@ public class KingTest {
         assertArrayEquals(expectedMove, TestKing.moveRightAndDown(Board));
     }    
     
+    //////////////////////////////CALCULATE POSSIBLE MOVES TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testCalculatePossibleMoves_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        List<int[]> TestResult1 = new ArrayList<>(); //Surrounded by pieces of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Surrounded by pieces of different color, all possible attacks.
+        TestResult2.add(new int[] {7,7,8,7,AuxPawn.getPointsForKill()}); //Down
+        TestResult2.add(new int[] {7,7,7,8,AuxPawn.getPointsForKill()}); //Right
+        TestResult2.add(new int[] {7,7,7,6,AuxPawn.getPointsForKill()}); //Left
+        TestResult2.add(new int[] {7,7,6,7,AuxPawn.getPointsForKill()}); //Up
+        TestResult2.add(new int[] {7,7,8,6,AuxPawn.getPointsForKill()}); //Down and left
+        TestResult2.add(new int[] {7,7,6,6,AuxPawn.getPointsForKill()}); //Up and left
+        TestResult2.add(new int[] {7,7,6,8,AuxPawn.getPointsForKill()}); //Up and right
+        TestResult2.add(new int[] {7,7,8,8,AuxPawn.getPointsForKill()}); //Down and right
+        
+        return Stream.of(
+                Arguments.of("                                                                                                      ppp             pkp             ppp                                                                                                                       ", 7, 7, TestResult1),
+                Arguments.of("                                                                                                      PPP             PkP             PPP                                                                                                                       ", 7, 7, TestResult2)             
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="King calculatePossibleMoves test run {index}")
+    @MethodSource("testCalculatePossibleMoves_Parameters")
+    public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        King TestKing = new King(currentRow,currentCol,"black");
+        TestKing.calculatePossibleMoves(Board);
+        assertArrayEquals(expectedMoves.toArray(), TestKing.getPossibleMoves().toArray());
+        
+    }    
+    
     
     /**
      * Test of isNull method, of class King.

@@ -5,6 +5,8 @@
  */
 package com.megachess.chesspiece;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -62,7 +64,17 @@ public class NullPieceTest {
         assertEquals(0, TestNullPiece.getPointsForMove());
         assertEquals(0, TestNullPiece.getPointsForKill());
         
-    }     
+    } 
+
+    /**
+     * Test of calculatePossibleMoves method, of class NullPiece.
+     */
+
+     @Test
+     public void testCalculatePossibleMoves(){
+         NullPiece TestNullPiece = new NullPiece(3,4);
+         assertTrue(TestNullPiece.getPossibleMoves().isEmpty());
+     }
     
     /**
      * Test of isNull method, of class NullPiece.

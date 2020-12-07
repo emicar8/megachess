@@ -382,6 +382,41 @@ public class KnightTest {
         
     }
     
+    //////////////////////////////CALCULATE POSSIBLE MOVES TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testCalculatePossibleMoves_Parameters(){
+        Pawn AuxPawn = new Pawn(0,0,"");
+        List<int[]> TestResult1 = new ArrayList<>(); //Surrounded by pieces of same color, no moves should be generated
+        List<int[]> TestResult2 = new ArrayList<>(); //Surrounded by pieces of different color, all possible attacks.
+        TestResult2.add(new int[] {7,7,9,6,AuxPawn.getPointsForKill()}); //Down and left
+        TestResult2.add(new int[] {7,7,9,8,AuxPawn.getPointsForKill()}); //Down and right
+        TestResult2.add(new int[] {7,7,8,9,AuxPawn.getPointsForKill()}); //Right and down
+        TestResult2.add(new int[] {7,7,6,9,AuxPawn.getPointsForKill()}); //Right and up
+        TestResult2.add(new int[] {7,7,5,8,AuxPawn.getPointsForKill()}); //Up and right
+        TestResult2.add(new int[] {7,7,5,6,AuxPawn.getPointsForKill()}); //Up and left
+        TestResult2.add(new int[] {7,7,6,5,AuxPawn.getPointsForKill()}); //Left and up
+        TestResult2.add(new int[] {7,7,8,5,AuxPawn.getPointsForKill()}); //Left and down
+        
+        return Stream.of(
+                Arguments.of("                                                                                      p p            p   p             h             p   p            p p                                                                                                       ", 7, 7, TestResult1),
+                Arguments.of("                                                                                      P P            P   P             h             P   P            P P                                                                                                       ", 7, 7, TestResult2)             
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Queen calculatePossibleMoves test run {index}")
+    @MethodSource("testCalculatePossibleMoves_Parameters")
+    public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
+        //Create board
+        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        //Finished creating board
+        
+        Knight TestKnight = new Knight(currentRow,currentCol,"black");
+        TestKnight.calculatePossibleMoves(Board);
+        assertArrayEquals(expectedMoves.toArray(), TestKnight.getPossibleMoves().toArray());
+        
+    }    
+    
     /**
      * Test of isNull method, of class Knight.
      */
