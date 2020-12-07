@@ -5,6 +5,7 @@
  */
 package com.megachess.chesspiece;
 
+import com.megachess.client.ChessBot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -41,58 +42,6 @@ public class KnightTest {
     
     @AfterEach
     public void tearDown() {
-    }
-
-    private List<List<ChessPiece>> generateBoard(String boardString){
-        List<List<ChessPiece>> Board = new ArrayList<>();
-        for(int row = 0; row < 16; row++){
-            List<ChessPiece> BoardRow = new ArrayList<>();
-            for(int column = 0; column < 16; column++){
-                switch(boardString.charAt(row*16 + column)){
-                    case 'p':
-                       BoardRow.add(new Pawn(row,column,"black"));
-                       break;
-                    case 'P':
-                        BoardRow.add(new Pawn(row,column,"white"));
-                        break;                               
-                   case 'r':
-                       BoardRow.add(new Rook(row,column,"black")); 
-                       break;
-                    case 'R':
-                        BoardRow.add(new Rook(row,column,"white")); 
-                        break;                               
-                   case 'h':
-                       BoardRow.add(new Knight(row,column,"black"));
-                       break;
-                    case 'H':
-                        BoardRow.add(new Knight(row,column,"white")); 
-                        break;                               
-                   case 'b':
-                       BoardRow.add(new Bishop(row,column,"black")); 
-                       break;
-                    case 'B':
-                        BoardRow.add(new Bishop(row,column,"white"));
-                        break;                               
-                   case 'q':
-                       BoardRow.add(new Queen(row,column,"black"));
-                       break;
-                    case 'Q':
-                        BoardRow.add(new Queen(row,column,"white"));
-                        break;                               
-                   case 'k':
-                       BoardRow.add(new King(row,column,"black"));
-                       break;                          
-                    case 'K':
-                        BoardRow.add(new King(row,column,"white")); 
-                        break;
-                    default:
-                        BoardRow.add(new NullPiece(row,column));
-                        break;                        
-                }                        
-            }
-            Board.add(BoardRow);
-        } 
-        return Board;
     }
 
     //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +92,7 @@ public class KnightTest {
     @MethodSource("testMoveUpAndRight_Parameters")
     public void testMoveUpAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -176,7 +125,7 @@ public class KnightTest {
     @MethodSource("testMoveDownAndRight_Parameters")
     public void testMoveDownAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -209,7 +158,7 @@ public class KnightTest {
     @MethodSource("testMoveUpAndLeft_Parameters")
     public void testMoveUpAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -242,7 +191,7 @@ public class KnightTest {
     @MethodSource("testMoveDownAndLeft_Parameters")
     public void testMoveDownAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -275,7 +224,7 @@ public class KnightTest {
     @MethodSource("testMoveRightAndUp_Parameters")
     public void testMoveRightAndUp(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -308,7 +257,7 @@ public class KnightTest {
     @MethodSource("testMoveRightAndDown_Parameters")
     public void testMoveRightAndDown(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -341,7 +290,7 @@ public class KnightTest {
     @MethodSource("testMoveLeftAndUp_Parameters")
     public void testMoveLeftAndUp(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -374,7 +323,7 @@ public class KnightTest {
     @MethodSource("testMoveLeftAndDown_Parameters")
     public void testMoveLeftAndDown(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
@@ -408,7 +357,7 @@ public class KnightTest {
     @MethodSource("testCalculatePossibleMoves_Parameters")
     public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");

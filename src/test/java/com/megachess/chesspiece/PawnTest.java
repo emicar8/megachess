@@ -5,6 +5,7 @@
  */
 package com.megachess.chesspiece;
 
+import com.megachess.client.ChessBot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -43,59 +44,7 @@ public class PawnTest {
     
     @AfterEach
     public void tearDown() {
-    }
-    
-    private List<List<ChessPiece>> generateBoard(String boardString){
-        List<List<ChessPiece>> Board = new ArrayList<>();
-        for(int row = 0; row < 16; row++){
-            List<ChessPiece> BoardRow = new ArrayList<>();
-            for(int column = 0; column < 16; column++){
-                switch(boardString.charAt(row*16 + column)){
-                    case 'p':
-                       BoardRow.add(new Pawn(row,column,"black"));
-                       break;
-                    case 'P':
-                        BoardRow.add(new Pawn(row,column,"white"));
-                        break;                               
-                   case 'r':
-                       BoardRow.add(new Rook(row,column,"black")); 
-                       break;
-                    case 'R':
-                        BoardRow.add(new Rook(row,column,"white")); 
-                        break;                               
-                   case 'h':
-                       BoardRow.add(new Knight(row,column,"black"));
-                       break;
-                    case 'H':
-                        BoardRow.add(new Knight(row,column,"white")); 
-                        break;                               
-                   case 'b':
-                       BoardRow.add(new Bishop(row,column,"black")); 
-                       break;
-                    case 'B':
-                        BoardRow.add(new Bishop(row,column,"white"));
-                        break;                               
-                   case 'q':
-                       BoardRow.add(new Queen(row,column,"black"));
-                       break;
-                    case 'Q':
-                        BoardRow.add(new Queen(row,column,"white"));
-                        break;                               
-                   case 'k':
-                       BoardRow.add(new King(row,column,"black"));
-                       break;                          
-                    case 'K':
-                        BoardRow.add(new King(row,column,"white")); 
-                        break;
-                    default:
-                        BoardRow.add(new NullPiece(row,column));
-                        break;                        
-                }                        
-            }
-            Board.add(BoardRow);
-        } 
-        return Board;
-    }    
+    }  
 
     //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
     
@@ -147,7 +96,7 @@ public class PawnTest {
     @MethodSource("testMoveUpOnce_Parameters")
     public void testMoveUpOnce(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
@@ -182,7 +131,7 @@ public class PawnTest {
     @MethodSource("testMoveUpTwice_Parameters")
     public void testMoveUpTwice(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
@@ -209,7 +158,7 @@ public class PawnTest {
     @MethodSource("testMoveDownOnce_Parameters")
     public void testMoveUpDown(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
@@ -244,7 +193,7 @@ public class PawnTest {
     @MethodSource("testMoveDownTwice_Parameters")
     public void testMoveDownTwice(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
@@ -273,7 +222,7 @@ public class PawnTest {
     @MethodSource("testMoveUpAndRight_Parameters")
     public void testMoveUpAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"white");
@@ -302,7 +251,7 @@ public class PawnTest {
     @MethodSource("testMoveUpAndLeft_Parameters")
     public void testMoveUpAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"white");
@@ -331,7 +280,7 @@ public class PawnTest {
     @MethodSource("testMoveDownAndRight_Parameters")
     public void testMoveDownAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
@@ -360,7 +309,7 @@ public class PawnTest {
     @MethodSource("testMoveDownAndLeft_Parameters")
     public void testMoveDownAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
@@ -399,7 +348,7 @@ public class PawnTest {
     @MethodSource("testCalculatePossibleMoves_Parameters")
     public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, String color, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,color);
@@ -412,18 +361,6 @@ public class PawnTest {
         assertArrayEquals(expectedMoves.toArray(), TestPawn.getPossibleMoves().toArray());
         
     }    
-    
-        /**
-     * Test of calculatePossibleMoves method exception thrown, of class Pawn.
-     */
-    @Test
-    public void testExceptionCalculatePossibleMoves(){
-        Pawn TestPawn = new Pawn(1,1,"");
-        List<List<ChessPiece>> Board = new ArrayList<>();
-        assertThrows(Exception.class, ()-> {
-            TestPawn.calculatePossibleMoves(Board);
-        });        
-    }
     
     /**
      * Test of isNull method, of class Pawn.

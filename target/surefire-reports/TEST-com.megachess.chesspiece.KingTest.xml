@@ -18,7 +18,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
-    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire364994038216149855\surefirebooter10693899625074855188.jar C:\Users\Emile\AppData\Local\Temp\surefire364994038216149855 2020-12-06T23-42-48_766-jvmRun1 surefire2116302886908173548tmp surefire_01833031713970470525tmp"/>
+    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire14827301369838950304\surefirebooter8467687942121321686.jar C:\Users\Emile\AppData\Local\Temp\surefire14827301369838950304 2020-12-07T13-18-53_436-jvmRun1 surefire3670786201031718458tmp surefire_014317688947527052294tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\test-classes;C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\classes;C:\Users\Emile\.m2\repository\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar;C:\Users\Emile\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\Emile\.m2\repository\org\json\json\20200518\json-20200518.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Emile\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Emile\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire364994038216149855\surefirebooter10693899625074855188.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire14827301369838950304\surefirebooter8467687942121321686.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11+28"/>
@@ -79,7 +79,7 @@
   <testcase name="testMoveDown{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveDown{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
-  <testcase name="testMoveLeft{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0"/>
+  <testcase name="testMoveLeft{String, int, int, int[]}[1]" classname="com.megachess.chesspiece.KingTest" time="0.015"/>
   <testcase name="testMoveLeft{String, int, int, int[]}[2]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeft{String, int, int, int[]}[3]" classname="com.megachess.chesspiece.KingTest" time="0"/>
   <testcase name="testMoveLeft{String, int, int, int[]}[4]" classname="com.megachess.chesspiece.KingTest" time="0"/>
