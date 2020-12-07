@@ -6,7 +6,6 @@
 package com.megachess.chesspiece;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
@@ -96,6 +95,36 @@ public class PawnTest {
         return Board;
     }    
 
+    //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testPawn_Parameters(){  
+        return Stream.of(
+                Arguments.of(1,2,"white"),
+                Arguments.of(1,2,"black"),
+                Arguments.of(9,2,"white"),
+                Arguments.of(6,2,"black")
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn constructor test run {index}")
+    @MethodSource("testPawn_Parameters")
+    public void testPawn(int currentRow, int currentCol, String color){
+       
+        Pawn TestPawn = new Pawn(currentRow,currentCol,color);
+        assertEquals(currentRow, TestPawn.getCurrentRow());
+        assertEquals(currentCol, TestPawn.getCurrentCol());
+        assertEquals(color, TestPawn.getColor());
+        if(currentRow == 6 || currentRow == 9){
+           assertEquals(500, TestPawn.getPointsForMove()); 
+        }else{
+            assertEquals(80, TestPawn.getPointsForMove()); 
+        }
+        
+        assertEquals(100, TestPawn.getPointsForKill());
+        
+    }     
+    
     //////////////////////////////MOVE UP TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveUpOnce_Parameters(){

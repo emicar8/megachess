@@ -94,6 +94,29 @@ public class RookTest {
         } 
         return Board;
     }
+
+    //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testRook_Parameters(){  
+        return Stream.of(
+                Arguments.of(1,2,"white"),
+                Arguments.of(1,2,"black")              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Rook constructor test run {index}")
+    @MethodSource("testRook_Parameters")
+    public void testRook(int currentRow, int currentCol, String color){
+       
+        Rook TestRook = new Rook(currentRow,currentCol,color);
+        assertEquals(currentRow, TestRook.getCurrentRow());
+        assertEquals(currentCol, TestRook.getCurrentCol());
+        assertEquals(color, TestRook.getColor());
+        assertEquals(60, TestRook.getPointsForMove());
+        assertEquals(600, TestRook.getPointsForKill());
+        
+    } 
     
     //////////////////////////////MOVE RIGHT TEST/////////////////////////////////////////////////////////////////////////////////
     

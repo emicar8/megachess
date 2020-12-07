@@ -95,6 +95,29 @@ public class KnightTest {
         return Board;
     }
 
+    //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testKnight_Parameters(){  
+        return Stream.of(
+                Arguments.of(1,2,"white"),
+                Arguments.of(1,2,"black")              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Knight constructor test run {index}")
+    @MethodSource("testKnight_Parameters")
+    public void testKnight(int currentRow, int currentCol, String color){
+       
+        Knight TestKnight = new Knight(currentRow,currentCol,color);
+        assertEquals(currentRow, TestKnight.getCurrentRow());
+        assertEquals(currentCol, TestKnight.getCurrentCol());
+        assertEquals(color, TestKnight.getColor());
+        assertEquals(30, TestKnight.getPointsForMove());
+        assertEquals(300, TestKnight.getPointsForKill());
+        
+    }     
+    
     //////////////////////////////MOVE UP AND RIGHT TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveUpAndRight_Parameters(){

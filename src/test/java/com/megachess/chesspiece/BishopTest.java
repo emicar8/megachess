@@ -95,6 +95,29 @@ public class BishopTest {
         return Board;
     }
 
+    //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testBishop_Parameters(){  
+        return Stream.of(
+                Arguments.of(1,2,"white"),
+                Arguments.of(1,2,"black")              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Bishop constructor test run {index}")
+    @MethodSource("testBishop_Parameters")
+    public void testBishop(int currentRow, int currentCol, String color){
+       
+        Bishop TestBishop = new Bishop(currentRow,currentCol,color);
+        assertEquals(currentRow, TestBishop.getCurrentRow());
+        assertEquals(currentCol, TestBishop.getCurrentCol());
+        assertEquals(color, TestBishop.getColor());
+        assertEquals(40, TestBishop.getPointsForMove());
+        assertEquals(400, TestBishop.getPointsForKill());
+        
+    }     
+    
     //////////////////////////////MOVE RIGHT AND UP TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveRightAndUp_Parameters(){

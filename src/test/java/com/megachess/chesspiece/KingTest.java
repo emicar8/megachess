@@ -94,7 +94,30 @@ public class KingTest {
         } 
         return Board;
     }
+
+    //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
     
+    static Stream<Arguments> testKing_Parameters(){  
+        return Stream.of(
+                Arguments.of(1,2,"white"),
+                Arguments.of(1,2,"black")              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="King constructor test run {index}")
+    @MethodSource("testKing_Parameters")
+    public void testKing(int currentRow, int currentCol, String color){
+       
+        King TestKing = new King(currentRow,currentCol,color);
+        assertEquals(currentRow, TestKing.getCurrentRow());
+        assertEquals(currentCol, TestKing.getCurrentCol());
+        assertEquals(color, TestKing.getColor());
+        assertEquals(65, TestKing.getPointsForMove());
+        assertEquals(1000, TestKing.getPointsForKill());
+        
+    } 
+
     //////////////////////////////MOVE RIGHT TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveRight_Parameters(){

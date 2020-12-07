@@ -95,6 +95,29 @@ public class QueenTest {
         return Board;
     }
     
+    //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testQueen_Parameters(){  
+        return Stream.of(
+                Arguments.of(1,2,"white"),
+                Arguments.of(1,2,"black")              
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Queen constructor test run {index}")
+    @MethodSource("testQueen_Parameters")
+    public void testQueen(int currentRow, int currentCol, String color){
+       
+        Queen TestQueen = new Queen(currentRow,currentCol,color);
+        assertEquals(currentRow, TestQueen.getCurrentRow());
+        assertEquals(currentCol, TestQueen.getCurrentCol());
+        assertEquals(color, TestQueen.getColor());
+        assertEquals(5, TestQueen.getPointsForMove());
+        assertEquals(50, TestQueen.getPointsForKill());
+        
+    }     
+    
     //////////////////////////////MOVE RIGHT TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMoveRight_Parameters(){
