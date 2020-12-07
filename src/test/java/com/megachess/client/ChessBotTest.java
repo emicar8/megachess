@@ -55,21 +55,48 @@ public class ChessBotTest {
     public void testAcceptChallenge() {
         JSONObject receivedChallenge = new JSONObject("{\"action\":\"ask_challenge\",\"data\":{\"username\": \"gabriel\",\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\"}}");
         ChessBot instance = new ChessBot();
-        String expResult = "{\"data\":{\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\"},\"action\":\"accept_challenge\"}";
-        String result = instance.acceptChallenge(receivedChallenge);
-        assertEquals(expResult, result);
+        JSONObject expResult = new JSONObject("{\"data\":{\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\"},\"action\":\"accept_challenge\"}");
+        JSONObject result = instance.acceptChallenge(receivedChallenge);
+        assertTrue(expResult.similar(result));
     }
 
     /**
      * Test of acceptChallenge exception handling, of class ChessBot.
      */
+    /*
     @Test
     public void testAcceptChallengeException() {
         JSONObject receivedChallenge = new JSONObject("{\"action\":\"ask_challenge\",\"da\":{\"username\": \"gabriel\",\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\"}}"); //Broken json message
         ChessBot instance = new ChessBot();
         String result = instance.acceptChallenge(receivedChallenge);
         assertNull(result);
-    }    
+    } */   
+    
+    /**
+     * Test of myTurn method, of class ChessBot.
+     */
+    @Test
+    public void testMyTurn() {
+        JSONObject receivedTurn = new JSONObject("{\"event\":\"your_turn\","
+                                                + "\"data\":{\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\","
+                                                          + "\"turn_token\":\"e40573bb-138f-4171-a200-66258f546755\","
+                                                          + "\"username\":\"gabriel\","
+                                                          + "\"actual_turn\":\"black\","
+                                                          + "\"board\":\"                                                                                                                                                                                                                                 P              b               \","
+                                                          + "\"move_left\":19,"
+                                                          + "\"opponent_username\": \"maria\"}}"); //Board only has one move possible
+        ChessBot instance = new ChessBot();
+        JSONObject result = instance.myTurn(receivedTurn);
+        JSONObject expResult = new JSONObject("{\"action\":\"move\","
+                                             + "\"data\":{"
+                                                  + "\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\","
+                                                  + "\"turn_token\":\"e40573bb-138f-4171-a200-66258f546755\","
+                                                  + "\"from_row\":15,"
+                                                  + "\"from_col\":0,"
+                                                  + "\"to_row\":14,"
+                                                  + "\"to_col\":1}}");
+        assertTrue(expResult.similar(result));
+    }     
     
 
     /**

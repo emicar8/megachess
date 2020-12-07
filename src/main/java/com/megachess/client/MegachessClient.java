@@ -71,12 +71,12 @@ public class MegachessClient extends WebSocketClient{
         
         switch (receivedMessage.getString("event")){
             case "ask_challenge":
-                reply = Bot.acceptChallenge(receivedMessage);
+                reply = Bot.acceptChallenge(receivedMessage).toString();
                 send(reply);
                 System.out.println(reply);
                 break;
             case "your_turn":
-                send(Bot.myTurn(receivedMessage));
+                send(Bot.myTurn(receivedMessage).toString());
                 break;
             case "update_user_list":
             case "gameover":

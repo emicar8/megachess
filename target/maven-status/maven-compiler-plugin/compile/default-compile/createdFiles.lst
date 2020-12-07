@@ -5,6 +5,5 @@ com\megachess\client\MoveComparator.class
 com\megachess\chesspiece\King.class
 com\megachess\chesspiece\Knight.class
 com\megachess\chesspiece\Queen.class
-com\megachess\client\MegachessClient.class
 com\megachess\chesspiece\Bishop.class
 com\megachess\chesspiece\Rook.class

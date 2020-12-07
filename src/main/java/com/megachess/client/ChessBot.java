@@ -30,7 +30,7 @@ public class ChessBot {
         
     }
     
-    public String acceptChallenge(JSONObject receivedChallenge){
+    public JSONObject acceptChallenge(JSONObject receivedChallenge){
         
         JSONObject messageToSend = new JSONObject();    //Sent message.
         JSONObject dataOut = new JSONObject(); //Out data object
@@ -42,11 +42,11 @@ public class ChessBot {
         }catch(JSONException jsonEx){
             return null;
         }
-        return messageToSend.toString();
+        return messageToSend;
         
     }
     
-    public String myTurn(JSONObject receivedTurn){
+    public JSONObject myTurn(JSONObject receivedTurn) throws JSONException, NullPointerException{
 
         JSONObject messageToSend = new JSONObject();    //Sent message.
         JSONObject dataOut = new JSONObject(); //Out data object
@@ -75,21 +75,16 @@ public class ChessBot {
         }
 
         selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
+        messageToSend.put("action", "move");
+        dataOut.put("board_id", receivedTurn.getJSONObject("data").get("board_id"));
+        dataOut.put("turn_token", receivedTurn.getJSONObject("data").get("turn_token"));
+        dataOut.put("from_row", selectedMove[0]);
+        dataOut.put("from_col", selectedMove[1]);
+        dataOut.put("to_row",  selectedMove[2]);
+        dataOut.put("to_col",  selectedMove[3]);
+        messageToSend.put("data", dataOut);                    
 
-        try{
-            messageToSend.put("action", "move");
-            dataOut.put("board_id", receivedTurn.getJSONObject("data").get("board_id"));
-            dataOut.put("turn_token", receivedTurn.getJSONObject("data").get("turn_token"));
-            dataOut.put("from_row", selectedMove[0]);
-            dataOut.put("from_col", selectedMove[1]);
-            dataOut.put("to_row",  selectedMove[2]);
-            dataOut.put("to_col",  selectedMove[3]);
-            messageToSend.put("data", dataOut);                    
-        }catch(JSONException e){
-            System.out.println(e.toString());
-        }        
-        
-        return messageToSend.toString();
+        return messageToSend;
     }
     
     public static List<List<ChessPiece>> generateBoard(String boardString){
