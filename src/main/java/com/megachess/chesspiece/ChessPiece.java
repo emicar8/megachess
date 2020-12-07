@@ -7,6 +7,7 @@ package com.megachess.chesspiece;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -91,4 +92,32 @@ public abstract class ChessPiece {
     public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board);
     
     public abstract boolean isNull();
+    
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+        
+        if(!(o instanceof ChessPiece)){
+            return false;
+        }
+        
+        ChessPiece compared = (ChessPiece) o;
+        
+        return compared.color.equals(this.color) && compared.getCurrentCol() == this.currentCol && compared.getCurrentRow() == this.currentRow && compared.getClass().equals(this.getClass());
+        
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + this.currentCol;
+        hash = 29 * hash + this.currentRow;
+        hash = 29 * hash + this.pointsForMove;
+        hash = 29 * hash + this.pointsForKill;
+        hash = 29 * hash + Objects.hashCode(this.possibleMoves);
+        hash = 29 * hash + Objects.hashCode(this.color);
+        return hash;
+    }
 }

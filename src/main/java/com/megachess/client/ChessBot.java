@@ -16,6 +16,7 @@ import com.megachess.chesspiece.Rook;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,9 +35,13 @@ public class ChessBot {
         JSONObject messageToSend = new JSONObject();    //Sent message.
         JSONObject dataOut = new JSONObject(); //Out data object
         
-        messageToSend.put("action", "accept_challenge");
-        dataOut.put("board_id", receivedChallenge.getJSONObject("data").get("board_id"));
-        messageToSend.put("data", dataOut);
+        try{
+            messageToSend.put("action", "accept_challenge");
+            dataOut.put("board_id", receivedChallenge.getJSONObject("data").get("board_id"));
+            messageToSend.put("data", dataOut);            
+        }catch(JSONException jsonEx){
+            return null;
+        }
         return messageToSend.toString();
         
     }

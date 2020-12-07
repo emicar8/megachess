@@ -25,30 +25,16 @@
 
 package com.megachess.client;
 
-import com.megachess.chesspiece.Bishop;
-import com.megachess.chesspiece.ChessPiece;
-import com.megachess.chesspiece.King;
-import com.megachess.chesspiece.Knight;
-import com.megachess.chesspiece.NullPiece;
-import com.megachess.chesspiece.Pawn;
-import com.megachess.chesspiece.Queen;
-import com.megachess.chesspiece.Rook;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.json.JSONObject;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 
 import org.java_websocket.handshake.ServerHandshake;
-import org.json.JSONException;
+
 
 /**
  *
