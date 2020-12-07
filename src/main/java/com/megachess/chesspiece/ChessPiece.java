@@ -98,7 +98,7 @@ public abstract class ChessPiece {
         return (int)Math.round(-Math.pow(col-7.5, 2));
     }
     
-    public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board);
+    public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board) throws Exception;
     
     public abstract boolean isNull();
 }

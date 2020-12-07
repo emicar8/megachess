@@ -7,6 +7,8 @@ package com.megachess.chesspiece;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -401,10 +403,27 @@ public class PawnTest {
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,color);
-        TestPawn.calculatePossibleMoves(Board);
+        try{
+            TestPawn.calculatePossibleMoves(Board);            
+        }catch(Exception ex){
+            Logger.getLogger(PawnTest.class.getName()).log(Level.SEVERE, null, ex);            
+        }
+
         assertArrayEquals(expectedMoves.toArray(), TestPawn.getPossibleMoves().toArray());
         
     }    
+    
+        /**
+     * Test of calculatePossibleMoves method exception thrown, of class Pawn.
+     */
+    @Test
+    public void testExceptionCalculatePossibleMoves(){
+        Pawn TestPawn = new Pawn(1,1,"");
+        List<List<ChessPiece>> Board = new ArrayList<>();
+        assertThrows(Exception.class, ()-> {
+            TestPawn.calculatePossibleMoves(Board);
+        });        
+    }
     
     /**
      * Test of isNull method, of class Pawn.

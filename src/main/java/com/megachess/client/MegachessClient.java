@@ -40,6 +40,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.JSONObject;
 import org.java_websocket.client.WebSocketClient;
@@ -160,7 +162,12 @@ public class MegachessClient extends WebSocketClient{
                 for(List<ChessPiece> Row : Board){
                     for(ChessPiece Piece : Row){
                         if(dataIn.getString("actual_turn").equals(Piece.getColor())){
-                            Piece.calculatePossibleMoves(Board);
+                            try{
+                                Piece.calculatePossibleMoves(Board);
+                            }catch(Exception e){
+                                Logger.getLogger(Pawn.class.getName()).log(Level.SEVERE, null, e);
+                            }
+                            
                             AllMoves.addAll(Piece.getPossibleMoves());
                         }                   
                     }

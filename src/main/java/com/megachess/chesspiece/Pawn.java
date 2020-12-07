@@ -95,7 +95,7 @@ public class Pawn extends ChessPiece{
     }       
 
     @Override
-    public void calculatePossibleMoves(List<List<ChessPiece>> Board) {
+    public void calculatePossibleMoves(List<List<ChessPiece>> Board) throws Exception{
         switch (this.color) {
             case "black":
                 this.AddIfNotNull(moveDownOnce(Board));
@@ -110,12 +110,7 @@ public class Pawn extends ChessPiece{
                 this.AddIfNotNull(moveUpAndLeft(Board));
                 break;         
             default:
-                try {
-                    throw new Exception("Color must be black or white");
-                } catch (Exception ex) {
-                    Logger.getLogger(Pawn.class.getName()).log(Level.SEVERE, null, ex);
-                }   
-                break;
+                throw new Exception("Color must be black or white");  
         }
     }
 
