@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class ChessPiece {
     
     protected int currentCol,currentRow,pointsForMove,pointsForKill;
-    protected List<int[]> possibleMoves, possibleAttacks;
+    protected List<int[]> possibleMoves;
     protected String color;
     
     public ChessPiece(){
@@ -26,7 +26,6 @@ public abstract class ChessPiece {
         this.currentCol = col;
         this.currentRow = row;
         this.color = color;
-        this.possibleAttacks = new ArrayList<>();
         this.possibleMoves = new ArrayList<>();
     }
 
@@ -71,14 +70,6 @@ public abstract class ChessPiece {
         this.possibleMoves = possibleMoves;
     }
 
-    public List<int[]> getPossibleAttacks() {
-        return possibleAttacks;
-    }
-
-    public void setPossibleAttacks(List<int[]> possibleAttacks) {
-        this.possibleAttacks = possibleAttacks;
-    }
-
     public String getColor() {
         return color;
     }
@@ -92,8 +83,7 @@ public abstract class ChessPiece {
             this.possibleMoves.add(move);
         }
     }
-    
-    
+       
     private int prioritizeCenterKill(int col){
         return (int)Math.round(-Math.pow(col-7.5, 2));
     }

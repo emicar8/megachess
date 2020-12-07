@@ -73,6 +73,8 @@ public class NullPieceTest {
      @Test
      public void testCalculatePossibleMoves(){
          NullPiece TestNullPiece = new NullPiece(3,4);
+         List<List<ChessPiece>> Board = new ArrayList<>();
+         TestNullPiece.calculatePossibleMoves(Board);
          assertTrue(TestNullPiece.getPossibleMoves().isEmpty());
      }
     
