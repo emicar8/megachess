@@ -15,6 +15,7 @@ import com.megachess.chesspiece.Queen;
 import com.megachess.chesspiece.Rook;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -63,14 +64,14 @@ public class ChessBotTest {
     /**
      * Test of acceptChallenge exception handling, of class ChessBot.
      */
-    /*
     @Test
     public void testAcceptChallengeException() {
         JSONObject receivedChallenge = new JSONObject("{\"action\":\"ask_challenge\",\"da\":{\"username\": \"gabriel\",\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\"}}"); //Broken json message
         ChessBot instance = new ChessBot();
-        String result = instance.acceptChallenge(receivedChallenge);
-        assertNull(result);
-    } */   
+        assertThrows(JSONException.class, ()->{
+            instance.acceptChallenge(receivedChallenge);
+        });
+    }  
     
     /**
      * Test of myTurn method, of class ChessBot.
@@ -97,8 +98,48 @@ public class ChessBotTest {
                                                   + "\"to_col\":1}}");
         assertTrue(expResult.similar(result));
     }     
-    
 
+    /**
+     * Test of generateBoard JSONException, of class ChessBot.
+     */
+    @Test
+    public void testMyTurnJSONException() {
+
+            JSONObject receivedTurn = new JSONObject("{\"event\":\"your_turn\","
+                                                + "\"da\":{\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\","
+                                                          + "\"turn_token\":\"e40573bb-138f-4171-a200-66258f546755\","
+                                                          + "\"username\":\"gabriel\","
+                                                          + "\"actual_turn\":\"black\","
+                                                          + "\"board\":\"                                                                                                                                                                                                                                 P              b               \","
+                                                          + "\"move_left\":19,"
+                                                          + "\"opponent_username\": \"maria\"}}"); //Board only has one move possible
+        ChessBot instance = new ChessBot();
+        assertThrows(JSONException.class, ()->{
+            instance.myTurn(receivedTurn);
+        });
+    }
+ 
+
+    /**
+     * Test of myTurn IndexOutOfBoundsException, of class ChessBot.
+     */
+    @Test
+    public void testMyTurnIndexOutOfBounds() {
+
+            JSONObject receivedTurn = new JSONObject("{\"event\":\"your_turn\","
+                                                + "\"data\":{\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\","
+                                                          + "\"turn_token\":\"e40573bb-138f-4171-a200-66258f546755\","
+                                                          + "\"username\":\"gabriel\","
+                                                          + "\"actual_turn\":\"black\","
+                                                          + "\"board\":\"                                                                                                                                                                                                                                 P                              \","
+                                                          + "\"move_left\":19,"
+                                                          + "\"opponent_username\": \"maria\"}}"); //Board only has one move possible
+        ChessBot instance = new ChessBot();
+        assertThrows(IndexOutOfBoundsException.class, ()->{
+            instance.myTurn(receivedTurn);
+        });
+    }       
+    
     /**
      * Test of generateBoard method, of class ChessBot.
      */
@@ -145,5 +186,9 @@ public class ChessBotTest {
             assertArrayEquals(expResult.get(i).toArray(), result.get(i).toArray());
         }
     }
+      
+    
+
+    
     
 }

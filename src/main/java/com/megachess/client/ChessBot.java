@@ -30,23 +30,20 @@ public class ChessBot {
         
     }
     
-    public JSONObject acceptChallenge(JSONObject receivedChallenge){
+    public JSONObject acceptChallenge(JSONObject receivedChallenge) throws JSONException{
         
         JSONObject messageToSend = new JSONObject();    //Sent message.
         JSONObject dataOut = new JSONObject(); //Out data object
+
+        messageToSend.put("action", "accept_challenge");
+        dataOut.put("board_id", receivedChallenge.getJSONObject("data").get("board_id"));
+        messageToSend.put("data", dataOut);            
         
-        try{
-            messageToSend.put("action", "accept_challenge");
-            dataOut.put("board_id", receivedChallenge.getJSONObject("data").get("board_id"));
-            messageToSend.put("data", dataOut);            
-        }catch(JSONException jsonEx){
-            return null;
-        }
         return messageToSend;
         
     }
     
-    public JSONObject myTurn(JSONObject receivedTurn) throws JSONException, NullPointerException{
+    public JSONObject myTurn(JSONObject receivedTurn) throws JSONException, IndexOutOfBoundsException{
 
         JSONObject messageToSend = new JSONObject();    //Sent message.
         JSONObject dataOut = new JSONObject(); //Out data object
