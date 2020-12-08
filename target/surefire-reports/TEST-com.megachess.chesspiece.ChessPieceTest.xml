@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.chesspiece.NullPieceTest" time="0.001" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.chesspiece.ChessPieceTest" time="0.004" tests="16" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -63,8 +63,20 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testCalculatePossibleMoves" classname="com.megachess.chesspiece.NullPieceTest" time="0"/>
-  <testcase name="testIsNull" classname="com.megachess.chesspiece.NullPieceTest" time="0"/>
-  <testcase name="testNullPiece{int, int}[1]" classname="com.megachess.chesspiece.NullPieceTest" time="0.001"/>
-  <testcase name="testNullPiece{int, int}[2]" classname="com.megachess.chesspiece.NullPieceTest" time="0"/>
+  <testcase name="testHashCode{Object, Object, boolean}[1]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testHashCode{Object, Object, boolean}[2]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testHashCode{Object, Object, boolean}[3]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testHashCode{Object, Object, boolean}[4]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testHashCode{Object, Object, boolean}[5]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testHashCode{Object, Object, boolean}[6]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testHashCode{Object, Object, boolean}[7]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{int[], boolean}[1]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{int[], boolean}[2]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{Object, Object, boolean}[1]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{Object, Object, boolean}[2]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{Object, Object, boolean}[3]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{Object, Object, boolean}[4]" classname="com.megachess.chesspiece.ChessPieceTest" time="0.001"/>
+  <testcase name="testEquals{Object, Object, boolean}[5]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{Object, Object, boolean}[6]" classname="com.megachess.chesspiece.ChessPieceTest" time="0"/>
+  <testcase name="testEquals{Object, Object, boolean}[7]" classname="com.megachess.chesspiece.ChessPieceTest" time="0.001"/>
 </testsuite>
