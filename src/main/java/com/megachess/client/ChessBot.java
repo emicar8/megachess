@@ -5,6 +5,7 @@
  */
 package com.megachess.client;
 
+import com.megachess.board.Board;
 import com.megachess.chesspiece.Bishop;
 import com.megachess.chesspiece.ChessPiece;
 import com.megachess.chesspiece.King;
@@ -48,9 +49,9 @@ public class ChessBot {
         JSONObject messageToSend = new JSONObject();    //Sent message.
         JSONObject dataOut = new JSONObject(); //Out data object
         String boardString = receivedTurn.getJSONObject("data").getString("board");
-        List<int[]> AllMoves = new ArrayList<>();
-        List<int[]> BestMoves = new ArrayList<>();
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+
+        List<Board> BoardList = new ArrayList<>();
+        BoardList.add(new Board(boardString));
         int[] selectedMove;
 
         for(List<ChessPiece> Row : Board){
@@ -84,56 +85,22 @@ public class ChessBot {
         return messageToSend;
     }
     
-    public static List<List<ChessPiece>> generateBoard(String boardString){
-        List<List<ChessPiece>> Board = new ArrayList<>();
-        for(int row = 0; row < 16; row++){
-            List<ChessPiece> BoardRow = new ArrayList<>();
-            for(int column = 0; column < 16; column++){
-                switch(boardString.charAt(row*16 + column)){
-                    case 'p':
-                       BoardRow.add(new Pawn(row,column,"black"));
-                       break;
-                    case 'P':
-                        BoardRow.add(new Pawn(row,column,"white"));
-                        break;                               
-                   case 'r':
-                       BoardRow.add(new Rook(row,column,"black")); 
-                       break;
-                    case 'R':
-                        BoardRow.add(new Rook(row,column,"white")); 
-                        break;                               
-                   case 'h':
-                       BoardRow.add(new Knight(row,column,"black"));
-                       break;
-                    case 'H':
-                        BoardRow.add(new Knight(row,column,"white")); 
-                        break;                               
-                   case 'b':
-                       BoardRow.add(new Bishop(row,column,"black")); 
-                       break;
-                    case 'B':
-                        BoardRow.add(new Bishop(row,column,"white"));
-                        break;                               
-                   case 'q':
-                       BoardRow.add(new Queen(row,column,"black"));
-                       break;
-                    case 'Q':
-                        BoardRow.add(new Queen(row,column,"white"));
-                        break;                               
-                   case 'k':
-                       BoardRow.add(new King(row,column,"black"));
-                       break;                          
-                    case 'K':
-                        BoardRow.add(new King(row,column,"white")); 
-                        break;
-                    default:
-                        BoardRow.add(new NullPiece(row,column));
-                        break;                        
-                }                        
+    public int[] calculateBestMove(int depth, List<Board> BoardList, String currentColor){
+        
+        Board LastBoard =  BoardList.get(BoardList.size() - 1);
+        List<int[]> AllMoves = new ArrayList<>();
+        
+        for(List<ChessPiece> Row : LastBoard.getBoardConfig()){
+            for(ChessPiece Piece : Row){
+                if(Piece.getColor().equals(currentColor)){
+                    Piece.calculatePossibleMoves(LastBoard.getBoardConfig());
+                    AllMoves.addAll(Piece.getPossibleMoves());
+                }                   
             }
-            Board.add(BoardRow);
-        } 
-        return Board;
-    }    
+        }
+        
+        
+        return null;
+    }
     
 }
