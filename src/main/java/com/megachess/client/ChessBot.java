@@ -6,18 +6,10 @@
 package com.megachess.client;
 
 import com.megachess.board.Board;
-import com.megachess.chesspiece.Bishop;
 import com.megachess.chesspiece.ChessPiece;
-import com.megachess.chesspiece.King;
-import com.megachess.chesspiece.Knight;
-import com.megachess.chesspiece.NullPiece;
-import com.megachess.chesspiece.Pawn;
-import com.megachess.chesspiece.Queen;
-import com.megachess.chesspiece.Rook;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +17,7 @@ import org.json.JSONObject;
  *
  * @author Emile
  */
-public class ChessBot {
+public class ChessBot{
     
     ChessBot(){
         
@@ -49,30 +41,18 @@ public class ChessBot {
         JSONObject messageToSend = new JSONObject();    //Sent message.
         JSONObject dataOut = new JSONObject(); //Out data object
         String boardString = receivedTurn.getJSONObject("data").getString("board");
-
-        List<Board> BoardList = new ArrayList<>();
-        BoardList.add(new Board(boardString));
+        
+        /*
+        for(int i = 0; i < boardString.length(); i = i + 16){
+            System.out.println(boardString.substring(i, i+15));
+        }
+        System.out.println();
+        */
+        Board InitialBoard = new Board(boardString);
         int[] selectedMove;
 
-        for(List<ChessPiece> Row : Board){
-            for(ChessPiece Piece : Row){
-                if(receivedTurn.getJSONObject("data").getString("actual_turn").equals(Piece.getColor())){
-                    Piece.calculatePossibleMoves(Board);
-                    AllMoves.addAll(Piece.getPossibleMoves());
-                }                   
-            }
-        }
+        selectedMove = calculateBestMove(3, InitialBoard, receivedTurn.getJSONObject("data").getString("actual_turn"), Integer.MIN_VALUE, Integer.MAX_VALUE);
 
-        Collections.sort(AllMoves, new MoveComparator().reversed());
-
-        for(int[] move : AllMoves){
-            //System.out.println(move[0] + "," + move[1] + "," + move[2] + "," + move[3] + "," + move[4]);
-            if(AllMoves.get(0)[4] == move[4]){
-                BestMoves.add(move);
-            }  
-        }
-
-        selectedMove = BestMoves.get((int)Math.floor(Math.random()*BestMoves.size()));
         messageToSend.put("action", "move");
         dataOut.put("board_id", receivedTurn.getJSONObject("data").get("board_id"));
         dataOut.put("turn_token", receivedTurn.getJSONObject("data").get("turn_token"));
@@ -85,22 +65,62 @@ public class ChessBot {
         return messageToSend;
     }
     
-    public int[] calculateBestMove(int depth, List<Board> BoardList, String currentColor){
-        
-        Board LastBoard =  BoardList.get(BoardList.size() - 1);
+    public int[] calculateBestMove(int depth, Board Board, String currentColor, int alpha, int beta){
+               
         List<int[]> AllMoves = new ArrayList<>();
+        int moveValue, bestMoveValue = currentColor.equals("black")? Integer.MAX_VALUE : Integer.MIN_VALUE;
+        int[] bestMove = null;
+        int maxChildren = 1000, childCount = 0;
         
-        for(List<ChessPiece> Row : LastBoard.getBoardConfig()){
+        if(depth == 0){
+            moveValue = Board.evaluateBoardConfig();
+            //System.out.println("Depth:" + depth + ", bestMoveValue:" + moveValue + ", Color: " + currentColor);           
+            return new int[] {0, 0, 0, 0, moveValue};
+        }
+
+        for(List<ChessPiece> Row : Board.getBoardConfig()){
             for(ChessPiece Piece : Row){
                 if(Piece.getColor().equals(currentColor)){
-                    Piece.calculatePossibleMoves(LastBoard.getBoardConfig());
+                    Piece.calculatePossibleMoves(Board.getBoardConfig());
                     AllMoves.addAll(Piece.getPossibleMoves());
                 }                   
             }
         }
+        //System.out.println(depth + "," + AllMoves.size() + "," + currentColor);
+        Collections.sort(AllMoves, new MoveComparator().reversed());
         
-        
-        return null;
+        for (int[] move : AllMoves){
+            Board.movePiece(move[0], move[1], move[2], move[3]);
+            childCount++;
+            moveValue = calculateBestMove(depth - 1, Board, currentColor.equals("black")? "white":"black",alpha,beta)[4];
+            
+            if(currentColor.equals("black")){ //Minimizing player
+                if(moveValue < bestMoveValue){
+                    bestMoveValue = moveValue;
+                    bestMove = move;
+                }
+                beta = Math.min(beta, moveValue);
+            }else{ //Maximizing player
+                if(moveValue > bestMoveValue){
+                    bestMoveValue = moveValue;
+                    bestMove = move;
+                }
+                alpha = Math.max(alpha, moveValue);
+            }
+            Board.undoMovePiece();
+            //System.out.println("Depth:" + depth + ", bestMoveValue:" + bestMoveValue + ", Color: " + currentColor);
+            
+            if(beta <= alpha){
+                //System.out.println("prune");
+                break;
+            }
+            if(childCount >= maxChildren){
+                System.out.println("Max child reached");
+                break;
+            }
+            
+        }
+        return new int[] {bestMove[0], bestMove[1], bestMove[2], bestMove[3], bestMoveValue};
     }
     
 }

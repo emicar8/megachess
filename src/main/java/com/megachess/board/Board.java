@@ -20,54 +20,74 @@ import java.util.List;
  *
  * @author Emile
  */
-public class Board {
+public class Board{
     
-    private List<List<ChessPiece>> BoardConfig; 
-    private int boardValue;
-    
+    private List<List<ChessPiece>> BoardConfig;
+    private List<List<ChessPiece>> MoveHistory;
+     
     public Board(String BoardString){
-        boardValue = 0;
         BoardConfig = Board.generateBoardConfig(BoardString);
+        MoveHistory = new ArrayList<>();
     }
 
     public List<List<ChessPiece>> getBoardConfig() {
         return BoardConfig;
     }
-
-    public int getBoardValue() {
-        return boardValue;
-    }
     
-    
-    
-    public int movePiece(int fromRow, int fromCol, int toRow, int toCol){
+    public void movePiece(int fromRow, int fromCol, int toRow, int toCol){
+        List<ChessPiece> AuxList = new ArrayList<>(), FromRow = BoardConfig.get(fromRow), ToRow = BoardConfig.get(toRow);
         ChessPiece FromPiece = BoardConfig.get(fromRow).get(fromCol);
         ChessPiece ToPiece = BoardConfig.get(toRow).get(toCol);
-        List<ChessPiece> FromRow = BoardConfig.get(fromRow);
-        List<ChessPiece> ToRow = BoardConfig.get(toRow);
+                
+        //Saving moves to later undo
+        AuxList.add(FromPiece.copy());
+        AuxList.add(ToPiece.copy());
+        MoveHistory.add(AuxList);
         
-        if(!ToPiece.isNull()){ //Piece not null
-            boardValue += (FromPiece.getColor().equals("black")? -1 : 1) * ToPiece.getPointsForKill();
-        }
-        boardValue += (FromPiece.getColor().equals("black")? -1 : 1) * FromPiece.getPointsForMove();        
         
-        FromPiece.setCurrentRow(toRow);
-        FromPiece.setCurrentCol(toCol);
-        FromRow.set(fromCol, new NullPiece(fromRow, fromCol));
-        if(FromPiece instanceof Pawn){ //PawnPromotion check
-            if(FromPiece.getColor().equals("white") && toRow == 8){
-                ToRow.set(toCol, new Queen(toRow, toCol, "white"));
-            }else if(FromPiece.getColor().equals("black") && toRow == 7){
-                ToRow.set(toCol, new Queen(toRow, toCol, "black"));
-            }
+        if(FromPiece instanceof Pawn){
+            if(FromPiece.getColor().equals("black") && toRow == 7){
+                ToRow.set(toCol, new Queen(toRow,toCol,"black"));
+            }else if(FromPiece.getColor().equals("white") && toRow == 8){
+                ToRow.set(toCol, new Queen(toRow,toCol,"white"));
+            }else{
+                ToRow.set(toCol, FromPiece.copy());
+            }  
         }else{
-           ToRow.set(toCol, FromPiece); 
+            ToRow.set(toCol, FromPiece.copy());
         }
+        FromRow.set(fromCol, new NullPiece(fromRow,fromCol));
+        
+        BoardConfig.set(fromRow, FromRow);
+        BoardConfig.set(toRow, ToRow);   
+    }
+    
+    public void undoMovePiece(){ //Undo lastest move
+                       
+        int fromRow = MoveHistory.get(MoveHistory.size() - 1).get(0).getCurrentRow();
+        int fromCol = MoveHistory.get(MoveHistory.size() - 1).get(0).getCurrentCol();
+        int toRow = MoveHistory.get(MoveHistory.size() - 1).get(1).getCurrentRow();
+        int toCol = MoveHistory.get(MoveHistory.size() - 1).get(1).getCurrentCol();
+
+        List<ChessPiece> FromRow = BoardConfig.get(fromRow), ToRow = BoardConfig.get(toRow);
+        
+        FromRow.set(fromCol, MoveHistory.get(MoveHistory.size() - 1).get(0).copy());
+        ToRow.set(toCol, MoveHistory.get(MoveHistory.size() - 1).get(1).copy());
+        
         BoardConfig.set(fromRow, FromRow);
         BoardConfig.set(toRow, ToRow);
         
-
-        return boardValue;
+        MoveHistory.remove(MoveHistory.size() - 1);
+    }
+    
+    public int evaluateBoardConfig(){
+        int result = 0;
+        for(List<ChessPiece> Row : BoardConfig){
+            for(ChessPiece Piece : Row){
+                result += (Piece.getColor().equals("black")? -1 : 1) * Piece.getMinMaxValueCorrected();
+            }
+        }
+        return result;
     }
     
     public static List<List<ChessPiece>> generateBoardConfig(String boardString){
@@ -120,6 +140,5 @@ public class Board {
             Board.add(BoardRow);
         } 
         return Board;
-    }     
-    
+    }
 }

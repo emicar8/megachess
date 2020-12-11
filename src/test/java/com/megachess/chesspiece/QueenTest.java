@@ -5,6 +5,7 @@
  */
 package com.megachess.chesspiece;
 
+import com.megachess.board.Board;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -41,58 +42,6 @@ public class QueenTest {
     
     @AfterEach
     public void tearDown() {
-    }
-    
-    private List<List<ChessPiece>> generateBoard(String boardString){
-        List<List<ChessPiece>> Board = new ArrayList<>();
-        for(int row = 0; row < 16; row++){
-            List<ChessPiece> BoardRow = new ArrayList<>();
-            for(int column = 0; column < 16; column++){
-                switch(boardString.charAt(row*16 + column)){
-                    case 'p':
-                       BoardRow.add(new Pawn(row,column,"black"));
-                       break;
-                    case 'P':
-                        BoardRow.add(new Pawn(row,column,"white"));
-                        break;                               
-                   case 'r':
-                       BoardRow.add(new Rook(row,column,"black")); 
-                       break;
-                    case 'R':
-                        BoardRow.add(new Rook(row,column,"white")); 
-                        break;                               
-                   case 'h':
-                       BoardRow.add(new Knight(row,column,"black"));
-                       break;
-                    case 'H':
-                        BoardRow.add(new Knight(row,column,"white")); 
-                        break;                               
-                   case 'b':
-                       BoardRow.add(new Bishop(row,column,"black")); 
-                       break;
-                    case 'B':
-                        BoardRow.add(new Bishop(row,column,"white"));
-                        break;                               
-                   case 'q':
-                       BoardRow.add(new Queen(row,column,"black"));
-                       break;
-                    case 'Q':
-                        BoardRow.add(new Queen(row,column,"white"));
-                        break;                               
-                   case 'k':
-                       BoardRow.add(new King(row,column,"black"));
-                       break;                          
-                    case 'K':
-                        BoardRow.add(new King(row,column,"white")); 
-                        break;
-                    default:
-                        BoardRow.add(new NullPiece(row,column));
-                        break;                        
-                }                        
-            }
-            Board.add(BoardRow);
-        } 
-        return Board;
     }
     
     //////////////////////////////CONSTRUCTOR TEST/////////////////////////////////////////////////////////////////////////////////
@@ -148,11 +97,11 @@ public class QueenTest {
     @MethodSource("testMoveRight_Parameters")
     public void testMoveRight(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveRight(currentRow, currentCol + 1, Board);
+        TestQueen.moveRight(currentRow, currentCol + 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }
@@ -187,11 +136,11 @@ public class QueenTest {
     @MethodSource("testMoveDown_Parameters")
     public void testMoveDown(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveDown(currentRow + 1, currentCol, Board);
+        TestQueen.moveDown(currentRow + 1, currentCol, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }
@@ -227,11 +176,11 @@ public class QueenTest {
     @MethodSource("testMoveLeft_Parameters")
     public void testMoveLeft(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveLeft(currentRow, currentCol - 1, Board);
+        TestQueen.moveLeft(currentRow, currentCol - 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
@@ -267,11 +216,11 @@ public class QueenTest {
     @MethodSource("testMoveUp_Parameters")
     public void testMoveUp(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveUp(currentRow - 1, currentCol, Board);
+        TestQueen.moveUp(currentRow - 1, currentCol, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
@@ -307,11 +256,11 @@ public class QueenTest {
     @MethodSource("testMoveRightAndUp_Parameters")
     public void testMoveRightAndUp(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveRightAndUp(currentRow - 1, currentCol + 1, Board);
+        TestQueen.moveRightAndUp(currentRow - 1, currentCol + 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }
@@ -347,11 +296,11 @@ public class QueenTest {
     @MethodSource("testMoveRightAndDown_Parameters")
     public void testMoveRightAndDown(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveRightAndDown(currentRow + 1, currentCol + 1, Board);
+        TestQueen.moveRightAndDown(currentRow + 1, currentCol + 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
@@ -387,11 +336,11 @@ public class QueenTest {
     @MethodSource("testMoveLeftAndUp_Parameters")
     public void testMoveLeftAndUp(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveLeftAndUp(currentRow - 1, currentCol - 1, Board);
+        TestQueen.moveLeftAndUp(currentRow - 1, currentCol - 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }  
@@ -427,11 +376,11 @@ public class QueenTest {
     @MethodSource("testMoveLeftAndDown_Parameters")
     public void testMoveLeftAndDown(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.moveLeftAndDown(currentRow + 1, currentCol - 1, Board);
+        TestQueen.moveLeftAndDown(currentRow + 1, currentCol - 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }    
@@ -462,11 +411,11 @@ public class QueenTest {
     @MethodSource("testCalculatePossibleMoves_Parameters")
     public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = this.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Queen TestQueen = new Queen(currentRow,currentCol,"black");
-        TestQueen.calculatePossibleMoves(Board);
+        TestQueen.calculatePossibleMoves(TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestQueen.getPossibleMoves().toArray());
         
     }     

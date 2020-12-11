@@ -5,6 +5,7 @@
  */
 package com.megachess.chesspiece;
 
+import com.megachess.board.Board;
 import com.megachess.client.ChessBot;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,11 +97,11 @@ public class PawnTest {
     @MethodSource("testMoveUpOnce_Parameters")
     public void testMoveUpOnce(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestPawn.moveUpOnce(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveUpOnce(TestBoard));
     }  
 
     //////////////////////////////MOVE UP TWICE TEST/////////////////////////////////////////////////////////////////////////////////
@@ -131,11 +132,11 @@ public class PawnTest {
     @MethodSource("testMoveUpTwice_Parameters")
     public void testMoveUpTwice(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestPawn.moveUpTwice(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveUpTwice(TestBoard));
     }
 
     //////////////////////////////MOVE DOWN TEST/////////////////////////////////////////////////////////////////////////////////
@@ -158,11 +159,11 @@ public class PawnTest {
     @MethodSource("testMoveDownOnce_Parameters")
     public void testMoveUpDown(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard =  Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestPawn.moveDownOnce(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveDownOnce(TestBoard));
     }  
 
     //////////////////////////////MOVE DOWN TWICE TEST/////////////////////////////////////////////////////////////////////////////////
@@ -193,11 +194,11 @@ public class PawnTest {
     @MethodSource("testMoveDownTwice_Parameters")
     public void testMoveDownTwice(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestPawn.moveDownTwice(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveDownTwice(TestBoard));
     }
 
     //////////////////////////////MOVE RIGHT AND UP TEST/////////////////////////////////////////////////////////////////////////////////
@@ -222,11 +223,11 @@ public class PawnTest {
     @MethodSource("testMoveUpAndRight_Parameters")
     public void testMoveUpAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"white");
-        assertArrayEquals(expectedMove, TestPawn.moveUpAndRight(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveUpAndRight(TestBoard));
     }
     
     //////////////////////////////MOVE LEFT AND UP TEST/////////////////////////////////////////////////////////////////////////////////
@@ -251,11 +252,11 @@ public class PawnTest {
     @MethodSource("testMoveUpAndLeft_Parameters")
     public void testMoveUpAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"white");
-        assertArrayEquals(expectedMove, TestPawn.moveUpAndLeft(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveUpAndLeft(TestBoard));
     } 
     
     //////////////////////////////MOVE RIGHT AND DOWN TEST/////////////////////////////////////////////////////////////////////////////////
@@ -280,11 +281,11 @@ public class PawnTest {
     @MethodSource("testMoveDownAndRight_Parameters")
     public void testMoveDownAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestPawn.moveDownAndRight(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveDownAndRight(TestBoard));
     }
     
     //////////////////////////////MOVE LEFT AND DOWN TEST/////////////////////////////////////////////////////////////////////////////////
@@ -309,11 +310,11 @@ public class PawnTest {
     @MethodSource("testMoveDownAndLeft_Parameters")
     public void testMoveDownAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
 
         Pawn TestPawn = new Pawn(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestPawn.moveDownAndLeft(Board));
+        assertArrayEquals(expectedMove, TestPawn.moveDownAndLeft(TestBoard));
     }        
 
     //////////////////////////////CALCULATE POSSIBLE MOVES TEST/////////////////////////////////////////////////////////////////////////////////
@@ -348,12 +349,12 @@ public class PawnTest {
     @MethodSource("testCalculatePossibleMoves_Parameters")
     public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, String color, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Pawn TestPawn = new Pawn(currentRow,currentCol,color);
         try{
-            TestPawn.calculatePossibleMoves(Board);            
+            TestPawn.calculatePossibleMoves(TestBoard);            
         }catch(Exception ex){
             Logger.getLogger(PawnTest.class.getName()).log(Level.SEVERE, null, ex);            
         }
