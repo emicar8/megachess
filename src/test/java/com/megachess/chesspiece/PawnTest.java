@@ -373,6 +373,31 @@ public class PawnTest {
         boolean result = instance.isNull();
         assertEquals(expResult, result);
     }
+
+    //////////////////////////////POSITION BIAS TEST/////////////////////////////////////////////////////////////////////////////////
+    
+    static Stream<Arguments> testPositionBias_Parameters(){
+        Pawn AuxPawn1 = new Pawn(0,0,"white"); //No positive bias
+        Pawn AuxPawn2 = new Pawn(6,0,"white"); //Row postive bias
+        Pawn AuxPawn3 = new Pawn(0,7,"white"); //Column positive bias
+        Pawn AuxPawn4 = new Pawn(6,7,"white"); //Both row and column positive bias
+        
+        return Stream.of(
+                Arguments.of(AuxPawn1, 0),
+                Arguments.of(AuxPawn2, 10),
+                Arguments.of(AuxPawn3, 10),
+                Arguments.of(AuxPawn4, 20)
+        );
+    }    
+    
+    
+    @ParameterizedTest(name="Pawn position bias test run {index}")
+    @MethodSource("testPositionBias_Parameters")
+    public void testPositionBias(Pawn ToTest, int expectedBias){
+        
+        assertEquals(expectedBias, ToTest.positionBias());
+        
+    } 
     
     /**
      * Test of copy method, of class Pawn.
@@ -380,13 +405,10 @@ public class PawnTest {
     @Test
     public void testCopy(){
         Pawn testPawn = new Pawn(6,15,"black");
-        testPawn.setCurrentCol(15);
-        testPawn.setCurrentRow(6);
         Pawn testPawnCopy = (Pawn)testPawn.copy();
         assertEquals(testPawn.getCurrentRow(),testPawnCopy.getCurrentRow());
         assertEquals(testPawn.getCurrentCol(),testPawnCopy.getCurrentCol());
         assertEquals(testPawn.getColor(),testPawnCopy.getColor());
-        assertEquals(testPawn.getMinMaxValueCorrected(),testPawnCopy.getMinMaxValueCorrected());
     }      
     
 }

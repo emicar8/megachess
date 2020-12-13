@@ -42,12 +42,12 @@ public class ChessBot{
         JSONObject dataOut = new JSONObject(); //Out data object
         String boardString = receivedTurn.getJSONObject("data").getString("board");
         
-        /*
+        
         for(int i = 0; i < boardString.length(); i = i + 16){
             System.out.println(boardString.substring(i, i+15));
         }
         System.out.println();
-        */
+        
         Board InitialBoard = new Board(boardString);
         int[] selectedMove;
 

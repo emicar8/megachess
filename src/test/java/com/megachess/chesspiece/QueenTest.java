@@ -432,6 +432,15 @@ public class QueenTest {
     }
     
     /**
+     * Test of positionBias method, of class Queen.
+     */  
+    @Test
+    public void testPositionBias(){
+        Queen testQueen = new Queen(1,4,"white");
+        assertEquals(0,testQueen.positionBias());
+    }    
+    
+    /**
      * Test of copy method, of class Queen.
      */  
     @Test

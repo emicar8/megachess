@@ -354,6 +354,15 @@ public class KingTest {
         boolean result = instance.isNull();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of positionBias method, of class King.
+     */  
+    @Test
+    public void testPositionBias(){
+        King testKing = new King(1,4,"white");
+        assertEquals(0,testKing.positionBias());
+    } 
     
     /**
      * Test of copy method, of class King.

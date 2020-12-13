@@ -267,6 +267,15 @@ public class RookTest {
         boolean result = instance.isNull();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of positionBias method, of class Rook.
+     */  
+    @Test
+    public void testPositionBias(){
+        Rook testRook = new Rook(1,4,"white");
+        assertEquals(0,testRook.positionBias());
+    }
     
     /**
      * Test of copy method, of class Rook.

@@ -44,6 +44,8 @@ public class Board{
         AuxList.add(ToPiece.copy());
         MoveHistory.add(AuxList);
         
+        FromPiece.setCurrentRow(toRow);
+        FromPiece.setCurrentCol(toCol);
         
         if(FromPiece instanceof Pawn){
             if(FromPiece.getColor().equals("black") && toRow == 7){

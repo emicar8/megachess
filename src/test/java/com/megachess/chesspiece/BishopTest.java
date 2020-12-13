@@ -271,6 +271,15 @@ public class BishopTest {
     }
     
     /**
+     * Test of positionBias method, of class Bishop.
+     */  
+    @Test
+    public void testPositionBias(){
+        Bishop testBishop = new Bishop(1,4,"white");
+        assertEquals(0,testBishop.positionBias());
+    }    
+    
+    /**
      * Test of copy method, of class Bishop.
      */  
     @Test

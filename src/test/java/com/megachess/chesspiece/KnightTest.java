@@ -377,6 +377,15 @@ public class KnightTest {
         boolean result = instance.isNull();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of positionBias method, of class Knight.
+     */  
+    @Test
+    public void testPositionBias(){
+        Knight testKnight = new Knight(1,4,"white");
+        assertEquals(0,testKnight.positionBias());
+    } 
     
     /**
      * Test of copy method, of class Knight.
