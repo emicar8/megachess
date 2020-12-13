@@ -268,4 +268,16 @@ public class RookTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of copy method, of class Rook.
+     */  
+    @Test
+    public void testCopy(){
+        Rook testRook = new Rook(3,6,"black");
+        Rook testRookCOpy = (Rook)testRook.copy();
+        assertEquals(testRook.getCurrentRow(),testRookCOpy.getCurrentRow());
+        assertEquals(testRook.getCurrentCol(),testRookCOpy.getCurrentCol());
+        assertEquals(testRook.getColor(),testRookCOpy.getColor());
+    }    
+    
 }

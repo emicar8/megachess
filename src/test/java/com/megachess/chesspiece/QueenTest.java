@@ -420,6 +420,9 @@ public class QueenTest {
         
     }     
     
+    /**
+     * Test of isNull method, of class Queen.
+     */      
     @Test
     public void testIsNull() {
         Queen instance = new Queen(0,0,"");
@@ -427,5 +430,17 @@ public class QueenTest {
         boolean result = instance.isNull();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of copy method, of class Queen.
+     */  
+    @Test
+    public void testCopy(){
+        Queen TestQueen = new Queen(6,15,"black");
+        Queen testQueenCopy = (Queen)TestQueen.copy();
+        assertEquals(TestQueen.getCurrentRow(),testQueenCopy.getCurrentRow());
+        assertEquals(TestQueen.getCurrentCol(),testQueenCopy.getCurrentCol());
+        assertEquals(TestQueen.getColor(),testQueenCopy.getColor());
+    }      
     
 }

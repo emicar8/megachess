@@ -18,7 +18,7 @@ public class Bishop extends ChessPiece{
         this.pointsForMove = 40; //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
         this.pointsForKill = 400;
         this.minMaxValueBase = 30; //Base value used to evaluate the board
-        this.minMaxValueCorrected = this.minMaxValueBase + this.positionBias(row, col); //Corrected value based on position used to evaluate the board
+        this.minMaxValueCorrected = this.minMaxValueBase; //Corrected value based on position used to evaluate the board
     }    
 
      public void moveRightAndDown(int newRow, int newCol, List<List<ChessPiece>> Board){
@@ -87,7 +87,7 @@ public class Bishop extends ChessPiece{
     }
 
     @Override
-    public int positionBias(int row, int col) {
+    public int positionBias() {
         return 0;
     }
 

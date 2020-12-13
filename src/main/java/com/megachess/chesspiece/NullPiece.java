@@ -29,7 +29,7 @@ public class NullPiece extends ChessPiece{
     }
 
     @Override
-    public int positionBias(int row, int col) {
+    public int positionBias() {
         return 0;
     }
     

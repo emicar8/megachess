@@ -355,4 +355,16 @@ public class KingTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of copy method, of class King.
+     */  
+    @Test
+    public void testCopy(){
+        King testKing = new King(13,5,"white");
+        King testKingCopy = (King)testKing.copy();
+        assertEquals(testKing.getCurrentRow(),testKingCopy.getCurrentRow());
+        assertEquals(testKing.getCurrentCol(),testKingCopy.getCurrentCol());
+        assertEquals(testKing.getColor(),testKingCopy.getColor());
+    }    
+    
 }

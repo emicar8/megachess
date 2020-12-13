@@ -70,7 +70,7 @@ public class ChessBot{
         List<int[]> AllMoves = new ArrayList<>();
         int moveValue, bestMoveValue = currentColor.equals("black")? Integer.MAX_VALUE : Integer.MIN_VALUE;
         int[] bestMove = null;
-        int maxChildren = 1000, childCount = 0;
+        //int maxChildren = 1000, childCount = 0;
         
         if(depth == 0){
             moveValue = Board.evaluateBoardConfig();
@@ -86,12 +86,10 @@ public class ChessBot{
                 }                   
             }
         }
-        //System.out.println(depth + "," + AllMoves.size() + "," + currentColor);
         Collections.sort(AllMoves, new MoveComparator().reversed());
         
         for (int[] move : AllMoves){
             Board.movePiece(move[0], move[1], move[2], move[3]);
-            childCount++;
             moveValue = calculateBestMove(depth - 1, Board, currentColor.equals("black")? "white":"black",alpha,beta)[4];
             
             if(currentColor.equals("black")){ //Minimizing player
@@ -107,17 +105,14 @@ public class ChessBot{
                 }
                 alpha = Math.max(alpha, moveValue);
             }
-            Board.undoMovePiece();
-            //System.out.println("Depth:" + depth + ", bestMoveValue:" + bestMoveValue + ", Color: " + currentColor);
-            
+            Board.undoMovePiece();   
             if(beta <= alpha){
-                //System.out.println("prune");
                 break;
             }
-            if(childCount >= maxChildren){
+            /*if(childCount >= maxChildren){
                 System.out.println("Max child reached");
                 break;
-            }
+            }*/
             
         }
         return new int[] {bestMove[0], bestMove[1], bestMove[2], bestMove[3], bestMoveValue};

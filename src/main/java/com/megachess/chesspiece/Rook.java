@@ -19,7 +19,7 @@ public class Rook extends ChessPiece{
         this.pointsForMove = 60; //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
         this.pointsForKill = 600;
         this.minMaxValueBase = 40; //Base value used to evaluate the board
-        this.minMaxValueCorrected = this.minMaxValueBase + this.positionBias(row, col); //Corrected value based on position used to evaluate the board       
+        this.minMaxValueCorrected = this.minMaxValueBase; //Corrected value based on position used to evaluate the board       
     }    
     
     
@@ -89,7 +89,7 @@ public class Rook extends ChessPiece{
     }
 
     @Override
-    public int positionBias(int row, int col) {
+    public int positionBias() {
         return 0;
     }
     

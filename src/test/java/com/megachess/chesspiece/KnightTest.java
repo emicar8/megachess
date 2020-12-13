@@ -378,4 +378,16 @@ public class KnightTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of copy method, of class Knight.
+     */  
+    @Test
+    public void testCopy(){
+        Knight testKnight = new Knight(13,5,"white");
+        Knight testKnightCopy = (Knight)testKnight.copy();
+        assertEquals(testKnight.getCurrentRow(),testKnightCopy.getCurrentRow());
+        assertEquals(testKnight.getCurrentCol(),testKnightCopy.getCurrentCol());
+        assertEquals(testKnight.getColor(),testKnightCopy.getColor());
+    }      
+    
 }

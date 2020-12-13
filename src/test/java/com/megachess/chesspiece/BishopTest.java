@@ -270,4 +270,16 @@ public class BishopTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of copy method, of class Bishop.
+     */  
+    @Test
+    public void testCopy(){
+        Bishop testBishop = new Bishop(1,4,"white");
+        Bishop testBishopCopy = (Bishop)testBishop.copy();
+        assertEquals(testBishop.getCurrentRow(),testBishopCopy.getCurrentRow());
+        assertEquals(testBishop.getCurrentCol(),testBishopCopy.getCurrentCol());
+        assertEquals(testBishop.getColor(),testBishopCopy.getColor());
+    }
+    
 }

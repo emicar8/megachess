@@ -37,7 +37,6 @@ public abstract class ChessPiece{
 
     public void setCurrentCol(int currentCol) {
         this.currentCol = currentCol;
-        this.minMaxValueCorrected = this.minMaxValueBase + this.positionBias(this.currentRow, currentCol);
     }
 
     public int getCurrentRow() {
@@ -46,7 +45,6 @@ public abstract class ChessPiece{
 
     public void setCurrentRow(int currentRow) {
         this.currentRow = currentRow;
-        this.minMaxValueCorrected = this.minMaxValueBase + this.positionBias(currentRow, this.currentCol);
     }
 
     public int getPointsForMove() {
@@ -59,7 +57,9 @@ public abstract class ChessPiece{
 
 
     public List<int[]> getPossibleMoves() {
-        return possibleMoves;
+        List<int[]> temp = new ArrayList<>(this.possibleMoves);
+        possibleMoves.clear();
+        return temp;
     }
 
     public String getColor() {
@@ -71,6 +71,7 @@ public abstract class ChessPiece{
     }    
     
     public int getMinMaxValueCorrected(){
+        this.minMaxValueCorrected = this.minMaxValueBase + this.positionBias();
         return minMaxValueCorrected;
     }
     
@@ -112,7 +113,7 @@ public abstract class ChessPiece{
     
     public abstract boolean isNull();   
     
-    public abstract int positionBias(int row, int col);
+    public abstract int positionBias();
     
     public abstract ChessPiece copy();
         

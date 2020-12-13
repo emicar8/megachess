@@ -374,4 +374,19 @@ public class PawnTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of copy method, of class Pawn.
+     */  
+    @Test
+    public void testCopy(){
+        Pawn testPawn = new Pawn(6,15,"black");
+        testPawn.setCurrentCol(15);
+        testPawn.setCurrentRow(6);
+        Pawn testPawnCopy = (Pawn)testPawn.copy();
+        assertEquals(testPawn.getCurrentRow(),testPawnCopy.getCurrentRow());
+        assertEquals(testPawn.getCurrentCol(),testPawnCopy.getCurrentCol());
+        assertEquals(testPawn.getColor(),testPawnCopy.getColor());
+        assertEquals(testPawn.getMinMaxValueCorrected(),testPawnCopy.getMinMaxValueCorrected());
+    }      
+    
 }

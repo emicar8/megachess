@@ -89,4 +89,16 @@ public class NullPieceTest {
         assertEquals(expResult, result);
     }
     
+    /**
+     * Test of copy method, of class NullPiece.
+     */  
+    @Test
+    public void testCopy(){
+        NullPiece testNullPiece = new NullPiece(6,15);
+        NullPiece testNullPieceCopy = (NullPiece)testNullPiece.copy();
+        assertEquals(testNullPiece.getCurrentRow(),testNullPieceCopy.getCurrentRow());
+        assertEquals(testNullPiece.getCurrentCol(),testNullPieceCopy.getCurrentCol());
+        assertEquals(testNullPiece.getColor(),testNullPieceCopy.getColor());
+    }    
+    
 }
