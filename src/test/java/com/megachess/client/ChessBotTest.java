@@ -77,7 +77,7 @@ public class ChessBotTest {
     /**
      * Test of myTurn method, of class ChessBot.
      */
-    /*
+    
     @Test
     public void testMyTurn() {
         JSONObject receivedTurn = new JSONObject("{\"event\":\"your_turn\","

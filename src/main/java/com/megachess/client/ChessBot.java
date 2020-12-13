@@ -86,6 +86,10 @@ public class ChessBot{
                 }                   
             }
         }
+        if(AllMoves.isEmpty()){
+            moveValue = Board.evaluateBoardConfig();         
+            return new int[] {0, 0, 0, 0, moveValue};
+        }
         Collections.sort(AllMoves, new MoveComparator().reversed());
         
         for (int[] move : AllMoves){

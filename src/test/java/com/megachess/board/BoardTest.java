@@ -54,16 +54,22 @@ public class BoardTest {
     //////////////////////////////MOVE PIECE TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testMovePiece_Parameters(){   
-        //Test 1 movement
+        //Test 1 pawn movement
         Board ResultBoard1 = new Board("                                                                                   p                                                                                                                                                                            ");
-        //Test 2 attack
+        //Test 2 pawn attack
         Board ResultBoard2 = new Board("                                                                                    p                                                                                                                                                                           ");
-        //Test 3 pawn promotion
+        //Test 3 black pawn promotion
         Board ResultBoard3 = new Board("                                                                                                                   q                                                                                                                                            ");
+        //Test 4 white pawn promotion
+        Board ResultBoard4 = new Board("                                                                                                                                        Q                                                                                                                       ");
+        //Test 5 general piece movement
+        Board ResultBoard5 = new Board("Q                                                                                                                                                                                                                                                               ");
         return Stream.of(
                 Arguments.of("                                                                   p                                                                                                                                                                                            ", 4, 3, 5, 3, ResultBoard1),
                 Arguments.of("                                                                   p                R                                                                                                                                                                           ", 4, 3, 5, 4, ResultBoard2),
-                Arguments.of("                                                                                                   p                                                                                                                                                            ", 6, 3, 7, 3, ResultBoard3)              
+                Arguments.of("                                                                                                   p                                                                                                                                                            ", 6, 3, 7, 3, ResultBoard3),
+                Arguments.of("                                                                                                                                                        P                                                                                                       ", 9, 8, 8, 8, ResultBoard4),
+                Arguments.of("                                                                                                                                        Q                                                                                                                       ", 8, 8, 0, 0, ResultBoard5)                
         );
     }    
     
