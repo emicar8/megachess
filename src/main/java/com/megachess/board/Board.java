@@ -22,8 +22,8 @@ import java.util.List;
  */
 public class Board{
     
-    private List<List<ChessPiece>> BoardConfig;
-    private List<List<ChessPiece>> MoveHistory;
+    private List<List<ChessPiece>> BoardConfig; //Current board at any point during the calculation.
+    private List<List<ChessPiece>> MoveHistory; //List of all moves done to enable undoing those moves.
      
     public Board(String BoardString){
         BoardConfig = Board.generateBoardConfig(BoardString);
@@ -34,7 +34,7 @@ public class Board{
         return BoardConfig;
     }
     
-    public void movePiece(int fromRow, int fromCol, int toRow, int toCol){
+    public void movePiece(int fromRow, int fromCol, int toRow, int toCol){ //Function does not check game rules (except pawn promotion)
         List<ChessPiece> AuxList = new ArrayList<>(), FromRow = BoardConfig.get(fromRow), ToRow = BoardConfig.get(toRow);
         ChessPiece FromPiece = BoardConfig.get(fromRow).get(fromCol);
         ChessPiece ToPiece = BoardConfig.get(toRow).get(toCol);
@@ -47,7 +47,7 @@ public class Board{
         FromPiece.setCurrentRow(toRow);
         FromPiece.setCurrentCol(toCol);
         
-        if(FromPiece instanceof Pawn){
+        if(FromPiece instanceof Pawn){ //Pawn promotion check
             if(FromPiece.getColor().equals("black") && toRow == 7){
                 ToRow.set(toCol, new Queen(toRow,toCol,"black"));
             }else if(FromPiece.getColor().equals("white") && toRow == 8){
@@ -82,7 +82,7 @@ public class Board{
         MoveHistory.remove(MoveHistory.size() - 1);
     }
     
-    public int evaluateBoardConfig(){
+    public int evaluateBoardConfig(){ //Calculates the value of the board in its current state.
         int result = 0;
         for(List<ChessPiece> Row : BoardConfig){
             for(ChessPiece Piece : Row){
@@ -92,7 +92,7 @@ public class Board{
         return result;
     }
     
-    public static List<List<ChessPiece>> generateBoardConfig(String boardString){
+    public static List<List<ChessPiece>> generateBoardConfig(String boardString){ //Generate board from string.
         List<List<ChessPiece>> Board = new ArrayList<>();
         for(int row = 0; row < 16; row++){
             List<ChessPiece> BoardRow = new ArrayList<>();

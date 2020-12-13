@@ -6,7 +6,6 @@
 package com.megachess.chesspiece;
 
 import com.megachess.board.Board;
-import com.megachess.client.ChessBot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;

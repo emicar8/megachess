@@ -6,7 +6,6 @@
 package com.megachess.chesspiece;
 
 import com.megachess.board.Board;
-import com.megachess.client.ChessBot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -377,16 +376,14 @@ public class PawnTest {
     //////////////////////////////POSITION BIAS TEST/////////////////////////////////////////////////////////////////////////////////
     
     static Stream<Arguments> testPositionBias_Parameters(){
-        Pawn AuxPawn1 = new Pawn(0,0,"white"); //No positive bias
-        Pawn AuxPawn2 = new Pawn(6,0,"white"); //Row postive bias
-        Pawn AuxPawn3 = new Pawn(0,7,"white"); //Column positive bias
-        Pawn AuxPawn4 = new Pawn(6,7,"white"); //Both row and column positive bias
+        Pawn AuxPawn1 = new Pawn(12,0,"white"); //No positive bias
+        Pawn AuxPawn2 = new Pawn(10,0,"white"); //Row postive bias
+        Pawn AuxPawn3 = new Pawn(10,7,"white"); //Both row and column positive bias
         
         return Stream.of(
                 Arguments.of(AuxPawn1, 0),
                 Arguments.of(AuxPawn2, 10),
-                Arguments.of(AuxPawn3, 10),
-                Arguments.of(AuxPawn4, 20)
+                Arguments.of(AuxPawn3, 20)
         );
     }    
     

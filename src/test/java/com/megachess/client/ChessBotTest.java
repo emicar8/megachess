@@ -5,17 +5,6 @@
  */
 package com.megachess.client;
 
-import com.megachess.board.Board;
-import com.megachess.chesspiece.Bishop;
-import com.megachess.chesspiece.ChessPiece;
-import com.megachess.chesspiece.King;
-import com.megachess.chesspiece.Knight;
-import com.megachess.chesspiece.NullPiece;
-import com.megachess.chesspiece.Pawn;
-import com.megachess.chesspiece.Queen;
-import com.megachess.chesspiece.Rook;
-import java.util.ArrayList;
-import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
@@ -84,8 +73,8 @@ public class ChessBotTest {
                                                 + "\"data\":{\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\","
                                                           + "\"turn_token\":\"e40573bb-138f-4171-a200-66258f546755\","
                                                           + "\"username\":\"gabriel\","
-                                                          + "\"actual_turn\":\"black\","
-                                                          + "\"board\":\"                                                                                                                                                                                                                                 P              b               \","
+                                                          + "\"actual_turn\":\"white\","
+                                                          + "\"board\":\"                                                                   p       p  p                                                                                                                 PPPPPPPPPPPPPPPP                                                \","
                                                           + "\"move_left\":19,"
                                                           + "\"opponent_username\": \"maria\"}}"); //Board only has one move possible
         ChessBot instance = new ChessBot();
@@ -94,10 +83,10 @@ public class ChessBotTest {
                                              + "\"data\":{"
                                                   + "\"board_id\":\"2d348323-2e79-4961-ac36-1b000e8c42a5\","
                                                   + "\"turn_token\":\"e40573bb-138f-4171-a200-66258f546755\","
-                                                  + "\"from_row\":15,"
-                                                  + "\"from_col\":0,"
-                                                  + "\"to_row\":14,"
-                                                  + "\"to_col\":1}}");
+                                                  + "\"from_row\":12,"
+                                                  + "\"from_col\":5,"
+                                                  + "\"to_row\":10,"
+                                                  + "\"to_col\":5}}");
         assertTrue(expResult.similar(result));
     }     
 

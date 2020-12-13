@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.board.BoardTest" time="0.092" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.megachess.board.BoardTest" time="0.096" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11\bin"/>
-    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire14076794824148481975\surefirebooter2225361829126514683.jar C:\Users\Emile\AppData\Local\Temp\surefire14076794824148481975 2020-12-13T02-37-22_141-jvmRun1 surefire11013995718479887824tmp surefire_011056961408710853042tmp"/>
+    <property name="sun.java.command" value="C:\Users\Emile\AppData\Local\Temp\surefire2831337744837471678\surefirebooter5124807568575046744.jar C:\Users\Emile\AppData\Local\Temp\surefire2831337744837471678 2020-12-13T18-01-49_432-jvmRun1 surefire14890326783111480573tmp surefire_04948470991054853467tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\test-classes;C:\Users\Emile\OneDrive\Documentos\NetBeansProjects\megachess\target\classes;C:\Users\Emile\.m2\repository\org\java-websocket\Java-WebSocket\1.5.1\Java-WebSocket-1.5.1.jar;C:\Users\Emile\.m2\repository\org\slf4j\slf4j-api\1.7.25\slf4j-api-1.7.25.jar;C:\Users\Emile\.m2\repository\org\json\json\20200518\json-20200518.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Emile\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Emile\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Emile\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire14076794824148481975\surefirebooter2225361829126514683.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Emile\AppData\Local\Temp\surefire2831337744837471678\surefirebooter5124807568575046744.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11+28"/>
@@ -63,16 +63,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testUndoMove{String, int, int, int, int, Board}[1]" classname="com.megachess.board.BoardTest" time="0.032"/>
+  <testcase name="testUndoMove{String, int, int, int, int, Board}[1]" classname="com.megachess.board.BoardTest" time="0.036"/>
   <testcase name="testUndoMove{String, int, int, int, int, Board}[2]" classname="com.megachess.board.BoardTest" time="0.001"/>
-  <testcase name="testUndoMove{String, int, int, int, int, Board}[3]" classname="com.megachess.board.BoardTest" time="0.002"/>
+  <testcase name="testUndoMove{String, int, int, int, int, Board}[3]" classname="com.megachess.board.BoardTest" time="0.003"/>
   <testcase name="testGenerateBoardConfig" classname="com.megachess.board.BoardTest" time="0.007"/>
-  <testcase name="testEvaluateBoard{String, int}[1]" classname="com.megachess.board.BoardTest" time="0"/>
+  <testcase name="testEvaluateBoard{String, int}[1]" classname="com.megachess.board.BoardTest" time="0.001"/>
   <testcase name="testEvaluateBoard{String, int}[2]" classname="com.megachess.board.BoardTest" time="0"/>
-  <testcase name="testEvaluateBoard{String, int}[3]" classname="com.megachess.board.BoardTest" time="0.001"/>
+  <testcase name="testEvaluateBoard{String, int}[3]" classname="com.megachess.board.BoardTest" time="0"/>
   <testcase name="testMovePiece{String, int, int, int, int, Board}[1]" classname="com.megachess.board.BoardTest" time="0.001"/>
   <testcase name="testMovePiece{String, int, int, int, int, Board}[2]" classname="com.megachess.board.BoardTest" time="0.001"/>
   <testcase name="testMovePiece{String, int, int, int, int, Board}[3]" classname="com.megachess.board.BoardTest" time="0.001"/>
-  <testcase name="testMovePiece{String, int, int, int, int, Board}[4]" classname="com.megachess.board.BoardTest" time="0.001"/>
-  <testcase name="testMovePiece{String, int, int, int, int, Board}[5]" classname="com.megachess.board.BoardTest" time="0.001"/>
+  <testcase name="testMovePiece{String, int, int, int, int, Board}[4]" classname="com.megachess.board.BoardTest" time="0"/>
+  <testcase name="testMovePiece{String, int, int, int, int, Board}[5]" classname="com.megachess.board.BoardTest" time="0"/>
 </testsuite>

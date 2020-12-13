@@ -42,11 +42,13 @@ public class ChessBot{
         JSONObject dataOut = new JSONObject(); //Out data object
         String boardString = receivedTurn.getJSONObject("data").getString("board");
         
-        
+        //Print received board
+        /*
         for(int i = 0; i < boardString.length(); i = i + 16){
             System.out.println(boardString.substring(i, i+15));
         }
         System.out.println();
+        */
         
         Board InitialBoard = new Board(boardString);
         int[] selectedMove;
@@ -70,11 +72,9 @@ public class ChessBot{
         List<int[]> AllMoves = new ArrayList<>();
         int moveValue, bestMoveValue = currentColor.equals("black")? Integer.MAX_VALUE : Integer.MIN_VALUE;
         int[] bestMove = null;
-        //int maxChildren = 1000, childCount = 0;
         
         if(depth == 0){
-            moveValue = Board.evaluateBoardConfig();
-            //System.out.println("Depth:" + depth + ", bestMoveValue:" + moveValue + ", Color: " + currentColor);           
+            moveValue = Board.evaluateBoardConfig();       
             return new int[] {0, 0, 0, 0, moveValue};
         }
 
@@ -87,7 +87,8 @@ public class ChessBot{
             }
         }
         if(AllMoves.isEmpty()){
-            moveValue = Board.evaluateBoardConfig();         
+            moveValue = Board.evaluateBoardConfig();  
+            System.out.println(moveValue);
             return new int[] {0, 0, 0, 0, moveValue};
         }
         Collections.sort(AllMoves, new MoveComparator().reversed());
@@ -113,11 +114,6 @@ public class ChessBot{
             if(beta <= alpha){
                 break;
             }
-            /*if(childCount >= maxChildren){
-                System.out.println("Max child reached");
-                break;
-            }*/
-            
         }
         return new int[] {bestMove[0], bestMove[1], bestMove[2], bestMove[3], bestMoveValue};
     }

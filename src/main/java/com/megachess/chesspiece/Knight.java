@@ -130,7 +130,7 @@ public class Knight extends ChessPiece{
 
     @Override
     public int positionBias() {
-        return 0;
+        return 0; //TODO
     }
     
     @Override

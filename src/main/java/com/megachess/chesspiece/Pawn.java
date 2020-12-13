@@ -22,7 +22,7 @@ public class Pawn extends ChessPiece{
         }
         this.pointsForKill = 100; //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
         this.minMaxValueBase = 10; //Base value used to evaluate the board
-        this.minMaxValueCorrected = this.minMaxValueBase; //Corrected value based on position used to evaluate the board      
+        this.minMaxValueCorrected = 0; //Corrected value based on position used to evaluate the board      
     } 
     
     public int[] moveUpOnce(List<List<ChessPiece>> Board){ 
@@ -121,13 +121,15 @@ public class Pawn extends ChessPiece{
     @Override
     public int positionBias() {
        int bias = 0;
-        if(currentRow > 5 && currentRow < 10){
+        if(this.currentRow >= 5 && this.currentRow <= 10){
             bias += 10;
+            if(this.currentCol >= 5 && this.currentCol <= 10){
+                bias += 10;
+            }
         }
-        if(currentCol > 5 && currentCol < 10){
-            bias += 10;
-        }
-        return bias;/*(int)Math.floor(Math.abs(1/(row-7.5))*20);*/
+            
+
+        return bias;
     }
     
     @Override

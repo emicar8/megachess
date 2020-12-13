@@ -70,7 +70,7 @@ public class MegachessClient extends WebSocketClient{
         String reply;
         
         switch (receivedMessage.getString("event")){
-            case "ask_challenge":
+            case "ask_challenge": //Accept all challanges
                 reply = Bot.acceptChallenge(receivedMessage).toString();
                 send(reply);
                 System.out.println(reply);
