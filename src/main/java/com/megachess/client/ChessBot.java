@@ -88,7 +88,6 @@ public class ChessBot{
         }
         if(AllMoves.isEmpty()){
             moveValue = Board.evaluateBoardConfig();  
-            System.out.println(moveValue);
             return new int[] {0, 0, 0, 0, moveValue};
         }
         Collections.sort(AllMoves, new MoveComparator().reversed());
