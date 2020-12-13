@@ -15,6 +15,7 @@ public class NullPiece extends ChessPiece{
     
     public NullPiece(int row, int column){
         super(row,column,"");
+        this.minMaxValueBase = 0;
     }
     
     @Override
@@ -26,5 +27,15 @@ public class NullPiece extends ChessPiece{
     public boolean isNull() {
         return true;
     }
+
+    @Override
+    public int positionBias() {
+        return 0;
+    }
+    
+    @Override
+    public ChessPiece copy() {
+        return new NullPiece(this.currentRow, this.currentCol);
+    }    
     
 }

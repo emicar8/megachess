@@ -2,8 +2,3 @@ com\megachess\chesspiece\NullPiece.class
 com\megachess\chesspiece\ChessPiece.class
 com\megachess\chesspiece\Pawn.class
 com\megachess\client\MoveComparator.class
-com\megachess\chesspiece\King.class
-com\megachess\chesspiece\Knight.class
-com\megachess\chesspiece\Queen.class
-com\megachess\chesspiece\Bishop.class
-com\megachess\chesspiece\Rook.class

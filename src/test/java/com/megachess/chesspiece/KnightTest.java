@@ -5,7 +5,7 @@
  */
 package com.megachess.chesspiece;
 
-import com.megachess.client.ChessBot;
+import com.megachess.board.Board;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -92,11 +92,11 @@ public class KnightTest {
     @MethodSource("testMoveUpAndRight_Parameters")
     public void testMoveUpAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard =  Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveUpAndRight(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveUpAndRight(TestBoard));
         
     }    
     
@@ -125,11 +125,11 @@ public class KnightTest {
     @MethodSource("testMoveDownAndRight_Parameters")
     public void testMoveDownAndRight(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveDownAndRight(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveDownAndRight(TestBoard));
         
     }
     
@@ -158,11 +158,11 @@ public class KnightTest {
     @MethodSource("testMoveUpAndLeft_Parameters")
     public void testMoveUpAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveUpAndLeft(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveUpAndLeft(TestBoard));
         
     }    
     
@@ -191,11 +191,11 @@ public class KnightTest {
     @MethodSource("testMoveDownAndLeft_Parameters")
     public void testMoveDownAndLeft(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveDownAndLeft(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveDownAndLeft(TestBoard));
         
     }    
     
@@ -224,11 +224,11 @@ public class KnightTest {
     @MethodSource("testMoveRightAndUp_Parameters")
     public void testMoveRightAndUp(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveRightAndUp(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveRightAndUp(TestBoard));
         
     }    
     
@@ -257,11 +257,11 @@ public class KnightTest {
     @MethodSource("testMoveRightAndDown_Parameters")
     public void testMoveRightAndDown(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveRightAndDown(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveRightAndDown(TestBoard));
         
     }
     
@@ -290,11 +290,11 @@ public class KnightTest {
     @MethodSource("testMoveLeftAndUp_Parameters")
     public void testMoveLeftAndUp(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveLeftAndUp(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveLeftAndUp(TestBoard));
         
     }    
     
@@ -323,11 +323,11 @@ public class KnightTest {
     @MethodSource("testMoveLeftAndDown_Parameters")
     public void testMoveLeftAndDown(String boardString, int currentRow, int currentCol, int[] expectedMove){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        assertArrayEquals(expectedMove, TestKnight.moveLeftAndDown(Board));
+        assertArrayEquals(expectedMove, TestKnight.moveLeftAndDown(TestBoard));
         
     }
     
@@ -357,11 +357,11 @@ public class KnightTest {
     @MethodSource("testCalculatePossibleMoves_Parameters")
     public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Knight TestKnight = new Knight(currentRow,currentCol,"black");
-        TestKnight.calculatePossibleMoves(Board);
+        TestKnight.calculatePossibleMoves(TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestKnight.getPossibleMoves().toArray());
         
     }    
@@ -376,5 +376,26 @@ public class KnightTest {
         boolean result = instance.isNull();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of positionBias method, of class Knight.
+     */  
+    @Test
+    public void testPositionBias(){
+        Knight testKnight = new Knight(1,4,"white");
+        assertEquals(0,testKnight.positionBias());
+    } 
+    
+    /**
+     * Test of copy method, of class Knight.
+     */  
+    @Test
+    public void testCopy(){
+        Knight testKnight = new Knight(13,5,"white");
+        Knight testKnightCopy = (Knight)testKnight.copy();
+        assertEquals(testKnight.getCurrentRow(),testKnightCopy.getCurrentRow());
+        assertEquals(testKnight.getCurrentCol(),testKnightCopy.getCurrentCol());
+        assertEquals(testKnight.getColor(),testKnightCopy.getColor());
+    }      
     
 }

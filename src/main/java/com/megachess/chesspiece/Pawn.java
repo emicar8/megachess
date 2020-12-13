@@ -6,8 +6,6 @@
 package com.megachess.chesspiece;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,14 +15,15 @@ public class Pawn extends ChessPiece{
     
     public Pawn(int row, int col, String color){
         super(row, col, color);
-        //this.pointsForMove = 80; //Incentivize promotion of pawns over other movements but not over other kills.
         if(Math.abs(7.5 - (double)row) > 1.5){ //Check if in range of promotion on next move.
             this.pointsForMove = 80; //Not in range, but still incentivized over other movements
         }else{
             this.pointsForMove = 500; //In range, promote is worth 500 points.
         }
-        this.pointsForKill = 100;
-    }
+        this.pointsForKill = 100; //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
+        this.minMaxValueBase = 10; //Base value used to evaluate the board
+        this.minMaxValueCorrected = 0; //Corrected value based on position used to evaluate the board      
+    } 
     
     public int[] moveUpOnce(List<List<ChessPiece>> Board){ 
         if(Board.get(this.currentRow - 1).get(this.currentCol).isNull()){
@@ -118,5 +117,24 @@ public class Pawn extends ChessPiece{
     public boolean isNull() {
         return false;
     }
+
+    @Override
+    public int positionBias() {
+       int bias = 0;
+        if(this.currentRow >= 5 && this.currentRow <= 10){
+            bias += 10;
+            if(this.currentCol >= 5 && this.currentCol <= 10){
+                bias += 10;
+            }
+        }
+            
+
+        return bias;
+    }
+    
+    @Override
+    public ChessPiece copy() {
+        return new Pawn(this.currentRow, this.currentCol, this.color);
+    }    
     
 }

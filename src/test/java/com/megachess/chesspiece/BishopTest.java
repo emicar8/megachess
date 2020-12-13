@@ -5,7 +5,7 @@
  */
 package com.megachess.chesspiece;
 
-import com.megachess.client.ChessBot;
+import com.megachess.board.Board;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -98,11 +98,11 @@ public class BishopTest {
     @MethodSource("testMoveRightAndUp_Parameters")
     public void testMoveRightAndUp(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Bishop TestBishop = new Bishop(currentRow,currentCol,"black");
-        TestBishop.moveRightAndUp(currentRow - 1, currentCol + 1, Board);
+        TestBishop.moveRightAndUp(currentRow - 1, currentCol + 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestBishop.getPossibleMoves().toArray());
         
     }
@@ -138,11 +138,11 @@ public class BishopTest {
     @MethodSource("testMoveRightAndDown_Parameters")
     public void testMoveRightAndDown(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Bishop TestBishop = new Bishop(currentRow,currentCol,"black");
-        TestBishop.moveRightAndDown(currentRow + 1, currentCol + 1, Board);
+        TestBishop.moveRightAndDown(currentRow + 1, currentCol + 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestBishop.getPossibleMoves().toArray());
         
     }    
@@ -178,11 +178,11 @@ public class BishopTest {
     @MethodSource("testMoveLeftAndUp_Parameters")
     public void testMoveLeftAndUp(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TesBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Bishop TestBishop = new Bishop(currentRow,currentCol,"black");
-        TestBishop.moveLeftAndUp(currentRow - 1, currentCol - 1, Board);
+        TestBishop.moveLeftAndUp(currentRow - 1, currentCol - 1, TesBoard);
         assertArrayEquals(expectedMoves.toArray(), TestBishop.getPossibleMoves().toArray());
         
     }  
@@ -218,11 +218,11 @@ public class BishopTest {
     @MethodSource("testMoveLeftAndDown_Parameters")
     public void testMoveLeftAndDown(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Bishop TestBishop = new Bishop(currentRow,currentCol,"black");
-        TestBishop.moveLeftAndDown(currentRow + 1, currentCol - 1, Board);
+        TestBishop.moveLeftAndDown(currentRow + 1, currentCol - 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestBishop.getPossibleMoves().toArray());
         
     } 
@@ -249,11 +249,11 @@ public class BishopTest {
     @MethodSource("testCalculatePossibleMoves_Parameters")
     public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Bishop TestBishop = new Bishop(currentRow,currentCol,"black");
-        TestBishop.calculatePossibleMoves(Board);
+        TestBishop.calculatePossibleMoves(TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestBishop.getPossibleMoves().toArray());
         
     }    
@@ -267,6 +267,27 @@ public class BishopTest {
         boolean expResult = false;
         boolean result = instance.isNull();
         assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of positionBias method, of class Bishop.
+     */  
+    @Test
+    public void testPositionBias(){
+        Bishop testBishop = new Bishop(1,4,"white");
+        assertEquals(0,testBishop.positionBias());
+    }    
+    
+    /**
+     * Test of copy method, of class Bishop.
+     */  
+    @Test
+    public void testCopy(){
+        Bishop testBishop = new Bishop(1,4,"white");
+        Bishop testBishopCopy = (Bishop)testBishop.copy();
+        assertEquals(testBishop.getCurrentRow(),testBishopCopy.getCurrentRow());
+        assertEquals(testBishop.getCurrentCol(),testBishopCopy.getCurrentCol());
+        assertEquals(testBishop.getColor(),testBishopCopy.getColor());
     }
     
 }

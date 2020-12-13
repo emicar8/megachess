@@ -15,8 +15,10 @@ public class Knight extends ChessPiece{
 
     public Knight(int row, int col, String color){
         super(row, col, color);
-        this.pointsForMove = 30;
+        this.pointsForMove = 30; //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
         this.pointsForKill = 300;
+        this.minMaxValueBase = 30; //Base value used to evaluate the board
+        this.minMaxValueCorrected = this.minMaxValueBase; //Corrected value based on position used to evaluate the board
     }
 
     public int[] moveUpAndRight(List<List<ChessPiece>> Board){
@@ -125,5 +127,15 @@ public class Knight extends ChessPiece{
     public boolean isNull() {
         return false;
     }
+
+    @Override
+    public int positionBias() {
+        return 0; //TODO
+    }
+    
+    @Override
+    public ChessPiece copy() {
+        return new Knight(this.currentRow, this.currentCol, this.color);
+    }    
     
 }

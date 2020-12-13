@@ -16,9 +16,10 @@ public class King extends ChessPiece{
 
     public King(int row, int col, String color){
         super(row, col, color);
-        this.pointsForMove = 65; //Lower performance of king movement to incentivize pawn movement to promote.
-        //this.pointsForKill = 650; //Lowered to target enemy queens more aggressively
+        this.pointsForMove = 65;  //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
         this.pointsForKill = 1000;
+        this.minMaxValueBase = 100; //Base value used to evaluate the board
+        this.minMaxValueCorrected = this.minMaxValueBase; //Corrected value based on position used to evaluate the board
     }    
 
     //Straight moves
@@ -129,5 +130,15 @@ public class King extends ChessPiece{
     public boolean isNull() {
         return false;
     }
+
+    @Override
+    public int positionBias() {
+        return 0; //TODO
+    }
+    
+    @Override
+    public ChessPiece copy() {
+        return new King(this.currentRow, this.currentCol, this.color);
+    }    
     
 }

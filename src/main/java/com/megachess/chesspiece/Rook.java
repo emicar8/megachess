@@ -16,8 +16,10 @@ public class Rook extends ChessPiece{
     
     public Rook(int row, int col, String color){
         super(row, col, color);
-        this.pointsForMove = 60;
+        this.pointsForMove = 60; //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
         this.pointsForKill = 600;
+        this.minMaxValueBase = 40; //Base value used to evaluate the board
+        this.minMaxValueCorrected = this.minMaxValueBase; //Corrected value based on position used to evaluate the board       
     }    
     
     
@@ -85,5 +87,15 @@ public class Rook extends ChessPiece{
     public boolean isNull() {
         return false;
     }
+
+    @Override
+    public int positionBias() {
+        return 0; //TODO
+    }
+    
+    @Override
+    public ChessPiece copy() {
+        return new Rook(this.currentRow, this.currentCol, this.color);
+    }    
     
 }

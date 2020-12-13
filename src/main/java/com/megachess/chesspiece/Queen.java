@@ -15,8 +15,10 @@ public class Queen extends ChessPiece{
 
     public Queen(int row, int col, String color){
         super(row, col, color);
-        this.pointsForMove = 5;
+        this.pointsForMove = 5; //Points for kill and for move will be used to have minmax algorithm start with potencially better moves.
         this.pointsForKill = 50;
+        this.minMaxValueBase = 60; //Base value used to evaluate the board
+        this.minMaxValueCorrected = this.minMaxValueBase; //Corrected value based on position used to evaluate the board   
     }
 
     //Straight moves
@@ -145,5 +147,15 @@ public class Queen extends ChessPiece{
     public boolean isNull() {
         return false;
     }
+
+    @Override
+    public int positionBias() {
+        return 0; //TODO
+    }
+    
+    @Override
+    public ChessPiece copy() {
+        return new Queen(this.currentRow, this.currentCol, this.color);
+    }    
     
 }

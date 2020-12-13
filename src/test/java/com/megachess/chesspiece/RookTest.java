@@ -5,7 +5,7 @@
  */
 package com.megachess.chesspiece;
 
-import com.megachess.client.ChessBot;
+import com.megachess.board.Board;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -97,11 +97,11 @@ public class RookTest {
     @MethodSource("testMoveRight_Parameters")
     public void testMoveRight(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Rook TestRook = new Rook(currentRow,currentCol,"black");
-        TestRook.moveRight(currentRow, currentCol + 1, Board);
+        TestRook.moveRight(currentRow, currentCol + 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestRook.getPossibleMoves().toArray());
         
     }
@@ -136,11 +136,11 @@ public class RookTest {
     @MethodSource("testMoveDown_Parameters")
     public void testMoveDown(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Rook TestRook = new Rook(currentRow,currentCol,"black");
-        TestRook.moveDown(currentRow + 1, currentCol, Board);
+        TestRook.moveDown(currentRow + 1, currentCol, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestRook.getPossibleMoves().toArray());
         
     }
@@ -176,11 +176,11 @@ public class RookTest {
     @MethodSource("testMoveLeft_Parameters")
     public void testMoveLeft(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Rook TestRook = new Rook(currentRow,currentCol,"black");
-        TestRook.moveLeft(currentRow, currentCol - 1, Board);
+        TestRook.moveLeft(currentRow, currentCol - 1, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestRook.getPossibleMoves().toArray());
         
     }    
@@ -216,11 +216,11 @@ public class RookTest {
     @MethodSource("testMoveUp_Parameters")
     public void testMoveUp(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Rook TestRook = new Rook(currentRow,currentCol,"black");
-        TestRook.moveUp(currentRow - 1, currentCol, Board);
+        TestRook.moveUp(currentRow - 1, currentCol, TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestRook.getPossibleMoves().toArray());
         
     }    
@@ -247,11 +247,11 @@ public class RookTest {
     @MethodSource("testCalculatePossibleMoves_Parameters")
     public void testCalculatePossbileMoves(String boardString, int currentRow, int currentCol, List<int[]> expectedMoves){
         //Create board
-        List<List<ChessPiece>> Board = ChessBot.generateBoard(boardString);
+        List<List<ChessPiece>> TestBoard = Board.generateBoardConfig(boardString);
         //Finished creating board
         
         Rook TestRook = new Rook(currentRow,currentCol,"black");
-        TestRook.calculatePossibleMoves(Board);
+        TestRook.calculatePossibleMoves(TestBoard);
         assertArrayEquals(expectedMoves.toArray(), TestRook.getPossibleMoves().toArray());
         
     }    
@@ -266,5 +266,26 @@ public class RookTest {
         boolean result = instance.isNull();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of positionBias method, of class Rook.
+     */  
+    @Test
+    public void testPositionBias(){
+        Rook testRook = new Rook(1,4,"white");
+        assertEquals(0,testRook.positionBias());
+    }
+    
+    /**
+     * Test of copy method, of class Rook.
+     */  
+    @Test
+    public void testCopy(){
+        Rook testRook = new Rook(3,6,"black");
+        Rook testRookCOpy = (Rook)testRook.copy();
+        assertEquals(testRook.getCurrentRow(),testRookCOpy.getCurrentRow());
+        assertEquals(testRook.getCurrentCol(),testRookCOpy.getCurrentCol());
+        assertEquals(testRook.getColor(),testRookCOpy.getColor());
+    }    
     
 }

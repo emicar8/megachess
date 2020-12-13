@@ -13,9 +13,9 @@ import java.util.Objects;
  *
  * @author Emile
  */
-public abstract class ChessPiece {
+public abstract class ChessPiece{
     
-    protected int currentCol,currentRow,pointsForMove,pointsForKill;
+    protected int currentCol,currentRow,pointsForMove,pointsForKill, minMaxValueBase, minMaxValueCorrected;
     protected List<int[]> possibleMoves;
     protected String color;
     
@@ -29,6 +29,7 @@ public abstract class ChessPiece {
         this.color = color;
         this.possibleMoves = new ArrayList<>();
     }
+    
 
     public int getCurrentCol() {
         return currentCol;
@@ -50,33 +51,28 @@ public abstract class ChessPiece {
         return pointsForMove;
     }
 
-    public void setPointsForMove(int pointsForMove) {
-        this.pointsForMove = pointsForMove;
-    }
-
     public int getPointsForKill() {
-        //return pointsForKill + this.prioritizeCenterKill(this.currentCol);
         return pointsForKill;
     }
 
-    public void setPointsForKill(int pointsForKill) {
-        this.pointsForKill = pointsForKill;
-    }
 
     public List<int[]> getPossibleMoves() {
-        return possibleMoves;
-    }
-
-    public void setPossibleMoves(List<int[]> possibleMoves) {
-        this.possibleMoves = possibleMoves;
+        List<int[]> temp = new ArrayList<>(this.possibleMoves);
+        possibleMoves.clear();
+        return temp;
     }
 
     public String getColor() {
         return color;
     }
-
-    public void setColor(String color) {
-        this.color = color;
+    
+    public int getMinMaxValueBase(){
+        return minMaxValueBase;
+    }    
+    
+    public int getMinMaxValueCorrected(){
+        this.minMaxValueCorrected = this.minMaxValueBase + this.positionBias();
+        return minMaxValueCorrected;
     }
     
     public void AddIfNotNull(int [] move){
@@ -84,15 +80,7 @@ public abstract class ChessPiece {
             this.possibleMoves.add(move);
         }
     }
-       
-    private int prioritizeCenterKill(int col){
-        return (int)Math.round(-Math.pow(col-7.5, 2));
-    }
-    
-    public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board);
-    
-    public abstract boolean isNull();
-    
+         
     @Override
     public boolean equals(Object o){
         if(o == this){
@@ -120,4 +108,13 @@ public abstract class ChessPiece {
         hash = 29 * hash + Objects.hashCode(this.color);
         return hash;
     }
+    
+    public abstract void calculatePossibleMoves(List<List<ChessPiece>> Board);
+    
+    public abstract boolean isNull();   
+    
+    public abstract int positionBias();
+    
+    public abstract ChessPiece copy();
+        
 }
